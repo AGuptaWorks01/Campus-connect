@@ -85,7 +85,7 @@
   color: green;
   font-weight: bold;
   position: absolute;
-  bottom: 15px;
+  bottom: 35px;
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
@@ -116,8 +116,8 @@
   }
 
   .student-image {
-    width: 80px;
-    height: 80px;
+    width: 70%;
+    height: 50%;
   }
 
   .card-body {
@@ -149,3 +149,5 @@
 .search-filter select {
   height: 38px; /* Standard input height */
 }
+
+

@@ -6,7 +6,7 @@ const pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
     password: 'root@123', // Ensure that you have to your password
-    database: '', // Ensure this matches your actual database name
+    database: 'campus_connect', // Ensure this matches your actual database name
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
