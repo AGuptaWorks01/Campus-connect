@@ -1,0 +1,67 @@
+<div class="container mt-4">
+    <!-- Animated Typing Text -->
+    <h2 class="typing-text text-primary fw-bold">
+        Learn & become the <span id="typing-text"></span>
+    </h2>
+
+    <!-- Search & Filter Section -->
+    <div class="search-filter card p-3 shadow-lg mt-4">
+        <div class="row">
+            <div class="col-md-4">
+                <input type="text" class="form-control" placeholder="Search students..." [(ngModel)]="searchQuery">
+            </div>
+            <div class="col-md-4">
+                <select class="form-select" [(ngModel)]="selectedDepartment">
+                    <option value="">Select Department</option>
+                    <option value="CSE">CSE</option>
+                    <option value="ECE">ECE</option>
+                    <option value="AI">AI</option>
+                    <option value="DS">DS</option>
+                    <option value="CST">CST</option>
+                    <option value="IT">IT</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <select class="form-select" [(ngModel)]="selectedYear">
+                    <option value="">Select Year</option>
+                    <option value="1st Year">1st Year</option>
+                    <option value="2nd Year">2nd Year</option>
+                    <option value="3rd Year">3rd Year</option>
+                    <option value="4th Year">4th Year</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Student List -->
+    <div class="row mt-4">
+        <!-- Student & Company Card -->
+        <div *ngFor="let student of filteredStudents()" class="col-md-4 mb-4">
+            <div class="card shadow-sm d-flex flex-column justify-content-between h-100">
+                <div class="row g-0">
+                    <!-- Left Side (Circular Image) -->
+                    <div class="col-md-6 d-flex justify-content-center align-items-center">
+                        <img [src]="student.image" class="img-fluid rounded-circle student-image" alt="Student">
+                    </div>
+                    <!-- Right Side (Dynamic Details) -->
+                    <div class="col-md-6 d-flex flex-column justify-content-between">
+                        <div class="card-body">
+                            <!-- Company Name at Top Center -->
+                            <h5 class="card-title text-center mt-3 mb-4">{{ student.companyName }}</h5>
+
+                            <!-- Student Details -->
+                            <p class="card-text"><strong>Name:</strong> {{ student.companyEmployee }}</p>
+                            <p class="card-text"><strong>Branch:</strong> {{ student.companyBranch }}</p>
+                            <p class="card-text"><strong>Degree:</strong> {{ student.companyDegree }}</p>
+                            <p class="card-text"><strong>Batch:</strong> {{ student.companyBatch }}</p>
+                        </div>
+                        <!-- Stipend at the Bottom (Centered) -->
+                        <div class="text-center text-success mb-3">
+                            <strong>Stipend: ₹{{ student.companyStipend }}+/month</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
