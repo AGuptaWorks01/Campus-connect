@@ -1,0 +1,151 @@
+.typing-text {
+  display: inline-block;
+  border-right: 3px solid;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+  animation: typing 3s steps(30, end) infinite, blink 0.7s infinite;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 70%;
+  }
+}
+
+@keyframes blink {
+  30% {
+    border-color: transparent;
+  }
+}
+
+/* Card Styling */
+.card {
+  transition: transform 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  height: 100%;
+  padding: 15px;
+  margin-bottom: 20px;
+  position: relative;
+  min-height: 300px; /* Ensures consistency in all screen sizes */
+  max-height: 300px;
+}
+
+/* Card Hover Effect */
+.card:hover {
+  transform: scale(1.05);
+}
+
+/* Company Name - Always at Top Center with Light Grey Background */
+.card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
+  text-align:left;
+  background-color: #f0f0f0; /* Light Grey */
+  padding: 8px 0;
+  border-radius: 5px;
+}
+
+/* Student Image - Takes 50% Width */
+.student-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border: 5px solid #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Student Details - Takes 50% Width */
+.card-body {
+  flex-grow: 1;
+  width: 100%;
+  padding-top: 60px; /* Space from company name */
+  text-align: left;
+  padding-left: 15px;
+}
+
+/* Student Details Text */
+.card-text {
+  margin-bottom: 5px;
+}
+
+/* Stipend - Always at Bottom Center */
+.text-success {
+  color: green;
+  font-weight: bold;
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  text-align: center;
+}
+
+/* Half Image - Half Details */
+.row.g-0 {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.col-md-6 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  flex: 1;
+}
+
+/* Responsive Fix */
+@media (max-width: 768px) {
+  .card {
+    flex-direction: column;
+    min-height: 300px;
+    max-height: 300px;
+  }
+
+  .student-image {
+    width: 80px;
+    height: 80px;
+  }
+
+  .card-body {
+    padding-top: 70px;
+  }
+
+  .card-title {
+    font-size: 1.2rem;
+  }
+}
+
+
+
+.search-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Adds space between elements */
+  width: 100%;
+  max-width: 100%;
+  min-height: auto; /* Auto height adjustment */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.search-filter .row {
+  align-items: center;
+}
+
+.search-filter input,
+.search-filter select {
+  height: 38px; /* Standard input height */
+}
