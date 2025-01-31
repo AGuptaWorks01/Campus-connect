@@ -20,21 +20,26 @@ export class ResetPasswordComponent {
   resetForm: FormGroup;
   token: string | null = null;
 
-  constructor(private fb: FormBuilder, private route: ActivatedRoute, private authService: AuthService) {
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private authService: AuthService, private router:Router) {
     this.resetForm = this.fb.group({
       password: ['', Validators.required],
-      confirmPassword: ['', Validators.required]
+      // confirmPassword: ['', Validators.required]
     });
   }
 
   ngOnInit() {
-    this.token = this.route.snapshot.queryParamMap.get('token');
+    this.token = this.route.snapshot.paramMap.get('token');
   }
 
   reset() {
     if (this.resetForm.valid && this.token) {
       this.authService.resetPassword(this.token, this.resetForm.value.password).subscribe({
-        next: (res) => alert(res.message),
+        next: (res) => {
+          alert(res.message);
+          this.resetForm.reset()
+          this.router.navigateByUrl('login')
+         },
+        
         error: (err) => alert(err.error.message)
       });
     }

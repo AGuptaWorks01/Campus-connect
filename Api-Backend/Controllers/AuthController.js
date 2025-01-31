@@ -4,7 +4,7 @@ const promisePool = require("../config/db"); // Your MySQL connection pool
 const nodemailer = require("nodemailer");
 
 const JWT_SECRETKEY = "jwt_token"
-const FRONTEND_URL = "http://localhost:4200"; // Update with your frontend URL
+const FRONTEND_URL = `http://localhost:4200`; // Update with your frontend URL
 
 
 exports.register = async (req, res) => {
@@ -31,8 +31,8 @@ exports.register = async (req, res) => {
 
         return res.status(201).json({ message: "User registered successfully" });
     } catch (error) {
-        console.error(error);
-        return res.status(500).json({ message: "Something went wrong" });
+        console.error("Error during registration:", error);
+        return res.status(500).json({ message: "Something went wrong during registration" });
     }
 };
 
@@ -87,8 +87,8 @@ exports.login = async (req, res) => {
                 token: token,
             });
     } catch (error) {
-        console.error(error);
-        return res.status(500).json({ message: "Internal server error" });
+        console.error("Error during login:", error);
+        return res.status(500).json({ message: "Internal server error during login" });
     }
 };
 
@@ -119,6 +119,9 @@ exports.requestPasswordReset = async (req, res) => {
                 user: "ganurag624outlook@gmail.com", // Use your Gmail
                 pass: "gcmulzwcsssestwe",  // Generate an App Password in Gmail settings
             },
+            tls: {
+                rejectUnauthorized: false
+            }
         });
 
         // Email Content
@@ -129,7 +132,8 @@ exports.requestPasswordReset = async (req, res) => {
             html: `
                 <p>Hello ${user.username},</p>
                 <p>Click the link below to reset your password:</p>
-                <a href="${FRONTEND_URL}/reset-password/${resetToken}">Reset Password</a>
+                <a href="${FRONTEND_URL}/reset-password/${resetToken}">
+                  <button style="background-color: #4CAF50; color:white; padding: 14px 20px; border: none; cursor:pointer; border-radius: 4px;">Reset Password</button></a>
                 <p>This link will expire in 15 minutes.</p>
             `,
         };

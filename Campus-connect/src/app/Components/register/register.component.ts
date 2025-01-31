@@ -16,6 +16,7 @@ export class RegisterComponent {
   authService = inject(AuthService); // Inject your AuthService
   router = inject(Router);
 
+  showPassword: boolean = false; // Initialize password visibility flag
   registerForm!: FormGroup;
 
   ngOnInit(): void {

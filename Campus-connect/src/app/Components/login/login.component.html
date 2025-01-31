@@ -1,6 +1,4 @@
-<div
-  class="lg:w-5/12 mt-5 mb-7 p-10 shadow-lg mx-auto bg-transparent backdrop-blur-md"
->
+<div class="lg:w-5/12 mt-5 mb-7 p-10 shadow-lg mx-auto bg-transparent backdrop-blur-md">
   <h3 class="text-3xl text-center font-bold py-3">Login</h3>
   <form [formGroup]="loginForm" class="flex flex-col">
     <div class="flex flex-col mt-1 mb-1">
@@ -11,41 +9,42 @@
         placeholder="Email"
       />
       <span
-        *ngIf="
-          loginForm.hasError('required', 'email') &&
-          loginForm.controls['email'].dirty
-        "
+        *ngIf="loginForm.hasError('required', 'email') && loginForm.controls['email'].dirty"
         class="text-red-500"
       >
         *Email is required
       </span>
       <span
-        *ngIf="
-          loginForm.hasError('email', 'email') &&
-          loginForm.controls['email'].dirty
-        "
+        *ngIf="loginForm.hasError('email', 'email') && loginForm.controls['email'].dirty"
         class="text-red-500"
       >
         *Please enter a valid email
       </span>
     </div>
 
-    <div class="flex flex-col mt-2 mb-1">
+    <div class="flex flex-col mt-2 mb-1 relative">
       <input
         formControlName="password"
+        [type]="showPassword ? 'text' : 'password'" 
         class="p-2 border border-gray-300 rounded bg-transparent text-black placeholder-gray-300"
-        type="password"
         placeholder="Password"
       />
       <span
-        *ngIf="
-          loginForm.hasError('required', 'password') &&
-          loginForm.controls['password'].dirty
-        "
+        *ngIf="loginForm.hasError('required', 'password') && loginForm.controls['password'].dirty"
         class="text-red-500"
       >
         *Password is required
       </span>
+      
+      <!-- Eye Icon for toggling password visibility -->
+      <button
+        type="button"
+        (click)="showPassword = !showPassword"
+        class="absolute right-3 top-3 text-gray-600"
+        aria-label="Toggle Password Visibility"
+      >
+        <i [class]="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i> <!-- Eye icon that changes based on visibility -->
+      </button>
     </div>
 
     <button
@@ -59,10 +58,10 @@
   </form>
 
   <div class="flex justify-between mt-3">
-    <a routerLink="/forget-password" class="text-indigo-600 ml-2 cursor-pointer"
+    <a routerLink="/forget-password" class="text-indigo-600 hover:text-red-400 ml-2 cursor-pointer"
       >Forget Password</a
     >
-    <a routerLink="/register" class="text-indigo-600 ml-2 cursor-pointer" >
+    <a routerLink="/register" class="text-indigo-600 ml-2 cursor-pointer">
       Create Account
     </a>
   </div>

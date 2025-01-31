@@ -21,6 +21,7 @@ export class LoginComponent {
   fb = inject(FormBuilder);
   router = inject(Router);
   authService = inject(AuthService);
+  showPassword: boolean = false; // Initialize password visibility flag
 
   loginForm!: FormGroup;
 
