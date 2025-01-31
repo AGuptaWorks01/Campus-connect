@@ -1,4 +1,6 @@
 const express = require("express");
+const cookieParser = require("cookie-parser");
+
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const pool = require("./config/db"); // database ko import krha hai
@@ -7,6 +9,7 @@ const authRouter = require("./routers/AuthRouters");
 const app = express();
 const port = 3000;
 
+app.use(cookieParser());
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
@@ -15,8 +18,13 @@ app.use("/api/students", studentsRouter);
 app.use("/api/auth", authRouter);
 
 app.use(async (req, res, next) => {
-  await pool.testConnection(); // Test the DB connection
-  next(); // Proceed to the next middleware or route handler
+  try {
+    await pool.getConnection();
+    next();
+  } catch (error) {
+    console.error("Database connection failed:", error);
+    return res.status(500).json({ message: "Database connection error" });
+  }
 });
 
-app.listen(port, () => console.log(`Server Running on localhost//:${port}`));
+app.listen(port, () => console.log(`Server Running on localhost:${port}`));

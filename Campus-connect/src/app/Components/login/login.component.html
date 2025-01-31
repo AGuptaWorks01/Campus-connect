@@ -1,10 +1,12 @@
-<!-- <div class="lg:w-5/12 mt-10 p-10 shadow-lg mx-auto">
-  <h3 class="text-3xl text-center font-bold py-5">Login</h3>
+<div
+  class="lg:w-5/12 mt-5 mb-7 p-10 shadow-lg mx-auto bg-transparent backdrop-blur-md"
+>
+  <h3 class="text-3xl text-center font-bold py-3">Login</h3>
   <form [formGroup]="loginForm" class="flex flex-col">
-    <div class="flex flex-col mt-2 mb-1">
+    <div class="flex flex-col mt-1 mb-1">
       <input
         formControlName="email"
-        class="p-2 border border-gray-300 rounded"
+        class="p-2 border border-gray-300 rounded bg-transparent text-black placeholder-gray-300"
         type="text"
         placeholder="Email"
       />
@@ -31,7 +33,7 @@
     <div class="flex flex-col mt-2 mb-1">
       <input
         formControlName="password"
-        class="p-2 border border-gray-300 rounded"
+        class="p-2 border border-gray-300 rounded bg-transparent text-black placeholder-gray-300"
         type="password"
         placeholder="Password"
       />
@@ -50,19 +52,18 @@
       [disabled]="loginForm.invalid"
       [class.disabled]="loginForm.invalid"
       (click)="login()"
-      class="bg-indigo-500 p-2 rounded mt-3 text-white"
+      class="bg-indigo-500 p-2 rounded mt-3 text-white hover:bg-indigo-600"
     >
       Login
     </button>
   </form>
 
-  <div class="flex justify-between mt-5">
-    
+  <div class="flex justify-between mt-3">
     <a routerLink="/forget-password" class="text-indigo-600 ml-2 cursor-pointer"
       >Forget Password</a
     >
-    <a routerLink="/register" class="text-indigo-600 ml-2 cursor-pointer"
-      >Create Account</a
-    >
+    <a routerLink="/register" class="text-indigo-600 ml-2 cursor-pointer" >
+      Create Account
+    </a>
   </div>
-</div> -->
+</div>

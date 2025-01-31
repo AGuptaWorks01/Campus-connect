@@ -1,1 +1,95 @@
-<p>register works!</p>
+<div class="lg:w-5/12 mt-3 p-5 shadow-lg mx-auto">
+  <h3 class="text-3xl text-center font-bold py-2">Register</h3>
+  <form [formGroup]="registerForm" class="flex flex-col">
+    
+    <!-- Username Field -->
+    <div class="flex flex-col mt-2 mb-1">
+      <input
+        formControlName="username"
+        class="p-2 border border-gray-300 rounded"
+        type="text"
+        placeholder="Username"
+      />
+      <span
+        *ngIf="registerForm.hasError('required', 'username') && registerForm.controls['username'].dirty"
+        class="text-red-500"
+      >
+        *Username is required
+      </span>
+    </div>
+
+    <!-- Email Field -->
+    <div class="flex flex-col mt-2 mb-1">
+      <input
+        formControlName="email"
+        class="p-2 border border-gray-300 rounded"
+        type="email"
+        placeholder="Email"
+      />
+      <span
+        *ngIf="registerForm.hasError('required', 'email') && registerForm.controls['email'].dirty"
+        class="text-red-500"
+      >
+        *Email is required
+      </span>
+      <span
+        *ngIf="registerForm.hasError('email', 'email') && registerForm.controls['email'].dirty"
+        class="text-red-500"
+      >
+        *Please enter a valid email
+      </span>
+    </div>
+
+    <!-- Password Field -->
+    <div class="flex flex-col mt-2 mb-1">
+      <input
+        formControlName="password"
+        class="p-2 border border-gray-300 rounded"
+        type="password"
+        placeholder="Password"
+      />
+      <span
+        *ngIf="registerForm.hasError('required', 'password') && registerForm.controls['password'].dirty"
+        class="text-red-500"
+      >
+        *Password is required
+      </span>
+    </div>
+
+    <!-- Confirm Password Field -->
+    <!-- <div class="flex flex-col mt-2 mb-1">
+      <input
+        formControlName="confirmPassword"
+        class="p-2 border border-gray-300 rounded"
+        type="password"
+        placeholder="Confirm Password"
+      />
+      <span
+        *ngIf="registerForm.hasError('required', 'confirmPassword') && registerForm.controls['confirmPassword'].dirty"
+        class="text-red-500"
+      >
+        *Confirm Password is required
+      </span>
+      <span
+        *ngIf="registerForm.hasError('confirmPasswordValidator', 'confirmPassword') && registerForm.controls['confirmPassword'].dirty"
+        class="text-red-500"
+      >
+        *Passwords don't match
+      </span>
+    </div> -->
+
+    <button
+      [disabled]="registerForm.invalid"
+      [class.disabled]="registerForm.invalid"
+      (click)="register()"
+      class="bg-indigo-500 p-2 rounded mt-3 text-white"
+    >
+      Register
+    </button>
+  </form>
+
+  <div class="flex justify-center mt-3">
+    <span>Already have an account?</span>
+    <a routerLink="/login" class="text-indigo-600 ml-2 cursor-pointer">Login Here</a>
+  </div>
+</div>

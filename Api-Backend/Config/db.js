@@ -5,11 +5,12 @@ const mysql = require('mysql2/promise');
 const pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
-    password: 'Admin', // Ensure that you have to your password
+    password: 'root@123', // Ensure that you have to your password
     database: 'campus_connect', // Ensure this matches your actual database name
     waitForConnections: true,
     connectionLimit: 10,
-    queueLimit: 0
+    queueLimit: 0,
+    ssl: false
 });
 
 // Function to check the database connection

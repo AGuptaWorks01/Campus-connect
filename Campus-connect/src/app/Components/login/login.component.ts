@@ -8,6 +8,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -17,29 +18,29 @@ import {
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
-  // fb = inject(FormBuilder);
-  // router = inject(Router);
+  fb = inject(FormBuilder);
+  router = inject(Router);
+  authService = inject(AuthService);
 
-  // loginForm!: FormGroup;
+  loginForm!: FormGroup;
 
-  // ngOnInit(): void {
-  //   this.loginForm = this.fb.group({
-  //     email: ['', Validators.compose([Validators.required, Validators.email])],
-  //     password: ['', Validators.required],
-  //   });
-  // }
+  ngOnInit(): void {
+    this.loginForm = this.fb.group({
+      email: ['', Validators.compose([Validators.required, Validators.email])],
+      password: ['', Validators.required],
+    });
+  }
 
-  // login() {
-  //   this.authService.loginService(this.loginForm.value).subscribe({
-  //     next: (res) => {
-  //       localStorage.setItem('user_id', res.data._id);
-  //       this.authService.isLoggedIn$.next(true);
-  //       this.router.navigate(['/home']);
-  //       this.loginForm.reset();
-  //     },
-  //     error: (err) => {
-  //       alert('Error email or password');
-  //     },
-  //   });
-  // }
+  login() {
+    this.authService.loginService(this.loginForm.value).subscribe({
+      next: (res) => {
+        this.authService.setLoginStatus(res); // Set login state
+        this.router.navigate(['/home']);
+        this.loginForm.reset();
+      },
+      error: () => {
+        alert('Invalid email or password!');
+      },
+    });
+  }
 }

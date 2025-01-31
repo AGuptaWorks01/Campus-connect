@@ -1,34 +1,71 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container">
-    <a class="navbar-brand fw-bold" routerLink="/">Campus Connect</a>
+<nav class="bg-gray-900 text-white p-3">
+  <div class="container mx-auto flex justify-between items-center">
+    <a class="text-xl font-bold" routerLink="/">Campus Connect</a>
 
-    <!-- Navbar Toggle -->
-    <button class="navbar-toggler" type="button" (click)="toggleNavbar()" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+    <button class="md:hidden" (click)="toggleNavbar()">
+      <svg
+        class="w-6 h-6"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16m-7 6h7"
+        ></path>
+      </svg>
     </button>
 
-    <!-- Fullscreen Navbar on Mobile -->
-    <div class="collapse navbar-collapse offcanvas-navbar" [ngClass]="{'show': isNavbarOpen}" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item" (click)="closeNavbar()">
-          <a class="nav-link active" routerLink="/">Home</a>
-        </li>
-        <li class="nav-item" (click)="closeNavbar()">
-          <a class="nav-link" routerLink="/about">About</a>
-        </li>
-        <li class="nav-item" (click)="closeNavbar()">
-          <a class="nav-link" routerLink="/courses">Courses</a>
-        </li>
-        <li class="nav-item" (click)="closeNavbar()">
-          <a class="nav-link" routerLink="/contact">Contact</a>
-        </li>
-        <li class="nav-item" (click)="closeNavbar()">
-          <a class="btn btn-primary mx-2" routerLink="/signup">Sign Up</a>
-        </li>
-        <li class="nav-item" (click)="closeNavbar()">
-          <a class="btn btn-outline-light" routerLink="/login">Login</a>
-        </li>
-      </ul>
+    <div
+      [ngClass]="{ hidden: !isNavbarOpen, block: isNavbarOpen }"
+      class="md:flex space-x-4"
+    >
+      <ng-container *ngIf="isLoggedIn">
+        <a class="block py-2 px-4 hover:bg-gray-700 rounded" routerLink="home"
+          >Home</a
+        >
+        <a
+          class="block py-2 px-4 hover:bg-gray-700 rounded"
+          routerLink="/aiPoweredMockInterview"
+          >AI Mock Interview</a
+        >
+        <a
+          class="block py-2 px-4 hover:bg-gray-700 rounded"
+          routerLink="/AiPoweredResumeReview"
+          >AI Resume Review</a
+        >
+        <a
+          class="block py-2 px-4 hover:bg-gray-700 rounded"
+          routerLink="/Feedback"
+          >Feedback</a
+        >
+      </ng-container>
+
+      <!-- Show login/signup if not logged in -->
+      <ng-container *ngIf="!isLoggedIn">
+        <a
+          class="block py-2 px-4 bg-blue-500 hover:bg-blue-700 text-white rounded"
+          routerLink="/login"
+          >Login</a
+        >
+        <a
+          class="block py-2 px-4 bg-blue-500 hover:bg-blue-700 text-white rounded"
+          routerLink="/register"
+          >Signup</a
+        >
+      </ng-container>
+
+      <!-- Show logout button if logged in -->
+      <ng-container *ngIf="isLoggedIn">
+        <button
+          class="block py-2 px-4 bg-red-500 hover:bg-red-700 text-white rounded"
+          (click)="logout()"
+        >
+          Logout
+        </button>
+      </ng-container>
     </div>
   </div>
 </nav>
