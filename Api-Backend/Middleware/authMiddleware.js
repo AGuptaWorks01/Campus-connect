@@ -1,5 +1,7 @@
 const jwt = require("jsonwebtoken");
 
+const JWT_SECRETKEY = "jwt_token"
+
 exports.verifyToken = (req, res, next) => {
     const token = req.header("Authorization");
 
@@ -8,7 +10,7 @@ exports.verifyToken = (req, res, next) => {
     }
 
     try {
-        const decoded = jwt.verify(token.replace("Bearer ", ""), process.env.JWT_SECRET);
+        const decoded = jwt.verify(token.replace("Bearer ", ""), JWT_SECRETKEY);
         req.user = decoded; // Attach user details to request
         next();
     } catch (error) {
