@@ -3,6 +3,7 @@ import { Component } from '@angular/core'; // To define a component
 import { FormsModule } from '@angular/forms'; // To use Angular forms functionality (for two-way data binding)
 import { StudentsService } from '../../services/students.service'; // Importing the StudentsService to fetch student data
 import { RouterModule } from '@angular/router';
+import { Student } from '../../Student';
 
 @Component({
   selector: 'app-home', // Selector to define the custom tag for this component
@@ -16,7 +17,7 @@ export class HomeComponent {
   searchQuery: string = '';
   selectedDepartment: string = '';
   selectedYear: string = '';
-  student: any[] = []; // Array to hold student data
+  student: Student[] = []; // Array to hold student data
 
   // Injecting the StudentsService to interact with the backend
   constructor(private studentService: StudentsService) { }
@@ -33,7 +34,7 @@ export class HomeComponent {
       next: (data) => {
         // When data is successfully fetched, assign it to the student array
         // If the data doesn't have students, assign an empty array to avoid errors
-        this.student = data?.students ?? [];
+        this.student = data;
       },
       error: (err) => {
         // If there's an error fetching students, log the error and set the student array to empty

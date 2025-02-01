@@ -1,21 +1,33 @@
-// Import necessary Angular modules and libraries
-import { HttpClient } from '@angular/common/http'; // To make HTTP requests
-import { Injectable } from '@angular/core'; // To make the service injectable
-import { Observable } from 'rxjs'; // To use Observable for handling asynchronous operations
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Student } from '../Student';
 
 @Injectable({
-  providedIn: 'root' // This makes the service available globally in the app
+  providedIn: 'root'
 })
 export class StudentsService {
-  // The URL of the API endpoint to fetch student data
-  private apiUrl = 'http://localhost:3000/api/students/students';
+  private apiUrl = 'http://localhost:3000/api/students/students'; // API URL for student data
 
-  // Constructor where we inject the HttpClient service to be used for HTTP requests
   constructor(private http: HttpClient) { }
 
-  // This method fetches the list of students from the API
-  getStudents(): Observable<any> {
-    // Performing a GET request to the API and returning the observable of the response
-    return this.http.get<any>(this.apiUrl);
+  // Get all students
+  getStudents(): Observable<Student[]> {
+    return this.http.get<Student[]>(this.apiUrl);
+  }
+
+  // Add a new student
+  addStudent(student: Student): Observable<Student> {
+    return this.http.post<Student>(this.apiUrl, student);
+  }
+
+  // Update an existing student
+  updateStudent(id: number, student: Student): Observable<Student> {
+    return this.http.put<Student>(`${this.apiUrl}/${id}`, student);
+  }
+
+  // Delete a student
+  deleteStudent(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }

@@ -34,10 +34,25 @@ const createDatabaseIfNotExists = async () => {
     }
 };
 
-// Create the necessary tables inside the 'Campus_Connect' database
+
+
+
 const createTablesIfNotExists = async () => {
     try {
         await pool.query('USE Campus_Connect'); // Switch to 'Campus_Connect' database
+
+        // Create the users table first
+        await pool.query(`
+            CREATE TABLE IF NOT EXISTS users ( 
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                username VARCHAR(255) NOT NULL,
+                email VARCHAR(255) UNIQUE NOT NULL,
+                password VARCHAR(255) NOT NULL,
+                createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
+        `);
+
+        // Now create the students table with foreign key constraint
         await pool.query(`
             CREATE TABLE IF NOT EXISTS students (
                 id INT AUTO_INCREMENT PRIMARY KEY,
@@ -50,32 +65,32 @@ const createTablesIfNotExists = async () => {
                 branch VARCHAR(50),
                 degree VARCHAR(50),
                 batch VARCHAR(10),
-                stipend VARCHAR(50)
+                stipend VARCHAR(50),
+                user_id INT UNIQUE,  -- Ensure each user can only have one student record
+                FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
             );
         `);
-        await pool.query(`
-            CREATE TABLE IF NOT EXISTS users ( 
-                id INT AUTO_INCREMENT PRIMARY KEY,
-                username VARCHAR(255) NOT NULL,
-                email VARCHAR(255) UNIQUE NOT NULL,
-                password VARCHAR(255) NOT NULL,
-                createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-            );
-        `);
+
+        // Create feedback table
         await pool.query(`
             CREATE TABLE IF NOT EXISTS feedbacks (
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 name VARCHAR(255) NOT NULL,
                 rating INT NOT NULL CHECK (rating BETWEEN 1 AND 5),
                 review TEXT NOT NULL,
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                user_id INT,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
             );
         `);
+
         console.log('Tables created or ensured.');
     } catch (err) {
         console.error('Error creating tables:', err);
     }
 };
+
+
 
 // Call the functions
 createDatabaseIfNotExists();

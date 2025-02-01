@@ -4,7 +4,7 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const pool = require("./config/db"); // database ko import krha hai
-const studentsRouter = require("./routers/studentRoutes");
+const studentsRoutes = require("./routers/studentRoutes");
 const authRouter = require("./routers/AuthRouters");
 const feedbackRoutes = require('./routers/FeedbackRoutes');
 
@@ -16,7 +16,7 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
 
-app.use("/api/students", studentsRouter);
+app.use("/api/students", studentsRoutes);
 app.use("/api/auth", authRouter);
 app.use('/api/feedbacks', feedbackRoutes);
 

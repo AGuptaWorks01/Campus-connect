@@ -180,20 +180,3 @@ exports.resetPassword = async (req, res) => {
         return res.status(500).json({ message: "Something went wrong" });
     }
 };
-
-
-
-
-
-
-
-
-
-// CREATE TABLE users (
-//   id INT AUTO_INCREMENT PRIMARY KEY,
-//   username VARCHAR(255) NOT NULL,
-//   email VARCHAR(255) UNIQUE NOT NULL,
-//   password VARCHAR(255) NOT NULL,
-//   createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-// );
-
