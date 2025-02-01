@@ -10,9 +10,6 @@ exports.addStudent = async (req, res) => {
     company_name,
     employee,
     branch,
-    degree,
-    batch,
-    stipend,
     user_id, // Ensure user_id is included
   } = req.body;
 
@@ -24,32 +21,24 @@ exports.addStudent = async (req, res) => {
     );
 
     if (existingStudent.length > 0) {
-      return res.status(400).json({ message: "You can only add one student record." });
+      return res
+        .status(400)
+        .json({ message: "You can only add one student record." });
     }
 
     // Insert student if user does not have one
     const sql = `
-      INSERT INTO students (name, department, year, image, company_name, employee, branch, degree, batch, stipend, user_id)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      INSERT INTO students (name, branch, year, image, company_name, employee, user_id)
+      VALUES (?, ?, ?, ?, ?, ?, ?)
     `;
 
-    const values = [
-      name,
-      department,
-      year,
-      image,
-      company_name,
-      employee,
-      branch,
-      degree,
-      batch,
-      stipend,
-      user_id
-    ];
+    const values = [name, branch, year, image, company_name, employee, user_id];
 
     const [result] = await pool.execute(sql, values);
-    res.status(201).json({ message: "Student added successfully", studentId: result.insertId });
-
+    res.status(201).json({
+      message: "Student added successfully",
+      studentId: result.insertId,
+    });
   } catch (error) {
     console.error("Insert Error:", error);
     res.status(500).json({ message: "Error inserting student", error });
@@ -62,7 +51,6 @@ exports.getAllStudents = async (req, res) => {
     const sql = `SELECT s.*, u.username, u.email FROM students s JOIN users u ON s.user_id = u.id ORDER BY s.id DESC`;
     const [students] = await pool.execute(sql);
     res.status(200).json({ students });
-
   } catch (error) {
     console.error("Fetch Error:", error);
     res.status(500).json({ message: "Error fetching students", error });
@@ -76,15 +64,13 @@ exports.updateStudent = async (req, res) => {
 
   const {
     name,
-    department,
-    year,
-    image,
-    company_name,
-    employee,
     branch,
-    degree,
-    batch,
-    stipend,
+    year,
+    company_name,
+    employee_type,
+    image,
+    linkedin,
+    github,
   } = req.body;
 
   try {
@@ -95,39 +81,40 @@ exports.updateStudent = async (req, res) => {
     );
 
     if (existingStudent.length === 0) {
-      return res.status(403).json({ message: "Unauthorized: You can only update your own student record." });
+      return res.status(403).json({
+        message: "Unauthorized: You can only update your own student record.",
+      });
     }
 
     const sql = `
       UPDATE students
-      SET name = ?, department = ?, year = ?, image = ?, company_name = ?, 
-          employee = ?, branch = ?, degree = ?, batch = ?, stipend = ?
+      SET name = ?, branch = ?, year = ?, company_name = ?, employee_type = ?, 
+          image = ?, linkedin = ?, github = ?
       WHERE id = ? AND user_id = ?
     `;
 
     const values = [
       name,
-      department,
-      year,
-      image,
-      company_name,
-      employee,
       branch,
-      degree,
-      batch,
-      stipend,
+      year,
+      company_name,
+      employee_type,
+      image,
+      linkedin,
+      github,
       studentId,
-      userId
+      userId,
     ];
 
     const [result] = await pool.execute(sql, values);
 
     if (result.affectedRows === 0) {
-      return res.status(404).json({ message: "Student not found or not authorized to update." });
+      return res
+        .status(404)
+        .json({ message: "Student not found or not authorized to update." });
     }
 
     res.status(200).json({ message: "Student updated successfully" });
-
   } catch (error) {
     console.error("Update Error:", error);
     res.status(500).json({ message: "Error updating student", error });
@@ -144,11 +131,12 @@ exports.deleteStudent = async (req, res) => {
     const [result] = await pool.execute(sql, [studentId, userId]);
 
     if (result.affectedRows === 0) {
-      return res.status(404).json({ message: "Student not found or not authorized to delete." });
+      return res
+        .status(404)
+        .json({ message: "Student not found or not authorized to delete." });
     }
 
     res.status(200).json({ message: "Student deleted successfully" });
-
   } catch (error) {
     console.error("Delete Error:", error);
     res.status(500).json({ message: "Error deleting student", error });
