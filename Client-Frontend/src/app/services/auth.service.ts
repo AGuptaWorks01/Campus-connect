@@ -10,6 +10,7 @@ export class AuthService {
   private baseUrl = 'http://localhost:3000/api/auth'; // Your backend URL
   private tokenKey = 'auth_token'; // Key to store the token in localStorage
   private userIdKey = 'user_id';  // Key to store the user ID in localStorage
+  private usernameKey = 'username'; // Key to store the username in localStorage
 
   // A BehaviorSubject to track login status
   private isLoggedInSubject = new BehaviorSubject<boolean>(this.checkLoginStatus());
@@ -36,20 +37,24 @@ export class AuthService {
     return this.http.post<any>(`${this.baseUrl}/register`, registerData);
   }
 
-  // Set the login status and store the token and user ID
-  setLoginStatus(response: { data: { _id: string; token: string; } }): void {
+  // Set the login status, store the token, user ID, and username
+  setLoginStatus(response: { data: { _id: string; token: string; username: string } }): void {
     if (typeof window !== 'undefined' && window.localStorage) {
-      localStorage.setItem(this.tokenKey, response.data.token);
-      localStorage.setItem(this.userIdKey, response.data._id);
+      localStorage.setItem(this.tokenKey, response.data.token);  // Set Token
+      localStorage.setItem(this.userIdKey, response.data._id);  // Set User ID
+      localStorage.setItem(this.usernameKey, response.data.username);  // Set Username
+      console.log("Username set in localStorage:", response.data.username); // Debugging log
       this.isLoggedInSubject.next(true); // Notify login status change
     }
   }
+
 
   // Logout method to remove the user data from localStorage
   logout(): void {
     if (typeof window !== 'undefined' && window.localStorage) {
       localStorage.removeItem(this.tokenKey);
       localStorage.removeItem(this.userIdKey);
+      localStorage.removeItem(this.usernameKey); // Remove username
       this.isLoggedInSubject.next(false); // Update login status to false
     }
   }
@@ -70,6 +75,14 @@ export class AuthService {
     return null;
   }
 
+  // Get the username from localStorage
+  getUsername(): string | null {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      return localStorage.getItem(this.usernameKey);
+    }
+    return null;
+  }
+
   // Add the token to request headers for authenticated requests
   getAuthHeaders(): HttpHeaders {
     const token = this.getAuthToken();
@@ -77,8 +90,6 @@ export class AuthService {
       Authorization: token ? `Bearer ${token}` : ''
     });
   }
-
-
 
   // 🔹 Request password reset (send reset link to email)
   requestPasswordReset(email: string): Observable<any> {

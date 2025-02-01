@@ -6,6 +6,8 @@ const bodyParser = require("body-parser");
 const pool = require("./config/db"); // database ko import krha hai
 const studentsRouter = require("./routers/studentRoutes");
 const authRouter = require("./routers/AuthRouters");
+const feedbackRoutes = require('./routers/FeedbackRoutes');
+
 const app = express();
 const port = 3000;
 
@@ -16,6 +18,7 @@ app.use(bodyParser.json());
 
 app.use("/api/students", studentsRouter);
 app.use("/api/auth", authRouter);
+app.use('/api/feedbacks', feedbackRoutes);
 
 app.use(async (req, res, next) => {
   try {

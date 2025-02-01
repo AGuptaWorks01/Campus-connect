@@ -20,7 +20,7 @@
 
     <div
       [ngClass]="{ hidden: !isNavbarOpen, block: isNavbarOpen }"
-      class="md:flex space-x-4"
+      class="md:flex space-y-4 md:space-x-4 md:space-y-0"
     >
       <ng-container *ngIf="isLoggedIn">
         <a class="block py-2 px-4 hover:bg-gray-700 rounded" routerLink="home"
@@ -41,6 +41,30 @@
           routerLink="/Feedback"
           >Feedback</a
         >
+
+        <!-- Profile Dropdown -->
+        <div class="relative profile-dropdown">
+          <button
+            (click)="toggleDropdown($event)"
+            class="block py-2 px-4 hover:bg-gray-700 rounded"
+          >
+            <i class="fas fa-user mx-1"></i> {{ username | uppercase }}
+          </button>
+
+          <div
+            *ngIf="isDropdownOpen"
+            class="absolute right-0 mt-2 w-48 bg-white text-black rounded shadow-lg"
+          >
+            <a class="block px-4 py-2 hover:bg-gray-200" routerLink="/profile"
+              >My Account</a
+            >
+            <a
+              class="block px-4 py-2 hover:bg-gray-200 cursor-pointer"
+              (click)="logout()"
+              >Log out</a
+            >
+          </div>
+        </div>
       </ng-container>
 
       <!-- Show login/signup if not logged in -->
@@ -56,16 +80,8 @@
           >Signup</a
         >
       </ng-container>
-
-      <!-- Show logout button if logged in -->
-      <ng-container *ngIf="isLoggedIn">
-        <button
-          class="block py-2 px-4 bg-red-500 hover:bg-red-700 text-white rounded"
-          (click)="logout()"
-        >
-          Logout
-        </button>
-      </ng-container>
     </div>
   </div>
 </nav>
+
+

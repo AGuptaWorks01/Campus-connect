@@ -1,5 +1,6 @@
 const express = require('express');
-const { register, login, resetPassword, requestPasswordReset } = require("../Controllers/AuthController"); // Import function
+// Import function
+const { register, login, resetPassword, requestPasswordReset } = require("../Controllers/AuthController");
 const router = express.Router();
 
 // Register route
@@ -13,5 +14,9 @@ router.post("/login", login);
 router.post("/request-password-reset", requestPasswordReset)
 
 router.post("/reset-password", resetPassword); // Add this route for reset password
+
+
+
+
 
 module.exports = router;
