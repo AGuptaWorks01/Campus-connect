@@ -1,14 +1,12 @@
 export interface Student {
     id?: number;  // Make the id field optional
     name: string;
-    department: string;
+    branch: string;
     year: string;
     image: string;
     company_name: string;
-    employee: string;
-    branch: string;
-    degree: string;
-    batch: string;
-    stipend: string;
+    employee_type: string;
+    linkedin: string;
+    github: string;
     user_id: number;
 }

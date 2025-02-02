@@ -1,59 +1,65 @@
-import { CommonModule } from '@angular/common'; // To import common Angular functionalities like ngIf, ngFor
-import { Component } from '@angular/core'; // To define a component
-import { FormsModule } from '@angular/forms'; // To use Angular forms functionality (for two-way data binding)
-import { StudentsService } from '../../services/students.service'; // Importing the StudentsService to fetch student data
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { StudentsService } from '../../services/students.service';
 import { RouterModule } from '@angular/router';
 import { Student } from '../../Student';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
-  selector: 'app-home', // Selector to define the custom tag for this component
-  standalone: true, // Indicates that this component is standalone and does not need a module
-  imports: [CommonModule, FormsModule, RouterModule], // Import necessary modules (CommonModule and FormsModule)
-  templateUrl: './home.component.html', // Path to the HTML template for the component
-  styleUrls: ['./home.component.css'], // Path to the CSS for the component styling
+  selector: 'app-home',
+  standalone: true,
+  imports: [CommonModule, FormsModule, RouterModule],
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
-  // Variables for managing search query, selected department and year, and the student list
-  searchQuery: string = '';
-  selectedDepartment: string = '';
-  selectedYear: string = '';
-  student: Student[] = []; // Array to hold student data
+  students: Student[] = []; // Ensure students is an array
+  userId: string | null = ''; // Dynamically fetch logged-in user ID
+  searchQuery: string = ''; // For filtering the students
+  selectedYear: string = ''; // For filtering by year
+  selectedBranch: string = ''; // For filtering by branch
+  selectedEmployeeType: string = ''; // For filtering by employee type
 
-  // Injecting the StudentsService to interact with the backend
-  constructor(private studentService: StudentsService) { }
+  isLoading: boolean = true; // Add loading state
+  errorMessage: string = '';
 
-  // ngOnInit lifecycle hook, which runs once the component is initialized
+  constructor(
+    private studentService: StudentsService,
+    private authService: AuthService
+  ) {}
+
   ngOnInit(): void {
-    this.fetchStudents(); // Fetch students as soon as the component loads
+    this.userId = this.authService.getUserId(); // Get logged-in user ID from AuthService
+    this.fetchStudents();
   }
 
-  // Method to fetch students from the backend API
+  // Fetch students from backend API
   fetchStudents() {
-    // Calling the service's getStudents method to fetch data
     this.studentService.getStudents().subscribe({
-      next: (data) => {
-        // When data is successfully fetched, assign it to the student array
-        // If the data doesn't have students, assign an empty array to avoid errors
-        this.student = data;
+      next: (students: Student[]) => {
+        this.students = students || []; // Safely assign the students
+        this.isLoading = false;
       },
       error: (err) => {
-        // If there's an error fetching students, log the error and set the student array to empty
-        console.error('Error fetching students: ', err);
-        this.student = []; // Handle API error gracefully
-      }
+        console.error('Error fetching students:', err);
+        this.errorMessage = 'Failed to load students';
+        this.students = [];
+        this.isLoading = false;
+      },
     });
   }
 
-  // Method to filter students based on search query, selected department, and selected year
-  filteredStudents() {
-    return this.student.filter(
+  // Filter students based on search query, year, branch, and employee type
+  filteredStudents(): Student[] {
+    return this.students.filter(
       (student) =>
-        // Checking if the student's name includes the search query (case-insensitive)
-        student.name.toLowerCase().includes(this.searchQuery.toLowerCase()) &&
-        // Filtering based on department, if a department is selected
-        (this.selectedDepartment === '' || student.department === this.selectedDepartment) &&
-        // Filtering based on year, if a year is selected
-        (this.selectedYear === '' || student.year === this.selectedYear)
+        student.name?.toLowerCase().includes(this.searchQuery.toLowerCase()) &&
+        (this.selectedYear === '' || student.year === this.selectedYear) &&
+        (this.selectedBranch === '' ||
+          student.branch === this.selectedBranch) &&
+        (this.selectedEmployeeType === '' ||
+          student.employee_type === this.selectedEmployeeType)
     );
   }
 }

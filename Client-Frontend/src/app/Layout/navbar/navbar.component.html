@@ -1,86 +1,37 @@
 <nav class="bg-gray-900 text-white p-3">
   <div class="container mx-auto flex justify-between items-center">
-    <a class="text-xl font-bold" routerLink="/">Campus Connect</a>
+    <a class="text-xl font-bold" routerLink="home">Campus Connect</a>
 
     <button class="md:hidden" (click)="toggleNavbar()">
-      <svg
-        class="w-6 h-6"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M4 6h16M4 12h16m-7 6h7"
-        ></path>
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
       </svg>
     </button>
 
-    <div
-      [ngClass]="{ hidden: !isNavbarOpen, block: isNavbarOpen }"
-      class="md:flex space-y-4 md:space-x-4 md:space-y-0"
-    >
+    <div [ngClass]="{ hidden: !isNavbarOpen, block: isNavbarOpen }" class="md:flex space-y-4 md:space-x-4 md:space-y-0">
       <ng-container *ngIf="isLoggedIn">
-        <a class="block py-2 px-4 hover:bg-gray-700 rounded" routerLink="home"
-          >Home</a
-        >
-        <a
-          class="block py-2 px-4 hover:bg-gray-700 rounded"
-          routerLink="/aiPoweredMockInterview"
-          >AI Mock Interview</a
-        >
-        <a
-          class="block py-2 px-4 hover:bg-gray-700 rounded"
-          routerLink="/AiPoweredResumeReview"
-          >AI Resume Review</a
-        >
-        <a
-          class="block py-2 px-4 hover:bg-gray-700 rounded"
-          routerLink="/Feedback"
-          >Feedback</a
-        >
+        <a class="block py-2 px-4 hover:bg-gray-700 rounded" routerLink="home">Home</a>
+        <a class="block py-2 px-4 hover:bg-gray-700 rounded" routerLink="/aiPoweredMockInterview">AI Mock Interview</a>
+        <a class="block py-2 px-4 hover:bg-gray-700 rounded" routerLink="/AiPoweredResumeReview">AI Resume Review</a>
+        <a class="block py-2 px-4 hover:bg-gray-700 rounded" routerLink="/Feedback">Feedback</a>
 
         <!-- Profile Dropdown -->
         <div class="relative profile-dropdown">
-          <button
-            (click)="toggleDropdown($event)"
-            class="block py-2 px-4 hover:bg-gray-700 rounded"
-          >
+          <button (click)="toggleDropdown($event)" class="block py-2 px-4 hover:bg-gray-700 rounded">
             <i class="fas fa-user mx-1"></i> {{ username | uppercase }}
           </button>
 
-          <div
-            *ngIf="isDropdownOpen"
-            class="absolute right-0 mt-2 w-48 bg-white text-black rounded shadow-lg"
-          >
-            <a
-              class="block px-4 py-2 hover:bg-gray-200"
-              routerLink="/student-details"
-              >My Account</a
-            >
-            <a
-              class="block px-4 py-2 hover:bg-gray-200 cursor-pointer"
-              (click)="logout()"
-              >Log out</a
-            >
+          <div *ngIf="isDropdownOpen" class="absolute right-0 mt-2 w-48 bg-white text-black rounded shadow-lg">
+            <a class="block px-4 py-2 hover:bg-gray-200" routerLink="/student-details">My Account</a>
+            <a class="block px-4 py-2 hover:bg-gray-200 cursor-pointer" (click)="logout()">Log out</a>
           </div>
         </div>
       </ng-container>
 
       <!-- Show login/signup if not logged in -->
       <ng-container *ngIf="!isLoggedIn">
-        <a
-          class="block py-2 px-4 bg-blue-500 hover:bg-blue-700 text-white rounded"
-          routerLink="/login"
-          >Login</a
-        >
-        <a
-          class="block py-2 px-4 bg-blue-500 hover:bg-blue-700 text-white rounded"
-          routerLink="/register"
-          >Signup</a
-        >
+        <a class="block py-2 px-4 bg-blue-500 hover:bg-blue-700 text-white rounded" routerLink="/login">Login</a>
+        <a class="block py-2 px-4 bg-blue-500 hover:bg-blue-700 text-white rounded" routerLink="/register">Signup</a>
       </ng-container>
     </div>
   </div>

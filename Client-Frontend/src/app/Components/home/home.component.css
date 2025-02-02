@@ -1,24 +1,44 @@
+/* Typing Effect */
 .typing-text {
   display: inline-block;
   border-right: 3px solid;
   white-space: nowrap;
   overflow: hidden;
-  width: 0;
-  animation: typing 3s steps(30, end) infinite, blink 0.7s infinite;
+  animation: typing 3s steps(30, end) 1, blink 0.7s infinite step-end;
 }
 
+/* Typing animation */
 @keyframes typing {
   from {
     width: 0;
   }
   to {
-    width: 70%;
+    width: 50%;
   }
 }
 
+/* Blink effect */
 @keyframes blink {
-  30% {
+  0%, 100% {
     border-color: transparent;
+  }
+  50% {
+    border-color: black;
+  }
+}
+
+/* Reverse Typing Effect */
+.typing-text.reverse {
+  animation: reverseTyping 3s steps(30, end) 1, blink 0.7s infinite  ;
+}
+
+/* Reverse Typing animation */
+@keyframes reverseTyping {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0;
   }
 }
 
@@ -129,8 +149,6 @@
   }
 }
 
-
-
 .search-filter {
   display: flex;
   flex-direction: column;
@@ -149,5 +167,3 @@
 .search-filter select {
   height: 38px; /* Standard input height */
 }
-
-

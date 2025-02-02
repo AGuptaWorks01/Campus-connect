@@ -53,7 +53,6 @@ export class AuthService {
       localStorage.setItem(this.tokenKey, response.data.token); // Set Token
       localStorage.setItem(this.userIdKey, response.data._id); // Set User ID
       localStorage.setItem(this.usernameKey, response.data.username); // Set Username
-      console.log('Username set in localStorage:', response.data.username); // Debugging log
       this.isLoggedInSubject.next(true); // Notify login status change
     }
   }

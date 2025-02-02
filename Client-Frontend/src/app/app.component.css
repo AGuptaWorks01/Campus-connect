@@ -1,8 +1,22 @@
-/* app-footer.component.css */
+/* Navbar Styles */
+app-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10; /* Ensures it stays on top of the content */
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional, adds a shadow */
+  height: 64px; /* Adjust this to match the actual height of your navbar */
+}
+
+/* Footer Styles */
 footer {
   background-color: #333; /* Dark background */
   color: white;
   padding: 20px;
   text-align: center;
   font-size: 1rem;
+  width: 100%; /* Ensures footer takes the full width */
+  position: relative; /* Ensures it’s positioned at the bottom when content is short */
 }

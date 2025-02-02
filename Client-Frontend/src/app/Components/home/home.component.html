@@ -4,35 +4,52 @@
     Learn & become the <span id="typing-text"></span>
   </h2>
 
+  <!-- Loading Indicator -->
+  <div *ngIf="isLoading" class="text-center">
+    <p>Loading students...</p>
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="text-danger text-center">
+    <p>{{ errorMessage }}</p>
+  </div>
+
   <!-- Search & Filter Section -->
-  <div class="search-filter card p-3 shadow-lg mt-4 my-2">
+  <div class="search-filter card p-4 shadow-lg mt-3 my-2">
     <div class="row">
-      <div class="col-md-4">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Search students..."
-          [(ngModel)]="searchQuery"
-        />
+      <div class="col-md-3">
+        <input type="text" class="form-control" placeholder="Search students..." [(ngModel)]="searchQuery" />
       </div>
-      <div class="col-md-4 my-2">
-        <select class="form-select" [(ngModel)]="selectedDepartment">
-          <option value="">Select Department</option>
-          <option value="CSE">CSE</option>
-          <option value="ECE">ECE</option>
-          <option value="AI">AI</option>
-          <option value="DS">DS</option>
-          <option value="CST">CST</option>
-          <option value="IT">IT</option>
-        </select>
-      </div>
-      <div class="col-md-4">
+
+      <!-- Year Filter (2020 to 2030) -->
+      <div class="col-md-3 my-1">
         <select class="form-select" [(ngModel)]="selectedYear">
           <option value="">Select Year</option>
-          <option value="1st Year">1st Year</option>
-          <option value="2nd Year">2nd Year</option>
-          <option value="3rd Year">3rd Year</option>
-          <option value="4th Year">4th Year</option>
+          <option *ngFor="let year of [2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030]" [value]="year">
+            {{ year }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Branch Filter -->
+      <div class="col-md-3 mt-1">
+        <select class="form-select" [(ngModel)]="selectedBranch">
+          <option value="">Select Branch</option>
+          <option value="CSE">CSE</option>
+          <option value="ECE">ECE</option>
+          <option value="IT">IT</option>
+          <option value="Mechanical">Mechanical</option>
+          <option value="Civil">Civil</option>
+        </select>
+      </div>
+
+      <!-- Employee Type Filter -->
+      <div class="col-md-3 mt-1">
+        <select class="form-select" [(ngModel)]="selectedEmployeeType">
+          <option value="">Select Employee Type</option>
+          <option value="Intern">Intern</option>
+          <option value="Full-Time">Full-Time</option>
+          <option value="Part-Time">Part-Time</option>
         </select>
       </div>
     </div>
@@ -40,65 +57,55 @@
 
   <!-- Student List -->
   <div class="row mt-4 d-flex">
-    <!-- Student & Company Card -->
     <div *ngFor="let student of filteredStudents()" class="col-md-4 mb-4">
-      <div
-        class="card shadow-sm d-flex flex-column justify-content-between h-100"
-      >
+      <div class="card shadow-sm d-flex flex-column justify-content-between h-100">
         <div class="row g-0">
-          <!-- Left Side (Image - 50% Width) -->
-          <div
-            class="col-md-6 d-flex justify-content-center align-items-center"
-          >
-            <img
-              [src]="student.image"
-              class="img-fluid rounded-circle student-image"
-              alt="Student"
-            />
+          <!-- Left Side (Image) -->
+          <div class="col-md-6 d-flex justify-content-center align-items-center">
+            <img [src]="student.image" class="img-fluid rounded-circle student-image" alt="Student" />
           </div>
-          <!-- Right Side (Student Details - 50% Width) -->
+          <!-- Right Side (Student Details) -->
           <div class="col-md-6 d-flex flex-column justify-content-between">
             <div class="card-body">
-              <!-- Company Name at Top Center -->
               <h5 class="card-title text-center mt-3 mb-4">
-                {{ student.company_name }}
+                {{ student.company_name || 'No Company' }}
               </h5>
-
-              <!-- Student Details -->
               <p class="card-text"><strong>Name:</strong> {{ student.name }}</p>
-              <p class="card-text">
-                <strong>Branch:</strong> {{ student.branch }}
-              </p>
-              <p class="card-text">
-                <strong>Degree:</strong> {{ student.degree }}
-              </p>
-              <p class="card-text">
-                <strong>Batch:</strong> {{ student.batch }}
-              </p>
-            </div>
-            <!-- Stipend at the Bottom (Centered) -->
-            <div class="text-center text-success mb-4">
-              <strong>Stipend: ₹{{ student.stipend }}+/month</strong>
+              <p class="card-text"><strong>Branch:</strong> {{ student.branch }}</p>
+              <!-- <p class="card-text"><strong>LinkedIn:</strong>
+                <a [href]="student.linkedin" target="_blank">
+                  <button class="btn btn-info w-100">View LinkedIn</button>
+                </a>
+              </p> -->
+              <p class="card-text"><strong>Batch:</strong> {{ student.year }}</p>
+
+              <!-- Employee Type at Bottom -->
+              <p class="card-text"><strong>Employee Type:</strong> {{ student.employee_type }}</p>
             </div>
 
-            <!-- Buttons for View Profile and Like -->
-            <!-- routerLink="/Profile/{{ student.id }}" -->
-            <div class="button-container">
-              <button
-                routerLink="/Profile"
-                class="btn btn-primary btn-sm view-profile"
-              >
-                View Profile
+
+            <!-- LinkedIn and Like Buttons (Side by Side) -->
+            <div class="d-flex justify-content-between mt-3">
+              <!-- LinkedIn Button -->
+              <a [href]="student.linkedin" target="_blank">
+                <button class="btn btn-info btn-sm w-100">
+                  <i class="fab fa-linkedin"></i> LinkedIn
+                </button>
+              </a>
+
+              <!-- Like Button -->
+              <button class="btn btn-warning btn-sm ml-2">
+                <i class="fas fa-heart"></i> Like
               </button>
-              <button class="btn btn-warning btn-sm like-button">Like</button>
             </div>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- No Students Found Message -->
+    <div *ngIf="filteredStudents().length === 0 && !isLoading" class="col-md-12 text-center mt-4">
+      <h4>No students found matching the filters.</h4>
+    </div>
   </div>
 </div>
-
-
-
-

@@ -48,10 +48,10 @@ CREATE TABLE IF NOT EXISTS feedbacks (
 
  Databases and tables are create.
 
- go to your folder and **APi-Backend** intergrate terminal and run ` npm start` (we are using **nodemon** ) package for auto save and run your project.
+ go to your folder and **APi-Backend** intergrate terminal and  run `npm install` first for node_module folder ` npm start` (we are using **nodemon** ) package for auto save and run your project.
  it will run on `localhost:3100`
 
- then to **client-Frontend** intergrate terminal and run ` ng serve` 
+ then to **client-Frontend** intergrate terminal and run `npm install` first for node_module folder  run ` ng serve` 
  it will run on ` localhost:4200`
 
 
@@ -65,11 +65,17 @@ http://localhost:3100/api/auth/register
 // api for login user
 http://localhost:3100/api/auth/login
 
+// api for reset password
+http://localhost:3100/api/auth/reset-password
 
-// api for insert student info
-http://localhost:3100/api/students/insert-student
+// api for add student info
+http://localhost:3100/api/students/add
 
 // api for get all students
-http://localhost:3100/api/students/students
+http://localhost:3100/api/students/getall
 
+// api for update user detail
+http://localhost:3100/api/students/update/1
 
+// api for delete student details
+http://localhost:3100/api/students/delete/1

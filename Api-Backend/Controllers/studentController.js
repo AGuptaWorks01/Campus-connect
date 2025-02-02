@@ -4,19 +4,20 @@ const pool = require("../config/db");
 exports.addStudent = async (req, res) => {
   const {
     name,
-    department,
     year,
     image,
     company_name,
-    employee,
+    employee_type,
     branch,
-    user_id, // Ensure user_id is included
+    linkedin,
+    github,
   } = req.body;
+  const user_id = req.user.id; // Get logged-in user ID from middleware
 
   try {
     // Check if user already has a student record
     const [existingStudent] = await pool.query(
-      "SELECT * FROM students WHERE user_id = ?",
+      "SELECT id FROM students WHERE user_id = ?",
       [user_id]
     );
 
@@ -26,13 +27,22 @@ exports.addStudent = async (req, res) => {
         .json({ message: "You can only add one student record." });
     }
 
-    // Insert student if user does not have one
+    // Insert student
     const sql = `
-      INSERT INTO students (name, branch, year, image, company_name, employee, user_id)
-      VALUES (?, ?, ?, ?, ?, ?, ?)
+      INSERT INTO students (name, branch, year, image, company_name, employee_type, linkedin, github, user_id)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
-
-    const values = [name, branch, year, image, company_name, employee, user_id];
+    const values = [
+      name,
+      branch,
+      year,
+      image,
+      company_name,
+      employee_type,
+      linkedin,
+      github,
+      user_id,
+    ];
 
     const [result] = await pool.execute(sql, values);
     res.status(201).json({
@@ -76,7 +86,7 @@ exports.updateStudent = async (req, res) => {
   try {
     // Ensure the student belongs to the logged-in user
     const [existingStudent] = await pool.query(
-      "SELECT * FROM students WHERE id = ? AND user_id = ?",
+      "SELECT id FROM students WHERE id = ? AND user_id = ?",
       [studentId, userId]
     );
 
@@ -105,7 +115,6 @@ exports.updateStudent = async (req, res) => {
       studentId,
       userId,
     ];
-
     const [result] = await pool.execute(sql, values);
 
     if (result.affectedRows === 0) {

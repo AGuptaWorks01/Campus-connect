@@ -5,18 +5,10 @@
     <input type="text" class="form-control" id="name" required [(ngModel)]="student.name" name="name">
   </div>
 
-  <!-- Department -->
+  <!-- Branch -->
   <div class="col-md-4">
-    <label for="department">Department</label>
-    <select class="form-select" [(ngModel)]="student.department" name="department" required>
-      <option value="">Select Department</option>
-      <option value="CSE">CSE</option>
-      <option value="ECE">ECE</option>
-      <option value="AI">AI</option>
-      <option value="DS">DS</option>
-      <option value="CST">CST</option>
-      <option value="IT">IT</option>
-    </select>
+    <label for="branch">Branch</label>
+    <input type="text" class="form-control" id="branch" required [(ngModel)]="student.branch" name="branch">
   </div>
 
   <!-- Year -->
@@ -43,45 +35,34 @@
     <input type="text" class="form-control" id="company_name" [(ngModel)]="student.company_name" name="company_name">
   </div>
 
-  <!-- Employee -->
+  <!-- Employee Type -->
   <div class="col-md-4">
-    <label for="employee">Employee</label>
-    <input type="text" class="form-control" id="employee" [(ngModel)]="student.employee" name="employee">
+    <label for="employee_type">Employee Type</label>
+    <input type="text" class="form-control" id="employee_type" [(ngModel)]="student.employee_type" name="employee_type">
   </div>
 
-  <!-- Branch -->
+  <!-- LinkedIn -->
   <div class="col-md-4">
-    <label for="branch">Branch</label>
-    <input type="text" class="form-control" id="branch" [(ngModel)]="student.branch" name="branch">
+    <label for="linkedin">LinkedIn</label>
+    <input type="text" class="form-control" id="linkedin" [(ngModel)]="student.linkedin" name="linkedin">
   </div>
 
-  <!-- Degree -->
+  <!-- GitHub -->
   <div class="col-md-4">
-    <label for="degree">Degree</label>
-    <input type="text" class="form-control" id="degree" [(ngModel)]="student.degree" name="degree">
-  </div>
-
-  <!-- Batch -->
-  <div class="col-md-4">
-    <label for="batch">Batch</label>
-    <input type="text" class="form-control" id="batch" [(ngModel)]="student.batch" name="batch">
-  </div>
-
-  <!-- Stipend -->
-  <div class="col-md-4">
-    <label for="stipend">Stipend</label>
-    <input type="text" class="form-control" id="stipend" [(ngModel)]="student.stipend" name="stipend">
+    <label for="github">GitHub</label>
+    <input type="text" class="form-control" id="github" [(ngModel)]="student.github" name="github">
   </div>
 
   <!-- Hidden user_id -->
   <input type="hidden" [(ngModel)]="student.user_id" name="user_id" />
 
-  <!-- Submit Button -->
+  <!-- Buttons -->
   <div class="col-md-12">
-    <button type="submit" class="btn btn-primary">{{ isEditing ? 'Update' : 'Add' }} Student</button>
+    <button type="submit" class="btn btn-primary">
+      {{ isEditing ? 'Update Student' : 'Add Student' }}
+    </button>
   </div>
 
-  <!-- Delete Button -->
   <div *ngIf="isEditing" class="col-md-12 mt-2">
     <button type="button" class="btn btn-danger" (click)="onDelete()">Delete Student</button>
   </div>
