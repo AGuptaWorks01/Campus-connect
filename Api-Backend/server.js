@@ -9,7 +9,7 @@ const authRouter = require("./routers/AuthRouters");
 const feedbackRoutes = require('./routers/FeedbackRoutes');
 
 const app = express();
-const port = 3000;
+const PORT = 3100;
 
 app.use(cookieParser());
 app.use(cors());
@@ -30,4 +30,4 @@ app.use(async (req, res, next) => {
   }
 });
 
-app.listen(port, () => console.log(`Server Running on localhost:${port}`));
+app.listen(PORT, () => console.log(`Server Running on localhost:${PORT}`));

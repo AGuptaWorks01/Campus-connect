@@ -4,12 +4,12 @@ import { Observable } from 'rxjs';
 import { Student } from '../Student';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StudentsService {
-  private apiUrl = 'http://localhost:3000/api/students/students'; // API URL for student data
+  private apiUrl = 'http://localhost:3100/api/students/students'; // API URL for student data
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   // Get all students
   getStudents(): Observable<Student[]> {
