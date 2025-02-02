@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -17,7 +17,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './students-details.component.html',
   styleUrl: './students-details.component.css',
 })
-export class StudentsDetailsComponent {
+export class StudentsDetailsComponent implements OnInit {
   student: Student = {
     name: '',
     branch: '',
@@ -32,7 +32,7 @@ export class StudentsDetailsComponent {
 
   isEditing: boolean = false;
   userId: number = 1; // Replace with actual logged-in user ID
-  selectedYear: string = '';
+  years: number[] = [];
 
   constructor(
     private studentsService: StudentsService,
@@ -42,6 +42,7 @@ export class StudentsDetailsComponent {
 
   ngOnInit(): void {
     this.student.user_id = this.userId;
+    this.years = Array.from({ length: 11 }, (_, index) => 2015 + index); // Generate years from 2015 to 2025
 
     /// Check if user already has a student record
     this.studentsService.getStudents().subscribe((students) => {

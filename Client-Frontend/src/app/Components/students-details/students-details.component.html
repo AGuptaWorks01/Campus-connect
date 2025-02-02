@@ -1,56 +1,72 @@
-<form (ngSubmit)="onSubmit()" #studentForm="ngForm" class="row">
+<form (ngSubmit)="onSubmit()" #studentForm="ngForm" class="row g-3">
   <!-- Name -->
-  <div class="col-md-4">
-    <label for="name">Name</label>
-    <input type="text" class="form-control" id="name" required [(ngModel)]="student.name" name="name">
+  <div class="col-md-6">
+    <label for="name" class="form-label">Name</label>
+    <input type="text" class="form-control" id="name" required [(ngModel)]="student.name" name="name"
+      placeholder="Enter your name">
   </div>
 
   <!-- Branch -->
-  <div class="col-md-4">
-    <label for="branch">Branch</label>
-    <input type="text" class="form-control" id="branch" required [(ngModel)]="student.branch" name="branch">
-  </div>
-
-  <!-- Year -->
-  <div class="col-md-4">
-    <label for="year">Year</label>
-    <select class="form-select" [(ngModel)]="student.year" name="year" required>
-      <option value="">Select Year</option>
-      <option value="1st Year">1st Year</option>
-      <option value="2nd Year">2nd Year</option>
-      <option value="3rd Year">3rd Year</option>
-      <option value="4th Year">4th Year</option>
+  <div class="col-md-6">
+    <label for="branch" class="form-label">Branch</label>
+    <select class="form-select" [(ngModel)]="student.branch" name="branch" required>
+      <option value="">Select Branch</option>
+      <option value="CSE">CSE</option>
+      <option value="ECE">ECE</option>
+      <option value="IT">IT</option>
+      <option value="Mechanical">Mechanical</option>
+      <option value="Civil">Civil</option>
     </select>
   </div>
 
-  <!-- Image -->
-  <div class="col-md-4">
-    <label for="image">Image URL</label>
-    <input type="text" class="form-control" id="image" [(ngModel)]="student.image" name="image">
+  <!-- Year -->
+  <div class="col-md-6">
+    <label for="year" class="form-label">Year</label>
+    <select class="form-select" [(ngModel)]="student.year" name="year" required>
+      <option value="">Select Year</option>
+      <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+    </select>
+  </div>
+
+  <!-- Image URL -->
+  <div class="col-md-6">
+    <label for="image" class="form-label">Image URL</label>
+    <input type="text" class="form-control" id="image" [(ngModel)]="student.image" name="image"
+      placeholder="Enter image URL">
   </div>
 
   <!-- Company Name -->
-  <div class="col-md-4">
-    <label for="company_name">Company Name</label>
-    <input type="text" class="form-control" id="company_name" [(ngModel)]="student.company_name" name="company_name">
+  <div class="col-md-6">
+    <label for="company_name" class="form-label">Company Name</label>
+    <input type="text" class="form-control" id="company_name" [(ngModel)]="student.company_name" name="company_name"
+      placeholder="Enter company name">
   </div>
 
   <!-- Employee Type -->
-  <div class="col-md-4">
-    <label for="employee_type">Employee Type</label>
-    <input type="text" class="form-control" id="employee_type" [(ngModel)]="student.employee_type" name="employee_type">
+  <div class="col-md-6">
+    <label for="employee_type" class="form-label">Employee Type</label>
+    <!-- <input type="text" class="form-control" id="employee_type" [(ngModel)]="student.employee_type" name="employee_type"
+      placeholder="Enter employee type"> -->
+    <select class="form-select" [(ngModel)]="student.employee_type" name="employee_type" required>
+      <option value="">Employee Type</option>
+      <option value="Internship">Internship</option>
+      <option value="Part-Time">Part-Time</option>
+      <option value="Full-Time">Full-Time</option>
+    </select>
   </div>
 
   <!-- LinkedIn -->
-  <div class="col-md-4">
-    <label for="linkedin">LinkedIn</label>
-    <input type="text" class="form-control" id="linkedin" [(ngModel)]="student.linkedin" name="linkedin">
+  <div class="col-md-6">
+    <label for="linkedin" class="form-label">LinkedIn</label>
+    <input type="text" class="form-control" id="linkedin" [(ngModel)]="student.linkedin" name="linkedin"
+      placeholder="Enter LinkedIn URL">
   </div>
 
   <!-- GitHub -->
-  <div class="col-md-4">
-    <label for="github">GitHub</label>
-    <input type="text" class="form-control" id="github" [(ngModel)]="student.github" name="github">
+  <div class="col-md-6">
+    <label for="github" class="form-label">GitHub</label>
+    <input type="text" class="form-control" id="github" [(ngModel)]="student.github" name="github"
+      placeholder="Enter GitHub URL">
   </div>
 
   <!-- Hidden user_id -->
@@ -59,7 +75,7 @@
   <!-- Buttons -->
   <div class="col-md-12">
     <button type="submit" class="btn btn-primary">
-      {{ isEditing ? 'Update Student' : 'Add Student' }}
+      {{ isEditing ? 'Add Student' : 'Update Student' }}
     </button>
   </div>
 
