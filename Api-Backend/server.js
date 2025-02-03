@@ -18,15 +18,15 @@ app.use(bodyParser.json());
 
 
 // Database Connection Middleware
-app.use(async (req, res, next) => {
-  try {
-    await pool.getConnection();
-    next();
-  } catch (error) {
-    console.error("Database connection failed:", error);
-    return res.status(500).json({ message: "Database connection error" });
-  }
-});
+// app.use(async (req, res, next) => {
+//   try {
+//     await pool.getConnection();
+//     next();
+//   } catch (error) {
+//     console.error("Database connection failed:", error);
+//     return res.status(500).json({ message: "Database connection error" });
+//   }
+// });
 
 // API Routes
 app.use("/api/auth", authRouter);

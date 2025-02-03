@@ -18,6 +18,8 @@ exports.register = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(password, salt);
 
+
+
     await pool.query(
       "INSERT INTO users (username, email, password) VALUES (?, ?, ?)",
       [username, email, hashPassword]
@@ -25,6 +27,7 @@ exports.register = async (req, res) => {
 
     return res.status(201).json({ message: "User registered successfully" });
   } catch (error) {
+    console.error("Error during registration:", error);
     res
       .status(500)
       .json({ message: "Error during registration", error: error.message });
@@ -52,10 +55,9 @@ exports.login = async (req, res) => {
     const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRETKEY, {
       expiresIn: "1h",
     });
+    // console.log("Generated token:", token); // Log the token
 
-    res
-      .cookie("access_token", token, { httpOnly: true })
-      .status(200)
+    res.status(200)
       .json({
         message: "Login Success!",
         data: {
@@ -65,7 +67,10 @@ exports.login = async (req, res) => {
         },
         token,
       });
+    
+
   } catch (error) {
+    console.error("Internal server error during login:", error);
     res.status(500).json({
       message: "Internal server error during login",
       error: error.message,
@@ -75,7 +80,6 @@ exports.login = async (req, res) => {
 
 // Request Password Reset
 exports.requestPasswordReset = async (req, res) => {
-  
   try {
     const { email } = req.body;
     const [userRows] = await pool.query("SELECT * FROM users WHERE email = ?", [
@@ -113,6 +117,7 @@ exports.requestPasswordReset = async (req, res) => {
     await transporter.sendMail(mailOptions);
     return res.json({ message: "Password reset link sent!" });
   } catch (error) {
+    console.error("Error during password reset request:", error);
     res.status(500).json({
       message: "Error during password reset request",
       error: error.message,
@@ -140,6 +145,7 @@ exports.resetPassword = async (req, res) => {
       return res.json({ message: "Password reset successfully" });
     });
   } catch (error) {
+    console.error("Error during password reset:", error);
     res
       .status(500)
       .json({ message: "Error during password reset", error: error.message });

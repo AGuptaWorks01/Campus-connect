@@ -18,14 +18,26 @@
   <div class="search-filter card p-4 shadow-lg mt-3 my-2">
     <div class="row">
       <div class="col-md-3">
-        <input type="text" class="form-control" placeholder="Search students..." [(ngModel)]="searchQuery" />
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search students..."
+          [(ngModel)]="searchQuery"
+        />
       </div>
 
       <!-- Year Filter (2020 to 2030) -->
       <div class="col-md-3 my-1">
         <select class="form-select" [(ngModel)]="selectedYear">
           <option value="">Select Year</option>
-          <option *ngFor="let year of [2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030]" [value]="year">
+          <option
+            *ngFor="
+              let year of [
+                2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025
+              ]
+            "
+            [value]="year"
+          >
             {{ year }}
           </option>
         </select>
@@ -47,7 +59,7 @@
       <div class="col-md-3 mt-1">
         <select class="form-select" [(ngModel)]="selectedEmployeeType">
           <option value="">Select Employee Type</option>
-          <option value="Intern">Intern</option>
+          <option value="Internship">Internship</option>
           <option value="Full-Time">Full-Time</option>
           <option value="Part-Time">Part-Time</option>
         </select>
@@ -58,31 +70,44 @@
   <!-- Student List -->
   <div class="row mt-4 d-flex">
     <div *ngFor="let student of filteredStudents()" class="col-md-4 mb-4">
-      <div class="card shadow-sm d-flex flex-column justify-content-between h-100">
+      <div
+        class="card shadow-sm d-flex flex-column justify-content-between h-100"
+      >
         <div class="row g-0">
           <!-- Left Side (Image) -->
-          <div class="col-md-6 d-flex justify-content-center align-items-center">
-            <img [src]="student.image" class="img-fluid rounded-circle student-image" alt="Student" />
+          <div
+            class="col-md-6 d-flex justify-content-center align-items-center"
+          >
+            <img
+              [src]="student.image"
+              class="img-fluid rounded-circle student-image"
+              alt="Student"
+            />
           </div>
           <!-- Right Side (Student Details) -->
           <div class="col-md-6 d-flex flex-column justify-content-between">
             <div class="card-body">
               <h5 class="card-title text-center mt-3 mb-4">
-                {{ student.company_name || 'No Company' }}
+                {{ student.company_name || "No Company" }}
               </h5>
               <p class="card-text"><strong>Name:</strong> {{ student.name }}</p>
-              <p class="card-text"><strong>Branch:</strong> {{ student.branch }}</p>
+              <p class="card-text">
+                <strong>Branch:</strong> {{ student.branch }}
+              </p>
               <!-- <p class="card-text"><strong>LinkedIn:</strong>
                 <a [href]="student.linkedin" target="_blank">
                   <button class="btn btn-info w-100">View LinkedIn</button>
                 </a>
               </p> -->
-              <p class="card-text"><strong>Batch:</strong> {{ student.year }}</p>
+              <p class="card-text">
+                <strong>Batch:</strong> {{ student.year }}
+              </p>
 
               <!-- Employee Type at Bottom -->
-              <p class="card-text"><strong>Employee Type:</strong> {{ student.employee_type }}</p>
+              <p class="card-text">
+                <strong>Employee Type:</strong> {{ student.employee_type }}
+              </p>
             </div>
-
 
             <!-- LinkedIn and Like Buttons (Side by Side) -->
             <div class="d-flex justify-content-between mt-3">
@@ -104,7 +129,10 @@
     </div>
 
     <!-- No Students Found Message -->
-    <div *ngIf="filteredStudents().length === 0 && !isLoading" class="col-md-12 text-center mt-4">
+    <div
+      *ngIf="filteredStudents().length === 0 && !isLoading"
+      class="col-md-12 text-center mt-4"
+    >
       <h4>No students found matching the filters.</h4>
     </div>
   </div>

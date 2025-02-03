@@ -5,16 +5,16 @@ exports.verifyToken = (req, res, next) => {
   const token = req.header("Authorization");
 
   if (!token) {
-    return res
-      .status(401)
-      .json({ message: "Access denied. No token provided." });
+    return res.status(401).json({ message: "Access denied. No token provided." });
   }
 
   try {
-    const decoded = jwt.verify(token.replace("Bearer ", ""), JWT_SECRETKEY);
-    req.user = decoded;
+    const cleanToken = token.replace("Bearer ", ""); // Ensure no extra spaces
+    const decoded = jwt.verify(cleanToken, JWT_SECRETKEY);
+    req.user = decoded; // Store decoded user details in request
     next();
   } catch (error) {
-    res.status(400).json({ message: "Invalid or expired token." });
+    console.error("Token Verification Error:", error);
+    return res.status(400).json({ message: "Invalid or expired token." });
   }
 };

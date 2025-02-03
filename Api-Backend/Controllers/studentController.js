@@ -5,7 +5,6 @@ exports.addStudent = async (req, res) => {
   const {
     name,
     year,
-    image,
     company_name,
     employee_type,
     branch,
@@ -13,6 +12,13 @@ exports.addStudent = async (req, res) => {
     github,
   } = req.body;
   const user_id = req.user.id; // Get logged-in user ID from middleware
+
+
+  //Default image URL
+  const defaultImage = "https://img.freepik.com/premium-vector/profiling-flat-illustration_120816-75323.jpg"
+
+  // If user didn't provide an image, set the default image URL
+  const image = req.body.image || defaultImage;
 
   try {
     // Check if user already has a student record

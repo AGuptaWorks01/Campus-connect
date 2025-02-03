@@ -9,6 +9,7 @@ import {
 import { StudentsService } from '../../services/students.service';
 import { Student } from '../../Student';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-students-details',
@@ -19,6 +20,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class StudentsDetailsComponent implements OnInit {
   student: Student = {
+    id: 0,
     name: '',
     branch: '',
     year: '',
@@ -31,16 +33,18 @@ export class StudentsDetailsComponent implements OnInit {
   };
 
   isEditing: boolean = false;
-  userId: number = 1; // Replace with actual logged-in user ID
+  userId: number = 0; // Replace with actual logged-in user ID
   years: number[] = [];
 
   constructor(
     private studentsService: StudentsService,
+    private authService: AuthService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
+    this.userId = parseInt(this.authService.getUserId() || '0') // Dynamically get userId from AuthService
     this.student.user_id = this.userId;
     this.years = Array.from({ length: 11 }, (_, index) => 2015 + index); // Generate years from 2015 to 2025
 
@@ -49,7 +53,7 @@ export class StudentsDetailsComponent implements OnInit {
       const existingStudent = students.find((s) => s.user_id === this.userId);
       if (existingStudent) {
         this.student = { ...existingStudent };
-        this.isEditing = true;
+        this.isEditing = true;  // set isEditing to true if record exists
       }
     });
   }
@@ -58,15 +62,16 @@ export class StudentsDetailsComponent implements OnInit {
   onSubmit(): void {
     if (this.isEditing) {
       this.studentsService
-        .updateStudent(this.student.user_id, this.student)
+        .updateStudent(this.student.id!, this.student)
         .subscribe(() => {
           alert('Student updated successfully!');
-          this.router.navigate(['/students']); // Redirect to student list or wherever needed
+          this.router.navigate(['/home']); // Redirect to student list or wherever needed
         });
     } else {
       this.studentsService.addStudent(this.student).subscribe(() => {
-        this.router.navigate(['/students']); // Redirect after adding student
+        alert('Student added successfully!');
         this.isEditing = true;
+        this.router.navigate(['/home']); // Redirect after adding student
       });
     }
   }
@@ -74,10 +79,11 @@ export class StudentsDetailsComponent implements OnInit {
   // Delete Student
   onDelete(): void {
     if (confirm('Are you sure you want to delete this student?')) {
-      this.studentsService.deleteStudent(this.student.user_id).subscribe(() => {
+      this.studentsService.deleteStudent(this.student.id!).subscribe(() => {
         alert('Student deleted successfully!');
         this.isEditing = false;
         this.student = {
+          id:0,
           name: '',
           branch: '',
           year: '',
@@ -88,6 +94,7 @@ export class StudentsDetailsComponent implements OnInit {
           github: '',
           user_id: this.userId,
         };
+        this.router.navigate(['/home'])
       });
     }
   }

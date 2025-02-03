@@ -13,7 +13,7 @@ import { AuthGuard } from './AuthGuard/auth.guard';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'home',
     pathMatch: 'full', // Full match for default redirect
   },
   {

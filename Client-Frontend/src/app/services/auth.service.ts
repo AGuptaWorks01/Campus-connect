@@ -18,7 +18,15 @@ export class AuthService {
 
   isLoggedIn$ = this.isLoggedInSubject.asObservable(); // Observable to listen for login status
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
+
+  // Get the authentication token from localStorage
+  getAuthToken(): string | null {
+    const token = localStorage.getItem(this.tokenKey);
+    // console.log("Fetched Token:", token); // Debugging
+    return token;
+  }
+
 
   // Check if user is logged in by checking if the token exists
   private checkLoginStatus(): boolean {
@@ -46,49 +54,32 @@ export class AuthService {
   }
 
   // Set the login status, store the token, user ID, and username
-  setLoginStatus(response: {
-    data: { _id: string; token: string; username: string };
-  }): void {
+  setLoginStatus(response: { data: { _id: string; username: string }; token: string; }): void {
+    console.log("Received Token from API:", response.token); // Debugging
+
     if (typeof window !== 'undefined' && window.localStorage) {
-      localStorage.setItem(this.tokenKey, response.data.token); // Set Token
-      localStorage.setItem(this.userIdKey, response.data._id); // Set User ID
-      localStorage.setItem(this.usernameKey, response.data.username); // Set Username
+      localStorage.setItem(this.tokenKey, response.token); // ✅ Store Token
+      localStorage.setItem(this.userIdKey, response.data._id); // ✅ Store User ID
+      localStorage.setItem(this.usernameKey, response.data.username); // ✅ Store Username
+
+      // console.log("Stored Token in LocalStorage:", localStorage.getItem(this.tokenKey)); // ✅ Verify Storage
       this.isLoggedInSubject.next(true); // Notify login status change
     }
   }
 
-  // Logout method to remove the user data from localStorage
-  logout(): void {
-    if (typeof window !== 'undefined' && window.localStorage) {
-      localStorage.removeItem(this.tokenKey);
-      localStorage.removeItem(this.userIdKey);
-      localStorage.removeItem(this.usernameKey); // Remove username
-      this.isLoggedInSubject.next(false); // Update login status to false
-    }
-  }
 
-  // Get the authentication token from localStorage
-  getAuthToken(): string | null {
-    if (typeof window !== 'undefined' && window.localStorage) {
-      return localStorage.getItem(this.tokenKey);
-    }
-    return null;
-  }
 
   // Get the user ID from localStorage
   getUserId(): string | null {
-    if (typeof window !== 'undefined' && window.localStorage) {
-      return localStorage.getItem(this.userIdKey);
-    }
-    return null;
+    return localStorage.getItem(this.userIdKey);
   }
+
+
+
 
   // Get the username from localStorage
   getUsername(): string | null {
-    if (typeof window !== 'undefined' && window.localStorage) {
-      return localStorage.getItem(this.usernameKey);
-    }
-    return null;
+    return localStorage.getItem(this.usernameKey);
   }
 
   // Add the token to request headers for authenticated requests
@@ -110,5 +101,15 @@ export class AuthService {
       token,
       newPassword,
     });
+  }
+
+  // Logout method to remove the user data from localStorage
+  logout(): void {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      localStorage.removeItem(this.tokenKey);
+      localStorage.removeItem(this.userIdKey);
+      localStorage.removeItem(this.usernameKey); // Remove username
+      this.isLoggedInSubject.next(false); // Update login status to false
+    }
   }
 }
