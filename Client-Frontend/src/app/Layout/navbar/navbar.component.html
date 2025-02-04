@@ -1,8 +1,16 @@
-<nav class="bg-gray-900 text-white p-3">
+<nav class="bg-gray-900 text-white p-2">
   <div class="container mx-auto flex justify-between items-center">
-    <a class="text-xl font-bold" routerLink="home">Campus Connect</a>
+    <!-- Campus Connect with Icon -->
+    <a
+      class="text-xl font-bold uppercase bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent transition-transform duration-300 hover:scale-110 flex items-center gap-2"
+      routerLink="home"
+    >
+      <i class="fas fa-graduation-cap text-blue-400"></i>
+      CAMPUS CONNECT
+    </a>
 
-    <button class="md:hidden" (click)="toggleNavbar()">
+    <!-- Mobile Menu Button -->
+    <button class="md:hidden" (click)="toggleNavbar($event)">
       <svg
         class="w-6 h-6"
         fill="none"
@@ -18,27 +26,35 @@
       </svg>
     </button>
 
+    <!-- Navbar Items -->
     <div
+      #navbarMenu
       [ngClass]="{ hidden: !isNavbarOpen, block: isNavbarOpen }"
-      class="md:flex space-y-4 md:space-x-4 md:space-y-0"
+      class="md:flex md:space-x-4 md:space-y-0 bg-gray-900 md:bg-transparent"
     >
       <ng-container *ngIf="isLoggedIn">
-        <a class="block py-2 px-4 hover:bg-gray-700 rounded" routerLink="home"
+        <a
+          class="block py-2 px-4 hover:bg-gray-700 rounded"
+          routerLink="home"
+          (click)="closeNavbar()"
           >Home</a
         >
         <a
           class="block py-2 px-4 hover:bg-gray-700 rounded"
           routerLink="/aiPoweredMockInterview"
+          (click)="closeNavbar()"
           >AI Mock Interview</a
         >
         <a
           class="block py-2 px-4 hover:bg-gray-700 rounded"
           routerLink="/AiPoweredResumeReview"
+          (click)="closeNavbar()"
           >AI Resume Review</a
         >
         <a
           class="block py-2 px-4 hover:bg-gray-700 rounded"
           routerLink="/Feedback"
+          (click)="closeNavbar()"
           >Feedback</a
         >
 
@@ -58,11 +74,12 @@
             <a
               class="block px-4 py-2 hover:bg-gray-200"
               routerLink="/student-details"
+              (click)="closeNavbar()"
               >Account Settings</a
             >
             <a
               class="block px-4 py-2 hover:bg-gray-200 cursor-pointer"
-              (click)="logout()"
+              (click)="logout(); closeNavbar()"
               >Log out</a
             >
           </div>
@@ -71,16 +88,20 @@
 
       <!-- Show login/signup if not logged in -->
       <ng-container *ngIf="!isLoggedIn">
-        <a
-          class="block py-2 px-4 bg-blue-500 hover:bg-blue-700 text-white rounded"
-          routerLink="/login"
-          >Login</a
-        >
-        <a
-          class="block py-2 px-4 bg-blue-500 hover:bg-blue-700 text-white rounded"
-          routerLink="/register"
-          >Signup</a
-        >
+        <div class="flex space-x-2">
+          <a
+            class="py-1 px-3 bg-blue-500 hover:bg-blue-700 text-white rounded"
+            routerLink="/login"
+            (click)="closeNavbar()"
+            >Login</a
+          >
+          <a
+            class="py-1 px-3 bg-blue-500 hover:bg-blue-700 text-white rounded"
+            routerLink="/register"
+            (click)="closeNavbar()"
+            >Signup</a
+          >
+        </div>
       </ng-container>
     </div>
   </div>

@@ -1,9 +1,10 @@
 /* Typing Effect */
 .typing-text {
   display: inline-block;
-  border-right: 3px solid;
+  border-right: 2px solid;
   white-space: nowrap;
   overflow: hidden;
+  font-size:x-large;
   animation: typing 3s steps(30, end) 1, blink 0.7s infinite step-end;
 }
 
@@ -50,7 +51,7 @@
   justify-content: space-between;
   text-align: center;
   height: 100%;
-  padding: 15px;
+  padding: 12px;
   margin-bottom: 20px;
   position: relative;
   min-height: 300px; /* Ensures consistency in all screen sizes */
@@ -70,10 +71,10 @@
   top: 10px;
   left: 50%;
   transform: translateX(-50%);
-  width: 50%;
+  width: 60%;
   text-align:left;
-  background-color: #f0f0f0; /* Light Grey */
-  padding: 8px 0;
+  background-color: #dbd8d84f; /* Light Grey */
+  padding: 6px 0 5px ;
   border-radius: 5px;
 }
 
@@ -82,7 +83,7 @@
   width: 100px;
   height: 100px;
   object-fit: cover;
-  border: 5px solid #fff;
+  /* border: 2px solid #fff; */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -117,6 +118,7 @@
   display: flex;
   align-items: center;
   height: 100%;
+  flex-wrap: nowrap;
 }
 
 .col-md-6 {
@@ -136,7 +138,7 @@
   }
 
   .student-image {
-    width: 70%;
+    width: 65%;
     height: 50%;
   }
 
@@ -157,6 +159,9 @@
   max-width: 100%;
   min-height: auto; /* Auto height adjustment */
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #8136d1, #3070df); /* Blue and Purple Gradient */
+  border-radius: 10px; /* Optional: Adds rounded corners */
+  padding: 20px; /* Optional: Adds padding inside the box */
 }
 
 .search-filter .row {
@@ -167,3 +172,11 @@
 .search-filter select {
   height: 38px; /* Standard input height */
 }
+
+
+
+/* .card-text-bg{
+  background-color: #eee4e446; 
+  border-bottom-left-radius: 9px;
+  border-top-left-radius: 9px;
+} */

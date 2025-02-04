@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener, inject } from '@angular/core';
+import { Component, ElementRef, HostListener, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { Subscription } from 'rxjs';
@@ -21,6 +21,8 @@ export class NavbarComponent {
   username: string = '';
   private loginStatusSub: Subscription = new Subscription(); // Subscription to login status
 
+   constructor(private eRef: ElementRef) {}
+
   ngOnInit() {
     // Subscribe to isLoggedIn$ to get the latest login status
     this.loginStatusSub = this.authService.isLoggedIn$.subscribe((status) => {
@@ -39,7 +41,8 @@ export class NavbarComponent {
   }
 
   // Toggle the navbar open/close state
-  toggleNavbar(): void {
+  toggleNavbar(event: Event): void {
+    event.stopPropagation()
     this.isNavbarOpen = !this.isNavbarOpen;
   }
 
@@ -51,6 +54,7 @@ export class NavbarComponent {
   // Close the navbar when a menu item is clicked
   closeNavbar(): void {
     this.isNavbarOpen = false;
+    this.isDropdownOpen = false;
   }
 
   logout() {
@@ -60,11 +64,9 @@ export class NavbarComponent {
 
 
   @HostListener('document:click', ['$event'])
-  closeDropdown(event: Event) {
-    const targetElement = event.target as HTMLElement
-
-    if (!targetElement.closest('.profile-dropdown')) {
-      this.isDropdownOpen = false
+  closeNavbarOutside(event: Event) {
+    if (!this.eRef.nativeElement.contains(event.target)) {
+      this.closeNavbar();
     }
   }
 }

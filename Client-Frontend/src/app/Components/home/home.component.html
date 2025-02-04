@@ -1,7 +1,7 @@
 <div class="container mt-4">
   <!-- Animated Typing Text -->
-  <h2 class="typing-text text-primary fw-bold">
-    Learn & become the <span id="typing-text"></span>
+  <h2 class="typing-text text-primary fw-bold" style="background: linear-gradient(to right, #5095c4, #bf88d4); -webkit-background-clip: text; color: transparent;">
+    Learn & become the... <span id="typing-text"></span>
   </h2>
 
   <!-- Loading Indicator -->
@@ -31,11 +31,7 @@
         <select class="form-select" [(ngModel)]="selectedYear">
           <option value="">Select Year</option>
           <option
-            *ngFor="
-              let year of [
-                2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025
-              ]
-            "
+            *ngFor="let year of [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025]"
             [value]="year"
           >
             {{ year }}
@@ -70,69 +66,52 @@
   <!-- Student List -->
   <div class="row mt-4 d-flex">
     <div *ngFor="let student of filteredStudents()" class="col-md-4 mb-4">
-      <div
-        class="card shadow-sm d-flex flex-column justify-content-between h-100"
-      >
+      <div class="card shadow-sm d-flex flex-column justify-content-between h-100  bg-gradient-to-r from-blue-400 to-purple-500">
         <div class="row g-0">
           <!-- Left Side (Image) -->
-          <div
-            class="col-md-6 d-flex justify-content-center align-items-center"
-          >
+          <div class="col-md-6">
             <img
               [src]="student.image"
-              class="img-fluid rounded-circle student-image"
+              class="img rounded-circle student-image"
               alt="Student"
             />
           </div>
+
           <!-- Right Side (Student Details) -->
-          <div class="col-md-6 d-flex flex-column justify-content-between">
+          <div class="col-md-6 flex-column">
             <div class="card-body">
-              <h5 class="card-title text-center mt-3 mb-4">
+              <h5 class="card-title text-center mt-3 mb-5">
                 {{ student.company_name || "No Company" }}
               </h5>
-              <p class="card-text"><strong>Name:</strong> {{ student.name }}</p>
-              <p class="card-text">
-                <strong>Branch:</strong> {{ student.branch }}
-              </p>
-              <!-- <p class="card-text"><strong>LinkedIn:</strong>
-                <a [href]="student.linkedin" target="_blank">
-                  <button class="btn btn-info w-100">View LinkedIn</button>
-                </a>
-              </p> -->
-              <p class="card-text">
-                <strong>Batch:</strong> {{ student.year }}
-              </p>
+              <div class="card-text-bg">
 
-              <!-- Employee Type at Bottom -->
-              <p class="card-text">
-                <strong>Employee Type:</strong> {{ student.employee_type }}
-              </p>
+                <p class="card-text"><strong>Name:</strong> {{ student.name }}</p>
+                <p class="card-text"><strong>Branch:</strong> {{ student.branch }}</p>
+                <p class="card-text"><strong>Batch:</strong> {{ student.year }}</p>
+                <p class="card-text"><strong>Employee Type:</strong> {{ student.employee_type }}</p>
+              </div>
             </div>
 
             <!-- LinkedIn and Like Buttons (Side by Side) -->
             <div class="d-flex justify-content-between mt-3">
-              <!-- LinkedIn Button -->
               <a [href]="student.linkedin" target="_blank">
                 <button class="btn btn-info btn-sm w-100">
                   <i class="fab fa-linkedin"></i> LinkedIn
                 </button>
               </a>
 
-              <!-- Like Button -->
               <button class="btn btn-warning btn-sm ml-2">
                 <i class="fas fa-heart"></i> Like
               </button>
             </div>
           </div>
+
         </div>
       </div>
     </div>
 
     <!-- No Students Found Message -->
-    <div
-      *ngIf="filteredStudents().length === 0 && !isLoading"
-      class="col-md-12 text-center mt-4"
-    >
+    <div *ngIf="filteredStudents().length === 0 && !isLoading" class="col-md-12 text-center mt-4">
       <h4>No students found matching the filters.</h4>
     </div>
   </div>

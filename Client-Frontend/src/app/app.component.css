@@ -7,16 +7,34 @@ app-navbar {
   z-index: 10; /* Ensures it stays on top of the content */
   background-color: #fff;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional, adds a shadow */
-  height: 64px; /* Adjust this to match the actual height of your navbar */
+  ; /* Adjust this to match the actual height of your navbar */
 }
 
 /* Footer Styles */
-footer {
-  background-color: #333; /* Dark background */
+/* Footer Styles */
+/* Ensure footer stays at the bottom */
+app-footer {
+  position: relative;
+  top: 5px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #000000; /* Dark background */
   color: white;
   padding: 20px;
   text-align: center;
   font-size: 1rem;
-  width: 100%; /* Ensures footer takes the full width */
-  position: relative; /* Ensures it’s positioned at the bottom when content is short */
+  width: 100%;
+  z-index: 10; /* Ensure it's above content */
+}
+
+/* Ensure Main Content has padding at the bottom for spacing */
+.flex-grow-1 {
+  padding-bottom: 60px; /* Adjust spacing for footer */
+}
+
+@media (max-width: 768px){
+.flex-grow-1{
+  padding-bottom: 180px;
+}
 }
