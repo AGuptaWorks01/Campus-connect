@@ -17,11 +17,10 @@ export class NavbarComponent {
   isNavbarOpen = false; // Track whether the navbar is open or closed
   isLoggedIn = false; // Track login status
   isDropdownOpen = false;
-  isModalOpen = false;
   username: string = '';
   private loginStatusSub: Subscription = new Subscription(); // Subscription to login status
 
-   constructor(private eRef: ElementRef) {}
+  constructor(private eRef: ElementRef) { }
 
   ngOnInit() {
     // Subscribe to isLoggedIn$ to get the latest login status
