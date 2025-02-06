@@ -19,6 +19,7 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './students-details.component.css',
 })
 export class StudentsDetailsComponent implements OnInit {
+  
   student: Student = {
     id: 0,
     name: '',
@@ -39,7 +40,6 @@ export class StudentsDetailsComponent implements OnInit {
   constructor(
     private studentsService: StudentsService,
     private authService: AuthService,
-    private route: ActivatedRoute,
     private router: Router
   ) { }
 

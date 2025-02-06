@@ -2,7 +2,7 @@
   <div class="container mx-auto flex justify-between items-center">
     <!-- Campus Connect with Icon -->
     <a
-      class="text-xl font-bold uppercase bg-gradient-to-r from-blue-300 to-purple-500 bg-clip-text text-transparent transition-transform duration-300 hover:scale-110 flex items-center gap-2"
+      class="text-xl font-bold uppercase bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent transition-transform duration-300 hover:scale-110 flex items-center gap-2"
       routerLink="home"
     >
       <i class="fas fa-graduation-cap text-blue-400"></i>
@@ -30,7 +30,7 @@
     <div
       #navbarMenu
       [ngClass]="{ hidden: !isNavbarOpen, block: isNavbarOpen }"
-      class="md:flex md:space-x-4 md:space-y-0  md:bg-transparent"
+      class="md:flex md:space-x-4 md:space-y-0 md:bg-transparent"
     >
       <ng-container *ngIf="isLoggedIn">
         <a

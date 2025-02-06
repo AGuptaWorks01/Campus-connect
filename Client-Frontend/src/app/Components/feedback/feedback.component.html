@@ -1,8 +1,7 @@
 <div class="flex flex-col items-center max-w-6xl mx-auto mt-8 space-y-10">
 
   <!-- Feedback Form Section -->
-  <div
-    class="w-full bg-gradient-to-r from-teal-400 via-blue-500 to-indigo-600 p-10 rounded-3xl shadow-2xl transform hover:scale-105 transition duration-500 ease-in-out">
+  <div class="w-full bg-gradient-to-r from-teal-400 via-blue-500 to-indigo-600 p-10 rounded-3xl shadow-2xl transform hover:scale-105 transition duration-500 ease-in-out">
     <h2 class="text-4xl font-extrabold text-white mb-6 text-center">Share Your Feedback</h2>
 
     <form [formGroup]="feedbackForm" (ngSubmit)="submitFeedback()">
@@ -38,8 +37,8 @@
     </form>
   </div>
 
-  <!-- Feedback List Section with Scroll -->
-  <div class="w-full bg-white p-8 rounded-3xl shadow-2xl border border-gray-200 max-h-96 overflow-y-auto">
+  <!-- Feedback List Section -->
+  <div class="w-full bg-white p-8 rounded-3xl shadow-2xl border border-gray-200">
     <h2 class="text-3xl font-extrabold text-blue-600 mb-6 text-center">All Feedback</h2>
 
     <!-- Feedback Entries -->

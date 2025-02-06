@@ -4,9 +4,8 @@
     <div class="flex flex-col mt-1 mb-1">
       <input
         formControlName="email"
-        class="p-2 border border-gray-300 rounded bg-transparent text-black placeholder-gray-300"
-        type="text"
-        placeholder="Email"
+        class="p-2 border border-gray-300 rounded"
+        placeholder="Email"    
       />
       <span
         *ngIf="loginForm.hasError('required', 'email') && loginForm.controls['email'].dirty"
@@ -26,7 +25,7 @@
       <input
         formControlName="password"
         [type]="showPassword ? 'text' : 'password'" 
-        class="p-2 border border-gray-300 rounded bg-transparent text-black placeholder-gray-300"
+        class="p-2 border border-gray-300 rounded"
         placeholder="Password"
       />
       <span

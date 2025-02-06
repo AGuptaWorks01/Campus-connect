@@ -47,3 +47,35 @@ footer {
     z-index: 2000;
   }
 }
+
+
+
+
+/* navbar.component.css */
+
+.dark-mode {
+  background-color: #333;
+  color: white;
+}
+
+.dark-mode .bg-blue-900 {
+  background-color: #1a1a1a;
+}
+
+.dark-mode .text-white {
+  color: #ccc;
+}
+
+.dark-mode a {
+  color: #ddd;
+}
+
+.dark-mode .hover\:bg-gray-700:hover {
+  background-color: #444;
+}
+
+.dark-mode .hover\:bg-gray-200:hover {
+  background-color: #555;
+}
+
+/* Add other dark mode specific styles here */
