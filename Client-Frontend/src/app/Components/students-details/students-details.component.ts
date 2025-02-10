@@ -19,7 +19,7 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './students-details.component.css',
 })
 export class StudentsDetailsComponent implements OnInit {
-  
+
   student: Student = {
     id: 0,
     name: '',
@@ -31,11 +31,14 @@ export class StudentsDetailsComponent implements OnInit {
     linkedin: '',
     github: '',
     user_id: 0,
+    resume:''
   };
 
   isEditing: boolean = false;
   userId: number = 0; // Replace with actual logged-in user ID
   years: number[] = [];
+  showDialog = false;
+  resumeFile: File | null = null;  // Property to hold the selected file
 
   constructor(
     private studentsService: StudentsService,
@@ -46,7 +49,7 @@ export class StudentsDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.userId = parseInt(this.authService.getUserId() || '0') // Dynamically get userId from AuthService
     this.student.user_id = this.userId;
-    this.years = Array.from({ length: 11 }, (_, index) => 2015 + index); // Generate years from 2015 to 2025
+    this.years = Array.from({ length: 16 }, (_, index) => 2015 + index); // Generate years from 2015 to 2025
 
     /// Check if user already has a student record
     this.studentsService.getStudents().subscribe((students) => {
@@ -60,21 +63,35 @@ export class StudentsDetailsComponent implements OnInit {
 
   // Submit form (Add or Update)
   onSubmit(): void {
+    const formData = new FormData();
+    formData.append('name', this.student.name);
+    formData.append('branch', this.student.branch);
+    formData.append('year', this.student.year);
+    formData.append('company_name', this.student.company_name);
+    formData.append('employee_type', this.student.employee_type);
+    formData.append('linkedin', this.student.linkedin);
+    formData.append('github', this.student.github);
+    formData.append('image', this.student.image);
+
+    // Add the resume file if selected
+    if (this.resumeFile) {
+      formData.append('resume', this.resumeFile);  // Add resume to formData
+    }
+
     if (this.isEditing) {
-      this.studentsService
-        .updateStudent(this.student.id!, this.student)
-        .subscribe(() => {
-          alert('Student updated successfully!');
-          this.router.navigate(['/home']); // Redirect to student list or wherever needed
-        });
+      this.studentsService.updateStudent(this.student.id!, formData).subscribe(() => {
+        alert('Student updated successfully!');
+        this.router.navigate(['/home']);  // Redirect after updating student
+      });
     } else {
-      this.studentsService.addStudent(this.student).subscribe(() => {
+      this.studentsService.addStudent(formData).subscribe(() => {
         alert('Student added successfully!');
         this.isEditing = true;
-        this.router.navigate(['/home']); // Redirect after adding student
+        this.router.navigate(['/home']);  // Redirect after adding student
       });
     }
   }
+
 
   // Delete Student
   onDelete(): void {
@@ -83,7 +100,7 @@ export class StudentsDetailsComponent implements OnInit {
         alert('Student deleted successfully!');
         this.isEditing = false;
         this.student = {
-          id:0,
+          id: 0,
           name: '',
           branch: '',
           year: '',
@@ -93,9 +110,24 @@ export class StudentsDetailsComponent implements OnInit {
           linkedin: '',
           github: '',
           user_id: this.userId,
+          resume:''
         };
         this.router.navigate(['/home'])
       });
     }
   }
+
+
+
+
+  onResumeChange(event: any): void {
+    const file = event.target.files[0];
+    if (file && file.type === 'application/pdf') {
+      this.resumeFile = file;
+    } else {
+      alert('Only PDF files are allowed.');
+      this.resumeFile = null;  // Reset if invalid file type is selected
+    }
+  }
+
 }

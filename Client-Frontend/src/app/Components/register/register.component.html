@@ -1,8 +1,7 @@
-<div style="height: 70vh;">
+<div style="height: 70vh">
   <div class="lg:w-5/12 mt-3 p-5 shadow-lg mx-auto">
     <h3 class="text-3xl text-center font-bold py-2">Register</h3>
     <form [formGroup]="registerForm" class="flex flex-col">
-    
       <!-- Username Field -->
       <div class="flex flex-col mt-2 mb-1">
         <input
@@ -12,7 +11,10 @@
           placeholder="Username"
         />
         <span
-          *ngIf="registerForm.hasError('required', 'username') && registerForm.controls['username'].dirty"
+          *ngIf="
+            registerForm.hasError('required', 'username') &&
+            registerForm.controls['username'].dirty
+          "
           class="text-red-500"
         >
           *Username is required
@@ -28,13 +30,19 @@
           placeholder="Email"
         />
         <span
-          *ngIf="registerForm.hasError('required', 'email') && registerForm.controls['email'].dirty"
+          *ngIf="
+            registerForm.hasError('required', 'email') &&
+            registerForm.controls['email'].dirty
+          "
           class="text-red-500"
         >
           *Email is required
         </span>
         <span
-          *ngIf="registerForm.hasError('email', 'email') && registerForm.controls['email'].dirty"
+          *ngIf="
+            registerForm.hasError('email', 'email') &&
+            registerForm.controls['email'].dirty
+          "
           class="text-red-500"
         >
           *Please enter a valid email
@@ -50,12 +58,15 @@
           placeholder="Password"
         />
         <span
-          *ngIf="registerForm.hasError('required', 'password') && registerForm.controls['password'].dirty"
+          *ngIf="
+            registerForm.hasError('required', 'password') &&
+            registerForm.controls['password'].dirty
+          "
           class="text-red-500"
         >
           *Password is required
         </span>
-        
+
         <!-- Eye Icon for toggling password visibility -->
         <button
           type="button"
@@ -63,7 +74,8 @@
           class="absolute right-3 top-3 text-gray-600"
           aria-label="Toggle Password Visibility"
         >
-          <i [class]="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i> <!-- Eye icon that changes based on visibility -->
+          <i [class]="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+          <!-- Eye icon that changes based on visibility -->
         </button>
       </div>
 
@@ -71,7 +83,7 @@
         [disabled]="registerForm.invalid"
         [class.disabled]="registerForm.invalid"
         (click)="register()"
-        class="bg-indigo-500 p-2 rounded mt-3 text-white"
+        class="bg-blue-900 p-2 rounded mt-3 text-white hover:bg-blue-700"
       >
         Register
       </button>
@@ -79,7 +91,9 @@
 
     <div class="flex justify-center mt-3">
       <span>Already have an account?</span>
-      <a routerLink="/login" class="text-indigo-600 ml-2 cursor-pointer">Login Here</a>
+      <a routerLink="/login" class="text-indigo-600 ml-2 cursor-pointer"
+        >Login Here</a
+      >
     </div>
   </div>
 </div>

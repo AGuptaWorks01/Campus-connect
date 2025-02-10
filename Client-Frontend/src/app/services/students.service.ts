@@ -31,27 +31,27 @@ export class StudentsService {
   }
 
   // Add a new student
-  addStudent(student: Student): Observable<Student> {
-    console.log("Adding Student:", student); // ✅ Debugging
+  addStudent(formData: FormData): Observable<Student> {
+    // console.log("Adding Student:", student); // ✅ Debugging
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.authService.getAuthToken()}`,
     });
 
-    return this.http.post<Student>(`${this.apiUrl}add`, student, {
+    return this.http.post<Student>(`${this.apiUrl}add`, formData, {
       headers // Add Authorization header
     });
   }
 
 
   // Update a student (using Student ID)
-  updateStudent(studentId: number, student: Student): Observable<Student> {
+  updateStudent(studentId: number, formData: FormData): Observable<Student> {
     console.log("Updating Student ID:", studentId); // ✅ Debugging
 
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.authService.getAuthToken()}`, // ✅ Correct Header
     });
 
-    return this.http.put<Student>(`${this.apiUrl}update/${studentId}`, student, { headers });
+    return this.http.put<Student>(`${this.apiUrl}update/${studentId}`, formData, { headers });
   }
 
 

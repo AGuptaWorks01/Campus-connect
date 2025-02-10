@@ -1,13 +1,12 @@
-<div class="d-flex flex-column min-vh-100">
+<div class="d-flex flex-column min-h-screen">
   <!-- Navbar -->
-  <app-navbar></app-navbar>
+  <app-navbar class="fixed-top"></app-navbar>
 
-  <!-- Main Content -->
-  <div class="flex-grow-1 pt-16 bg-slate-200
-  "> <!-- Add padding-top to make space for fixed navbar -->
+  <!-- Main Content (Reduced padding) -->
+  <div class="flex-grow pt-20 pb-10 bg-slate-200">
     <router-outlet></router-outlet>
   </div>
 
-  <!-- Footer -->
+  <!-- Footer (Always at Bottom) -->
   <app-footer class="mt-auto"></app-footer>
 </div>

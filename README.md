@@ -67,9 +67,11 @@ CREATE TABLE IF NOT EXISTS students (
   image TEXT,
   linkedin VARCHAR(255),
   github VARCHAR(255),
+  resume VARCHAR(255), -- Add this to store resume file path
   user_id INT UNIQUE,
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
+
 
 -- Step 5: Create the Feedbacks Table
 CREATE TABLE IF NOT EXISTS feedbacks (

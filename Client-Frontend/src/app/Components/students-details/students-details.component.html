@@ -8,7 +8,24 @@
           class="list-group list-group-flush account-settings-links cursor-pointer flex md:block"
         >
           <a class="list-group-item list-group-item-action active">General</a>
-          <a class="list-group-item list-group-item-action">Change password</a>
+
+          <div class="relative inline-block">
+            <a
+              class="list-group-item list-group-item-action cursor-pointer"
+              (mouseenter)="showDialog = true"
+              (mouseleave)="showDialog = false"
+            >
+              Change password
+            </a>
+
+            <!-- Dialog Box (Visible on Hover) -->
+            <div
+              *ngIf="showDialog"
+              class="absolute left-2px ml-5 mt-2 w-48 bg-white shadow-lg rounded-lg p-4 border border-gray-200 text-gray-800"
+            >
+              <p>🚧 Under Implementation</p>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -27,17 +44,21 @@
               <div class="upload-box">
                 <label class="btn btn-outline-primary disabled">
                   Upload new photo
-                  <input type="file" class="account-settings-fileinput" disabled />
+                  <input
+                    type="file"
+                    class="account-settings-fileinput"
+                    disabled
+                  />
                 </label>
               </div>
 
               <!-- Reset Button on Right Side -->
-              <button
+              <!-- <button
                 type="button"
                 class="btn btn-default md-btn-flat reset-btn"
               >
                 Reset
-              </button>
+              </button> -->
             </div>
 
             <hr class="border-light m-0" />
@@ -169,6 +190,18 @@
                   />
                 </div>
 
+                <!-- Resume Upload -->
+                <div class="col-md-6">
+                  <label for="resume" class="form-label">Resume (PDF)</label>
+                  <input
+                    type="file"
+                    class="form-control"
+                    id="resume"
+                    (change)="onResumeChange($event)"
+                    accept="application/pdf"
+                  />
+                </div>
+
                 <!-- Hidden user_id -->
                 <input
                   type="hidden"
@@ -177,22 +210,25 @@
                 />
 
                 <!-- Buttons -->
-                <div class="col-md-12 mt-3 text-right">
-                    <button type="submit" class="btn btn-primary">
-                    {{ isEditing ? "Update Student" : "Add Student" }}</button
-                  >
-                  &nbsp;
-                  <!-- <button type="button" class="btn btn-default" (click)="onCancel()">Cancel</button> -->
-                </div>
-
-                <!-- Delete Button (if Editing) -->
-                <div *ngIf="isEditing" class="col-md-12 mt-2 text-right">
+                <!-- Buttons in a row -->
+                <div class="col-md-12 mt-3 flex justify-end items-end gap-x-4">
+                  <!-- Save Button -->
                   <button
+                    type="submit"
+                    class="btn btn-primary"
+                    [disabled]="studentForm.invalid"
+                  >
+                    {{ isEditing ? "Save Changes" : "Save Student" }}
+                  </button>
+
+                  <!-- Delete Button (if Editing) -->
+                  <button
+                    *ngIf="isEditing"
                     type="button"
                     class="btn btn-danger"
                     (click)="onDelete()"
                   >
-                    Delete Student
+                    Remove
                   </button>
                 </div>
               </form>

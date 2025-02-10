@@ -53,7 +53,7 @@ exports.login = async (req, res) => {
     }
 
     const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRETKEY, {
-      expiresIn: "1h",
+      expiresIn: "5h",
     });
     // console.log("Generated token:", token); // Log the token
 
@@ -67,7 +67,7 @@ exports.login = async (req, res) => {
         },
         token,
       });
-    
+
 
   } catch (error) {
     console.error("Internal server error during login:", error);

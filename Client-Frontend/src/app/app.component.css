@@ -1,40 +1,21 @@
-/* Navbar Styles */
-app-navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 10; /* Ensures it stays on top of the content */
-  background-color: #fff;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional, adds a shadow */
-  ; /* Adjust this to match the actual height of your navbar */
-}
-
-/* Footer Styles */
-/* Footer Styles */
-/* Ensure footer stays at the bottom */
+/* Footer should always be at the bottom */
 app-footer {
-  position: relative;
-  top: 5px;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #021a4d; /* Dark background */
+  background-color: #021a4d;
   color: white;
-  padding: 20px;
-  /* text-align: center; */
+  padding: 10px;
   font-size: 1rem;
   width: 100%;
-  z-index: 10; /* Ensure it's above content */
 }
 
-/* Ensure Main Content has padding at the bottom for spacing */
+/* Ensure main content takes up space so the footer doesn't overlap */
 .flex-grow-1 {
-  padding-bottom: 60px; /* Adjust spacing for footer */
+  min-height: calc(100vh - 100px); /* Adjust height based on navbar/footer */
+  padding-top: 100px; /* Space for fixed navbar */
+  padding-bottom: 80px; /* Space for footer */
 }
 
-@media (max-width: 768px){
-.flex-grow-1{
-  padding-bottom: 180px;
-}
+@media (max-width: 768px) {
+  .flex-grow-1 {
+    padding-bottom: 150px; /* More spacing for small screens */
+  }
 }
