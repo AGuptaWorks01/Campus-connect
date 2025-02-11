@@ -21,52 +21,7 @@
     <p>Loading students...</p>
   </div>
 
-  <!-- "Thousands of students achieved their dream job at" Section -->
-  <div class="mt-4">
-    <h3 class="text-center text-lg font-bold text-primary">
-      Thousands of students achieved their dream job at
-    </h3>
-
-    <!-- Company Logos (Grid Layout) -->
-    <div
-      class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 text-center mt-3"
-    >
-      <div
-        class="flex justify-center items-center p-4 bg-white shadow-md rounded-md hover:scale-105 transition duration-300"
-      >
-        <img src="" alt="Amazon" class="h-12" />
-      </div>
-      <div
-        class="flex justify-center items-center p-4 bg-white shadow-md rounded-md hover:scale-105 transition duration-300"
-      >
-        <img src="" alt="Google" class="h-12" />
-      </div>
-      <div
-        class="flex justify-center items-center p-4 bg-white shadow-md rounded-md hover:scale-105 transition duration-300"
-      >
-        <img src="" alt="Microsoft" class="h-12" />
-      </div>
-      <div
-        class="flex justify-center items-center p-4 bg-white shadow-md rounded-md hover:scale-105 transition duration-300"
-      >
-        <img src="" alt="Samsung" class="h-12" />
-      </div>
-      <div
-        class="flex justify-center items-center p-4 bg-white shadow-md rounded-md hover:scale-105 transition duration-300"
-      >
-        <img src="" alt="Apple" class="h-12" />
-      </div>
-    </div>
-
-    <!-- "See More" Button -->
-    <div class="text-center mt-6">
-      <a
-        href="#more-companies"
-        class="text-blue-500 text-lg font-semibold hover:underline"
-        >See More</a
-      >
-    </div>
-  </div>
+ 
 
   <!-- Search & Filter Section -->
   <div class="search-filter card p-4 shadow-lg mt-3 my-2">
@@ -175,7 +130,7 @@
               <button class="btn btn-warning btn-sm">
                 <i class="fas fa-heart"></i>
               </button>
-              <div *ngIf="student.resume" >
+              <div *ngIf="student.resume">
                 <a [href]="'http://localhost:3100' + student.resume" download>
                   <button class="btn btn-success btn-sm w-100">
                     <i class="fas fa-download"></i>
@@ -194,6 +149,168 @@
       class="col-md-12 text-center mt-4"
     >
       <h4 class="text-white">No students found matching the filters.</h4>
+    </div>
+  </div>
+
+
+
+   <!-- "Thousands of students achieved their dream job at" Section -->
+  <div class="mt-4">
+    <h2 class="text-center text-lg font-bold">
+      Thousands of students achieved their <span class="text-">dream job at</span>
+    </h2>
+
+    <!-- Company Logos (Grid Layout) -->
+    <div
+      class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 text-center mt-2"
+    >
+      <div
+        class="flex justify-center items-center p-4 rounded-md hover:scale-105 transition duration-300"
+      >
+        <img
+          src="../../../assets/images/amazonlogo.png"
+          alt="Amazon"
+          class="h-12"
+        />
+      </div>
+      <div
+        class="flex justify-center items-center p-4 rounded-md hover:scale-105 transition duration-300"
+      >
+        <img
+          src="../../../assets/images/google.png"
+          alt="Google"
+          class="h-12"
+        />
+      </div>
+      <div
+        class="flex justify-center items-center p-4 rounded-md hover:scale-105 transition duration-300"
+      >
+        <img
+          src="../../../assets/images/microsoft.png"
+          alt="Microsoft"
+          class="h-12"
+        />
+      </div>
+      <div
+        class="flex justify-center items-center p-4 rounded-md hover:scale-105 transition duration-300"
+      >
+        <img
+          src="../../../assets/images/Samsung.png"
+          alt="Samsung"
+          class="h-12"
+        />
+      </div>
+      <div
+        class="flex justify-center items-center p-4 rounded-md hover:scale-105 transition duration-300"
+      >
+        <img
+          src="../../../assets/images/airtel.png"
+          alt="Airtel"
+          class="h-12"
+        />
+      </div>
+      <div
+        class="flex justify-center items-center p-4 rounded-md hover:scale-105 transition duration-300"
+      >
+        <img src="../../../assets/images/Dell.png" alt="Dell" class="h-12" />
+      </div>
+      <div
+        class="flex justify-center items-center p-4 rounded-md hover:scale-105 transition duration-300"
+      >
+        <img
+          src="../../../assets/images/Deloitte.png"
+          alt="Deloitte"
+          class="h-12"
+        />
+      </div>
+      <div
+        class="flex justify-center items-center p-4 rounded-md hover:scale-105 transition duration-300"
+      >
+        <img src="../../../assets/images/EY.png" alt="EY" class="h-12" />
+      </div>
+      <div
+        class="flex justify-center items-center p-4 rounded-md hover:scale-105 transition duration-300"
+      >
+        <img
+          src="../../../assets/images/GoldmanSachs.png"
+          alt="GoldmanSachs"
+          class="h-12"
+        />
+      </div>
+      <div
+        class="flex justify-center items-center p-4 rounded-md hover:scale-105 transition duration-300"
+      >
+        <img
+          src="../../../assets/images/Hitachi.png"
+          alt="Hitachi"
+          class="h-12"
+        />
+      </div>
+      <div
+        class="flex justify-center items-center p-4 rounded-md hover:scale-105 transition duration-300"
+      >
+        <img src="../../../assets/images/IBM.png" alt="IBM" class="h-12" />
+      </div>
+      <div
+        class="flex justify-center items-center p-4 rounded-md hover:scale-105 transition duration-300"
+      >
+        <img src="../../../assets/images/Isro.png" alt="Isro" class="h-12" />
+      </div>
+      <div
+        class="flex justify-center items-center p-4 rounded-md hover:scale-105 transition duration-300"
+      >
+        <img
+          src="../../../assets/images/JpMorgan.png"
+          alt="JpMorgan"
+          class="h-12"
+        />
+      </div>
+      <div
+        class="flex justify-center items-center p-4 rounded-md hover:scale-105 transition duration-300"
+      >
+        <img src="../../../assets/images/KPMG.png" alt="KPMG" class="h-12" />
+      </div>
+      <div
+        class="flex justify-center items-center p-4 rounded-md hover:scale-105 transition duration-300"
+      >
+        <img
+          src="../../../assets/images/Mercedes-Benz.png"
+          alt="Mercedes-Benz"
+          class="h-12"
+        />
+      </div>
+      <div
+        class="flex justify-center items-center p-4 rounded-md hover:scale-105 transition duration-300"
+      >
+        <img src="../../../assets/images/NetApp.png" alt="NetApp" class="h-12" />
+      </div>
+      <div
+        class="flex justify-center items-center p-4 rounded-md hover:scale-105 transition duration-300"
+      >
+        <img
+          src="../../../assets/images/PayPal.png"
+          alt="PayPal"
+          class="h-12"
+        />
+      </div>
+      <div
+        class="flex justify-center items-center p-4 rounded-md hover:scale-105 transition duration-300"
+      >
+        <img
+          src="../../../assets/images/salesDorce.png"
+          alt="salesforce"
+          class="h-12"
+        />
+      </div>
+    </div>
+
+    <!-- "See More" Button -->
+    <div class="text-center mt-6">
+      <a
+        href="#more-companies"
+        class="text-blue-500 text-lg font-semibold hover:underline"
+        >+See More</a
+      >
     </div>
   </div>
 </div>
