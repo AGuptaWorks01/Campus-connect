@@ -1,34 +1,30 @@
-<div class="gemini-container flex flex-col h-screen bg-gray-100">
-  <!-- Navbar -->
-  <div class="gemini-header text-center py-3 bg-white shadow-sm">
-    <h1 class="text-3xl font-bold text-gray-800">Gemini AI Integration</h1>
-    <p class="text-gray-600 mt-2">
-      Interact with the powerful Gemini AI model to generate content
-    </p>
+<div class="container">
+  <div class="header">
+    <h1>AI Powered Mock Interview</h1>
   </div>
 
-  <!-- Response Section (Scrollable) -->
- <div class="gemini-body flex-1 overflow-y-auto">
-  <div *ngIf="response" class="gemini-response bg-white p-4 rounded-lg shadow-md mb-4 max-h-84 overflow-y-auto">
-    <h3 class="text-xl font-semibold text-gray-800">Generated Response:</h3>
-    <p class="text-gray-700 mt-2 text-sm">{{ response }}</p>
-  </div>
-</div>
-
-  <!-- Input Container -->
-  <div class="input-container bg-white p-4 shadow-lg">
-    <div class="flex gap-2 max-w-2xl mx-auto">
-      <input
-        [(ngModel)]="prompt"
-        placeholder="Enter your prompt here..."
-        class="gemini-input flex-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
-      <button
-        (click)="getGeminiResponse()"
-        class="generate-btn bg-blue-900 text-white px-6 py-3 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-600"
-      >
-        Submit
-      </button>
+  <!-- Chat Window -->
+  <div class="chat-window">
+    <div class="messages" *ngIf="messages && messages.length">
+      <div *ngFor="let message of messages" [ngClass]="message.isUser ? 'user-message' : 'ai-message'">
+        <p>{{ message.text }}</p>
+      </div>
     </div>
+
+    <!-- Loading indicator -->
+    <div *ngIf="isLoading" class="loading">
+      <p>Loading...</p>
+    </div>
+  </div>
+
+  <!-- Input and Submit -->
+  <div class="footer">
+    <input [(ngModel)]="prompt" placeholder="Enter your prompt..." />
+    <button (click)="getGeminiResponse()" [disabled]="isLoading">Submit</button>
+  </div>
+
+  <!-- JotForm Agent Widget -->
+  <div class="chat-widget-container">
+    <!-- JotForm agent will load here automatically -->
   </div>
 </div>
