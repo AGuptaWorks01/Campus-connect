@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { GeminiAiService } from '../../services/gemini-ai.service';
 
 @Component({
   selector: 'app-ai-powered-mock-interview',
@@ -10,37 +11,25 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './ai-powered-mock-interview.component.css'
 })
 export class AiPoweredMockInterviewComponent {
- // Sample interview questions
-  questions = [
-    {
-      question: 'What is Angular?',
-      options: ['A programming language', 'A framework', 'A database', 'A library'],
-      correctAnswer: 'A framework'
-    },
-    {
-      question: 'What is two-way data binding in Angular?',
-      options: ['Binding data from component to template', 'Binding data from template to component', 'Binding data between two components', 'Both a and b'],
-      correctAnswer: 'Both a and b'
-    },
-    {
-      question: 'Which directive is used for iteration in Angular?',
-      options: ['ngFor', 'ngIf', 'ngModel', 'ngSwitch'],
-      correctAnswer: 'ngFor'
-    },
-  ];
+  prompt: string = '';
+  response: string | null = null;
 
-  questionIndex = 0;
-  correctAnswers = 0;
+  constructor(private geminiAiService: GeminiAiService) { }
 
-  submitAnswer(answer: string) {
-    if (answer === this.questions[this.questionIndex].correctAnswer) {
-      this.correctAnswers++;
+   getGeminiResponse() {
+    if (!this.prompt.trim()) {
+      this.response = 'Please enter a valid prompt.';
+      return;
     }
-    this.questionIndex++;
-  }
 
-  restartInterview() {
-    this.questionIndex = 0;
-    this.correctAnswers = 0;
+    this.geminiAiService.sendPromptToGemini(this.prompt).subscribe(
+      (data) => {
+        this.response = data.text;
+      },
+      (error) => {
+        this.response = 'There was an error processing your request.';
+        console.error('Error:', error);
+      }
+    );
   }
 }

@@ -1,69 +1,114 @@
-/* Full height screen */
-body, html {
+html, body {
   height: 100%;
   margin: 0;
-  font-family: 'Arial', sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Chatbox style */
-.chat-box {
+.gemini-container {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding: 10px;
+  height: 100vh;
+  background-color: #f0f4f8;
 }
 
-.message-box {
+.gemini-header {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.left {
-  align-items: flex-start; /* Align to left for question */
+.gemini-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin: 0;
 }
 
-.right {
-  align-items: flex-end; /* Align to right for answer options */
+.gemini-header p {
+  font-size: 1rem;
+  color: #4a5568;
+  margin-top: 0.5rem;
 }
 
-/* Bubble styles */
-.bubble {
-  max-width: 80%;
-  padding: 10px;
-  border-radius: 10px;
-  word-wrap: break-word;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.left .bubble {
-  background-color: #4C51BF; /* Purple for questions */
-  color: white;
-}
-
-.right .bubble {
-  background-color: #E2E8F0; /* Light gray for answers */
-  color: black;
-}
-
-/* Make chat scrollable */
-.flex-grow {
+.gemini-body {
+  flex-grow: 1;
   overflow-y: auto;
-  max-height: 80vh; /* Limit height */
+  padding: 1rem;
 }
 
-/* Button Hover effect */
-button {
-  transition: background-color 0.3s ease;
+.gemini-response {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
+  max-height: 21rem;
+  overflow-y: auto;
 }
 
-button:hover .bubble {
-  background-color: #4C51BF; /* Change color of options when hovered */
-  color: white;
+.gemini-response h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin: 0;
 }
 
-footer {
-  background-color: #333;
-  color: white;
-  padding: 10px;
-  font-size: 14px;
+.gemini-response p {
+  font-size: 0.875rem;
+  color: #4a5568;
+  margin-top: 0.5rem;
+}
+
+.input-container {
+  background-color: #fff;
+  padding: 1rem;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.input-container .flex {
+  display: flex;
+  gap: 0.5rem;
+  max-width: 32rem;
+  margin: 0 auto;
+}
+
+.gemini-input {
+  flex-grow: 1;
+  padding: 0.75rem;
+  border: 1px solid #cbd5e0;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  color: #2d3748;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.gemini-input:focus {
+  border-color: #3182ce;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+}
+
+.generate-btn {
+  background-color: #2a4365;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s, box-shadow 0.2s;
+  outline: none;
+  border: none;
+}
+
+.generate-btn:hover {
+  background-color: #2c5282;
+}
+
+.generate-btn:focus {
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
 }
