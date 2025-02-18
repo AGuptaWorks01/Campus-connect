@@ -12,7 +12,7 @@ exports.register = async (req, res) => {
     const [userRows] = await pool.query("SELECT * FROM users WHERE email = ?", [email]);
 
     if (userRows.length > 0) {
-      return res.status(400).json({ message: "Email already exists" });
+      return res.status(400).json({ message: "Email already exists" }); // Already exists error
     }
 
     const salt = await bcrypt.genSalt(10);

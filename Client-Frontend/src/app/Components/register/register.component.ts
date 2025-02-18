@@ -37,8 +37,14 @@ export class RegisterComponent {
       },
       error: (err) => {
         console.log(err);
-        alert('Error while registering!');
+        // Check if the error response indicates that the email already exists
+        if (err && err.error && err.error.message === 'Email already exists') {
+          alert('User already exists. Please try with a different email.');
+        } else {
+          alert('Error while registering!');
+        }
       },
     });
   }
+
 }

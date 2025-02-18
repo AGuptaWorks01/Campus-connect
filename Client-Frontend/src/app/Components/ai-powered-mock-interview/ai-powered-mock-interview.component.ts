@@ -32,6 +32,9 @@ export class AiPoweredMockInterviewComponent {
       (data) => {
         this.messages.push({ text: data.text, isUser: false });
         this.isLoading = false
+
+        //clear the input field after submit
+        this.prompt = '';
       },
       (error) => {
         this.response = 'There was an error processing your request.';
