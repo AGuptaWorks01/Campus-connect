@@ -19,7 +19,7 @@
 
   <!-- Input and Submit -->
   <div class="footer">
-    <input [(ngModel)]="prompt" placeholder="Enter your prompt..." />
+    <input [(ngModel)]="prompt" placeholder="Enter your prompt..." (keydown.enter)="getGeminiResponse()"  />
     <button (click)="getGeminiResponse()" [disabled]="isLoading">Submit</button>
   </div>
 
