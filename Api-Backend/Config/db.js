@@ -13,7 +13,18 @@ const pool = mysql.createPool({
   connectTimeout: 10000,
 });
 
+// Test the connection
+async function testConnection() {
+  try {
+    const connection = await pool.getConnection();
+    console.log("Database connected successfully!");
+    connection.release(); // Make sure to release the connection after use
+  } catch (error) {
+    console.error("Error connecting to the database:", error.message);
+  }
+}
+
+// Call the function to test connection
+testConnection();
+
 module.exports = pool;
-
-
-
