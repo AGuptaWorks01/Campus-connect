@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS students (
   image TEXT,
   linkedin VARCHAR(255),
   github VARCHAR(255),
-  resume VARCHAR(255), --store resume file path
+  resume VARCHAR(255),
   user_id INT UNIQUE,
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
