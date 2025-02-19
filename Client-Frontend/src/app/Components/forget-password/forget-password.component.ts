@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
+
 @Component({
   selector: 'app-forget-password',
   standalone: true,
@@ -29,3 +30,4 @@ export class ForgetPasswordComponent {
     }
   }
 }
+

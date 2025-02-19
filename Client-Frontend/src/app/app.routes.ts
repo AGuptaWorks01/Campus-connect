@@ -3,7 +3,6 @@ import { HomeComponent } from './Components/home/home.component';
 import { AiPoweredMockInterviewComponent } from './Components/ai-powered-mock-interview/ai-powered-mock-interview.component';
 import { AiPoweredResumeReviewComponent } from './Components/ai-powered-resume-review/ai-powered-resume-review.component';
 import { FeedbackComponent } from './Components/feedback/feedback.component';
-import { ProfileComponent } from './Components/profile/profile.component';
 import { LoginComponent } from './Components/login/login.component';
 import { RegisterComponent } from './Components/register/register.component';
 import { ForgetPasswordComponent } from './Components/forget-password/forget-password.component';
@@ -48,12 +47,6 @@ export const routes: Routes = [
     path: 'Feedback',
     loadComponent: () =>
       import('./Components/feedback/feedback.component').then((m) => m.FeedbackComponent),
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'Profile',
-    loadComponent: () =>
-      import('./Components/profile/profile.component').then((m) => m.ProfileComponent),
     canActivate: [AuthGuard]
   }
   ,

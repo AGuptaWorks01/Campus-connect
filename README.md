@@ -160,3 +160,109 @@ After setting up the database, install the required backend dependencies:
 ## 🎉 **Congratulations!**
 
 You have successfully set up the **Campus-Connect** project. Happy coding! 🚀
+
+# CAMPUS-CONNECT/
+
+# api-backend
+
+api-backend/
+│
+├── config/ # Database and environment configuration
+│ └── db.js # Contains the database connection logic
+│
+├── controllers/ # Logic for handling requests and responses
+│ ├── AuthController.js # Handles user authentication (login, register)
+│ ├── FeedbackController.js # Handles feedback-related operations
+│ └── StudentController.js # Handles student-related operations
+│
+├── middleware/ # Middleware for request validation and token verification
+│ └── authMiddleware.js # Validates JWT tokens for protected routes
+│
+├── routes/ # Defines route handling logic
+│ ├── authRoutes.js # Handles routes like login and registration
+│ ├── feedbackRoutes.js # Handles feedback submission and retrieval
+│ └── studentRoutes.js # Handles student data retrieval and updates
+│
+├── uploads/ # Directory to store uploaded files (e.g., resumes)
+│ └── (Uploaded files) # Stores files like resumes
+│
+├── server.js # Main file to start the server, configure routes, and middleware
+├── .env # Stores environment variables (e.g., database URI, JWT secret)
+│
+└── package.json # Project dependencies and scripts
+
+# Client-Frontend
+
+client-frontend/
+│
+└── src/
+├── app/
+│ ├── auth-guard/ # Auth Guard-related files
+│ │ └── auth.guard.ts # Protects routes from unauthorized access
+│ │
+│ ├── components/ # Reusable UI components (pages)
+│ │ ├── home/ # Home page component
+│ │ │ ├── home.component.ts # Component Logic (TypeScript)
+│ │ │ ├── home.component.html # Component Template (HTML)
+│ │ │ └── home.component.scss # Component Styles (CSS/SCSS)
+│ │ ├── login/ # Login page component
+│ │ │ ├── login.component.ts
+│ │ │ ├── login.component.html
+│ │ │ └── login.component.scss
+│ │ ├── register/ # Register page component
+│ │ │ ├── register.component.ts
+│ │ │ ├── register.component.html
+│ │ │ └── register.component.scss
+│ │ ├── forget-password/ # Forget password page
+│ │ │ ├── forget-password.component.ts
+│ │ │ ├── forget-password.component.html
+│ │ │ └── forget-password.component.scss
+│ │ ├── reset-password/ # Reset password page
+│ │ │ ├── reset-password.component.ts
+│ │ │ ├── reset-password.component.html
+│ │ │ └── reset-password.component.scss
+│ │ ├── students-details/ # Students details page component
+│ │ │ ├── students-details.component.ts
+│ │ │ ├── students-details.component.html
+│ │ │ └── students-details.component.scss
+│ │ ├── ai-powered-mock-interview/ # AI-powered mock interview
+│ │ │ ├── ai-powered-mock-interview.component.ts
+│ │ │ ├── ai-powered-mock-interview.component.html
+│ │ │ └── ai-powered-mock-interview.component.scss
+│ │ ├── ai-powered-resume-review/ # AI-powered resume review
+│ │ │ ├── ai-powered-resume-review.component.ts
+│ │ │ ├── ai-powered-resume-review.component.html
+│ │ │ └── ai-powered-resume-review.component.scss
+│ │ ├── feedback/ # Feedback component
+│ │ │ ├── feedback.component.ts
+│ │ │ ├── feedback.component.html
+│ │ │ └── feedback.component.scss
+│ │
+│ ├── layout/ # Layout components (Navbar, Footer)
+│ │ ├── navbar/ # Navbar component
+│ │ │ ├── navbar.component.ts
+│ │ │ ├── navbar.component.html
+│ │ │ └── navbar.component.scss
+│ │ └── footer/ # Footer component
+│ │ ├── footer.component.ts
+│ │ ├── footer.component.html
+│ │ └── footer.component.scss
+│ │
+│ ├── services/ # Angular services for API interaction
+│ │ ├── auth.service.ts # Auth service for login, register, JWT management
+│ │ ├── students.service.ts # Service to manage student data
+│ │ ├── gemini-ai.service.ts# Service for Gemini AI (mock interview, resume review)
+│ │ └── feedback.service.ts # Service for handling feedback submission
+│ │
+│ ├── app.component.ts # Root component of the app
+│ ├── app.component.html # Template for root app (includes navbar, footer, router-outlet)
+│ └── app.component.scss # Root-level styles
+│
+├── assets/ # Static assets (images, icons, etc.)
+│ ├── images/ # Folder for images
+│
+├── index.html # The root HTML file
+├── main.ts # The main entry point for Angular
+├── polyfills.ts # For cross-browser compatibility
+├── styles.css # Global styles (can be SCSS/CSS)
+└── tsconfig.json # TypeScript configuration for Angular
