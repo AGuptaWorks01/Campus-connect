@@ -11,13 +11,13 @@
   <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
 
     <!-- Feedback Form Section (Left Side) -->
-    <div class="w-full bg-gray-400 p-6 rounded-3xl shadow-xl transform hover:scale-102 transition duration-500 ease-in-out max-w-xl mx-auto">
-      <h2 class="text-2xl font-semibold text-white mb-4 text-center">Share Your Feedback</h2>
+    <div class="w-full bg-gray-200 p-6 rounded-3xl shadow-xl transform hover:scale-102 transition duration-500 ease-in-out max-w-xl mx-auto">
+      <h2 class="text-2xl font-semibold text-black mb-4 text-center">Share Your Feedback</h2>
 
       <form [formGroup]="feedbackForm" (ngSubmit)="submitFeedback()">
         <!-- Name Input -->
         <div class="mb-4">
-          <label class="block text-white text-lg font-medium">Your Name:</label>
+          <label class="block text-gray-500 text-lg font-medium">Your Name:</label>
           <input type="text" formControlName="name"
             class="w-full px-5 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-indigo-400 focus:border-indigo-500 transition duration-300"
             placeholder="Enter your name" />
@@ -25,11 +25,11 @@
 
         <!-- Rating Input -->
         <div class="mb-4">
-          <label class="block text-white text-lg font-medium">Rating:</label>
+          <label class="block text-gray-500 text-lg font-medium">Rating:</label>
           <div class="flex space-x-3">
             <span *ngFor="let star of [1, 2, 3, 4, 5]" (click)="setRating(star)"
               class="cursor-pointer text-2xl transition-all duration-300 transform hover:scale-110"
-              [ngClass]="{ 'text-yellow-400': selectedRating >= star, 'text-gray-300': selectedRating < star }">
+              [ngClass]="{ 'text-yellow-400': selectedRating >= star, 'text-gray-50': selectedRating < star }">
               ★
             </span>
           </div>
@@ -37,7 +37,7 @@
 
         <!-- Feedback Textarea -->
         <div class="mb-4">
-          <label class="block text-white text-lg font-medium">Your Feedback:</label>
+          <label class="block text-gray-500 text-lg font-medium">Your Feedback:</label>
           <textarea formControlName="review"
             class="w-full px-5 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-indigo-400 focus:border-indigo-500 transition duration-300"
             placeholder="Write your thoughts..."></textarea>
@@ -45,7 +45,7 @@
 
         <!-- Submit Button -->
         <button type="submit" [disabled]="feedbackForm.invalid"
-          class="w-full bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 transition duration-300">
+          class="w-full bg-gradient-to-r from-blue-400 to-blue-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-yellow-500 focus:ring-4 focus:ring-blue-300 transition duration-300">
           Submit Feedback
         </button>
       </form>

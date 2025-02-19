@@ -1,14 +1,12 @@
-
-
-
 /* Typing Effect */
 .typing-text {
   display: inline-block;
   border-right: 2px solid;
   white-space: nowrap;
   overflow: hidden;
-  font-size:x-large;
+  font-size: x-large;
   animation: typing 3s steps(30, end) 1, blink 0.7s infinite step-end;
+  max-width: 100%;  /* Ensures the text doesn't overflow its parent container */
 }
 
 /* Typing animation */
@@ -17,7 +15,7 @@
     width: 0;
   }
   to {
-    width: 50%;
+    width: 100%; /* Ensure it expands fully within its container */
   }
 }
 
@@ -30,6 +28,7 @@
     border-color: black;
   }
 }
+
 
 /* Reverse Typing Effect */
 .typing-text.reverse {
@@ -183,3 +182,8 @@
   border-bottom-left-radius: 9px;
   border-top-left-radius: 9px;
 } */
+
+h2.typing-text {
+  overflow: hidden; /* Prevents overflow of the typing text */
+  white-space: nowrap; /* Ensures text stays in a single line */
+}
