@@ -37,7 +37,7 @@ exports.addStudent = async (req, res) => {
 
   // Default image URL if no image is provided
   const defaultImage = "https://img.freepik.com/premium-vector/profiling-flat-illustration_120816-75323.jpg";
-  
+
   const image = req.body.image || defaultImage; // If no image, use the default image
 
   // Handle resume upload (if provided)

@@ -5,6 +5,7 @@ This guide will help you set up the **Campus-Connect** project on your local mac
 ---
 
 ## **📌 Step 1: Clone the GitHub Repository**
+
 Open your terminal and run the following command to clone the project:
 
 ```bash
@@ -20,7 +21,9 @@ cd Campus-connect
 ---
 
 ## **📌 Step 2: Configure the Backend (API)**
+
 1. **Navigate to the API folder:**
+
    ```bash
    cd API-Backend
    ```
@@ -36,6 +39,7 @@ cd Campus-connect
 ---
 
 ## **📌 Step 3: Set Up the Database**
+
 Before running the backend, you need to create the MySQL database and tables.
 
 1. **Open MySQL** and execute the following SQL queries **one by one**:
@@ -67,7 +71,7 @@ CREATE TABLE IF NOT EXISTS students (
   image TEXT,
   linkedin VARCHAR(255),
   github VARCHAR(255),
-  resume VARCHAR(255), -- Add this to store resume file path
+  resume VARCHAR(255), --store resume file path
   user_id INT UNIQUE,
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
@@ -91,6 +95,7 @@ CREATE TABLE IF NOT EXISTS feedbacks (
 ---
 
 ## **📌 Step 4: Install Dependencies & Start Backend**
+
 After setting up the database, install the required backend dependencies:
 
 1. **Navigate to API-Backend folder**:
@@ -110,6 +115,7 @@ After setting up the database, install the required backend dependencies:
 ---
 
 ## **📌 Step 5: Install Dependencies & Start Frontend**
+
 1. **Navigate to Client-Frontend folder**:
    ```bash
    cd ../Client-Frontend
@@ -127,12 +133,15 @@ After setting up the database, install the required backend dependencies:
 ---
 
 ## **📌 API Endpoints**
+
 ### **Authentication APIs**
+
 - **Register User:** `POST http://localhost:3100/api/auth/register`
 - **Login User:** `POST http://localhost:3100/api/auth/login`
 - **Reset Password:** `POST http://localhost:3100/api/auth/reset-password`
 
 ### **Student APIs**
+
 - **Add Student Info:** `POST http://localhost:3100/api/students/add`
 - **Get All Students:** `GET http://localhost:3100/api/students/getall`
 - **Update Student Info:** `PUT http://localhost:3100/api/students/update/:id`
@@ -141,6 +150,7 @@ After setting up the database, install the required backend dependencies:
 ---
 
 ## **📌 Notes**
+
 - Ensure MySQL is running on your system before starting the backend.
 - Use **Postman** or **any API testing tool** to test API endpoints.
 - If you encounter any issues, check the terminal logs for error messages.
@@ -148,5 +158,5 @@ After setting up the database, install the required backend dependencies:
 ---
 
 ## 🎉 **Congratulations!**
-You have successfully set up the **Campus-Connect** project. Happy coding! 🚀
 
+You have successfully set up the **Campus-Connect** project. Happy coding! 🚀
