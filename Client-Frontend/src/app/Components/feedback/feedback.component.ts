@@ -15,6 +15,7 @@ export class FeedbackComponent  implements OnInit{
   feedbackService = inject(FeedbackService);
   selectedRating = 0;
   feedbackList: any[] = []; // Store fetched feedbacks
+  feedbackSuccess: boolean = false; // New flag for success message
 
   constructor(private fb: FormBuilder) {
     this.feedbackForm = this.fb.group({
@@ -36,12 +37,17 @@ export class FeedbackComponent  implements OnInit{
   submitFeedback() {
     if (this.feedbackForm.valid) {
       this.feedbackService.postFeedback(this.feedbackForm.value).subscribe(
-        (response) => {
-          alert('Feedback submitted successfully!');
+        () => {
+          this.feedbackSuccess = true;  // Set success to true
+          // Reset form after feedback submission
           this.feedbackForm.reset();
           this.selectedRating = 0;
-          this.getFeedbacks(); // Refresh the feedback list after submission
+          this.getFeedbacks(); // Refresh the feedback list
 
+          // Hide success message after 1 second
+          setTimeout(() => {
+            this.feedbackSuccess = false;
+          }, 1000); // 1000 ms = 1 second
         },
         (error) => {
           console.error('Error submitting feedback:', error);
@@ -49,6 +55,7 @@ export class FeedbackComponent  implements OnInit{
       );
     }
   }
+
 
   getFeedbacks() {
     this.feedbackService.getAllFeedback().subscribe(

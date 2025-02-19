@@ -1,6 +1,21 @@
 <div style="height: 70vh">
   <div class="lg:w-5/12 mt-3 p-5 shadow-lg mx-auto">
     <h3 class="text-3xl text-center font-bold py-2">Register</h3>
+
+    <!-- Success message if registration is successful -->
+    <div *ngIf="registrationSuccess" class="alert alert-success" role="alert">
+      Registration Successful! Please login to continue.
+    </div>
+
+    <!-- Error message with close button if registration fails -->
+    <div *ngIf="showErrorMessages" class="alert alert-danger alert-dismissible fade show" role="alert">
+    {{ errorMessage }}
+      <button type="button" class="close" (click)="dismissError()" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <!-- Registration form -->
     <form [formGroup]="registerForm" class="flex flex-col">
       <!-- Username Field -->
       <div class="flex flex-col mt-2 mb-1">
@@ -11,10 +26,7 @@
           placeholder="Username"
         />
         <span
-          *ngIf="
-            registerForm.hasError('required', 'username') &&
-            registerForm.controls['username'].dirty
-          "
+          *ngIf="registerForm.hasError('required', 'username') && registerForm.controls['username'].dirty"
           class="text-red-500"
         >
           *Username is required
@@ -30,19 +42,13 @@
           placeholder="Email"
         />
         <span
-          *ngIf="
-            registerForm.hasError('required', 'email') &&
-            registerForm.controls['email'].dirty
-          "
+          *ngIf="registerForm.hasError('required', 'email') && registerForm.controls['email'].dirty"
           class="text-red-500"
         >
           *Email is required
         </span>
         <span
-          *ngIf="
-            registerForm.hasError('email', 'email') &&
-            registerForm.controls['email'].dirty
-          "
+          *ngIf="registerForm.hasError('email', 'email') && registerForm.controls['email'].dirty"
           class="text-red-500"
         >
           *Please enter a valid email
@@ -58,10 +64,7 @@
           placeholder="Password"
         />
         <span
-          *ngIf="
-            registerForm.hasError('required', 'password') &&
-            registerForm.controls['password'].dirty
-          "
+          *ngIf="registerForm.hasError('required', 'password') && registerForm.controls['password'].dirty"
           class="text-red-500"
         >
           *Password is required
@@ -75,7 +78,6 @@
           aria-label="Toggle Password Visibility"
         >
           <i [class]="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
-          <!-- Eye icon that changes based on visibility -->
         </button>
       </div>
 

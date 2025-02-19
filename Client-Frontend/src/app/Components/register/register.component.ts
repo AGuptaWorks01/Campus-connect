@@ -9,7 +9,7 @@ import { AuthService } from '../../services/auth.service';
   standalone: true,
   imports: [RouterModule, ReactiveFormsModule, CommonModule],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
   fb = inject(FormBuilder);
@@ -18,6 +18,9 @@ export class RegisterComponent {
 
   showPassword: boolean = false; // Initialize password visibility flag
   registerForm!: FormGroup;
+  registrationSuccess: boolean = false; // New flag for success message
+  errorMessage: string = ''; // Store error message
+  showErrorMessages: boolean = false; // Flag to show error messages
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
@@ -31,20 +34,31 @@ export class RegisterComponent {
     // Register the user via AuthService
     this.authService.registerService(this.registerForm.value).subscribe({
       next: () => {
-        alert('User registered successfully!');
+        this.registrationSuccess = true;  // Set success to true
+        this.errorMessage = '';  // Clear any previous error message
+        this.showErrorMessages = false; // Hide error message if successful
         this.registerForm.reset();
-        this.router.navigateByUrl('login');
+
+        // Redirect after 0.5 seconds
+        setTimeout(() => {
+          this.router.navigateByUrl('login');
+        }, 500);
       },
       error: (err) => {
         console.log(err);
-        // Check if the error response indicates that the email already exists
+        this.registrationSuccess = false;  // Set success to false
+        this.showErrorMessages = true;  // Show the error message
+
         if (err && err.error && err.error.message === 'Email already exists') {
-          alert('User already exists. Please try with a different email.');
+          this.errorMessage = 'User already exists. Please try with a different email.';
         } else {
-          alert('Error while registering!');
+          this.errorMessage = 'Error while registering!';
         }
       },
     });
   }
 
+  dismissError() { 
+    this.showErrorMessages = false; // Dismiss error message
+  }
 }
