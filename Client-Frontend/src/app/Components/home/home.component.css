@@ -1,39 +1,15 @@
 /* Typing Effect */
 .typing-text {
   display: inline-block;
-  border-right: 2px solid;
+  /* border-right: 2px solid; */
   white-space: nowrap;
   overflow: hidden;
   font-size: x-large;
-  animation: typing 3s steps(30, end) 1, blink 0.7s infinite step-end;
-  max-width: 100%;  /* Ensures the text doesn't overflow its parent container */
-}
-
-/* Typing animation */
-@keyframes typing {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%; /* Ensure it expands fully within its container */
-  }
-}
-
-/* Blink effect */
-@keyframes blink {
-  0%, 100% {
-    border-color: transparent;
-  }
-  50% {
-    border-color: black;
-  }
+  /* animation: typing 3s steps(30, end) 1, blink 0.7s infinite step-end; */
 }
 
 
-/* Reverse Typing Effect */
-.typing-text.reverse {
-  animation: reverseTyping 3s steps(30, end) 1, blink 0.7s infinite  ;
-}
+
 
 /* Reverse Typing animation */
 @keyframes reverseTyping {

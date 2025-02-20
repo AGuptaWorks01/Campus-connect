@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { GeminiAiService } from '../../services/gemini-ai.service';
 
@@ -10,14 +10,18 @@ import { GeminiAiService } from '../../services/gemini-ai.service';
   templateUrl: './ai-powered-mock-interview.component.html',
   styleUrl: './ai-powered-mock-interview.component.css'
 })
-export class AiPoweredMockInterviewComponent {
+export class AiPoweredMockInterviewComponent implements  OnInit{
   prompt: string = '';
   response: string | null = null;
   messages: { text: string, isUser: boolean }[] = []
   isLoading: boolean = false;
   
-
+  
   constructor(private geminiAiService: GeminiAiService) { }
+  
+    ngOnInit(): void {
+      this.loadJotFormAgent();
+    }
 
    getGeminiResponse() {
     if (!this.prompt.trim()) {
@@ -46,10 +50,6 @@ export class AiPoweredMockInterviewComponent {
 
 
 
-
-  ngOnInit(): void {
-    this.loadJotFormAgent();
-  }
 
   private loadJotFormAgent(): void {
     if (typeof window !== 'undefined' && window.AgentInitializer) {
