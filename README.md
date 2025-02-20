@@ -222,21 +222,9 @@ Steps to Get an API Key from AI Studio
 
 ---
 
-## **📌 Notes**
-
-- Ensure MySQL is running on your system before starting the backend.
-- Use **Postman** or **any API testing tool** to test API endpoints.
-- If you encounter any issues, check the terminal logs for error messages.
-
----
-
-## 🎉 **Congratulations!**
-
-You have successfully set up the **Campus-Connect** project. Happy coding! 🚀
-
 # CAMPUS-CONNECT/
 
-# api-backend
+# api-backend ( Backend Folder Structure)
 
 api-backend/  
 │  
@@ -264,7 +252,7 @@ api-backend/
 │  
 └── package.json # Project dependencies and scripts
 
-# Client-Frontend
+# Client-Frontend ( Angular Frontend Folder Structure)
 
 client-frontend/  
 │  
@@ -324,7 +312,7 @@ client-frontend/
 │ ├── services/ # Angular services for API interaction  
 │ │ ├── auth.service.ts # Auth service for login, register, JWT management  
 │ │ ├── students.service.ts # Service to manage student data  
-│ │ ├── gemini-ai.service.ts# Service for Gemini AI (mock interview, resume review)  
+│ │ ├── gemini-ai.service.ts # Service for Gemini AI (mock interview, resume review)  
 │ │ └── feedback.service.ts # Service for handling feedback submission  
 │ │  
 │ ├── app.component.ts # Root component of the app  
@@ -339,3 +327,17 @@ client-frontend/
 ├── polyfills.ts # For cross-browser compatibility  
 ├── styles.css # Global styles (can be SCSS/CSS)  
 └── tsconfig.json # TypeScript configuration for Angular
+
+---
+
+## **📌 Notes**
+
+- Ensure MySQL is running on your system before starting the backend.
+- Use **Postman** or **any API testing tool** to test API endpoints.
+- If you encounter any issues, check the terminal logs for error messages.
+
+---
+
+## 🎉 **Congratulations!**
+
+You have successfully set up the **Campus-Connect** project. Happy coding! 🚀
