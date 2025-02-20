@@ -132,19 +132,18 @@ After setting up the database, install the required backend dependencies:
 
 ---
 
-
 ## **📌 Step 6: Set Up Email Credentials for Nodemailer**
+
 In order to send emails from your application using Nodemailer, you need to configure an email account with Google (Gmail). Follow these steps to retrieve the necessary credentials for EMAIL_USER and EMAIL_PASS.
 
 1. Enable 2-Step Verification
-Before generating an App Password, you must enable 2-Step Verification for your Google account.
+   Before generating an App Password, you must enable 2-Step Verification for your Google account.
 
 Go to your Google Account Security Settings:
 Visit Google Account Security.
 Enable 2-Step Verification:
 Under "Signing in to Google," you'll see an option called 2-Step Verification.
-Click Get Started and follow the on-screen instructions to enable it (you'll likely need to enter a phone number to receive verification codes).
-2. Generate an App Password
+Click Get Started and follow the on-screen instructions to enable it (you'll likely need to enter a phone number to receive verification codes). 2. Generate an App Password
 Once you have 2-Step Verification enabled, you can generate an App Password to use with Nodemailer.
 
 Go to the App Passwords Page:
@@ -158,41 +157,42 @@ Google will provide you with a 16-character app-specific password, something lik
 nginx
 
 abcd efgh ijkl mnop
-Copy this password. This is your EMAIL_PASS.
-3. Use the App Password
+Copy this password. This is your EMAIL_PASS. 3. Use the App Password
 Now that you have your App Password, you can use it in the .env file for EMAIL_PASS:
 
 ```EMAIL_USER=your-email@gmail.com
 EMAIL_PASS=abcd efgh ijkl mnop  (This is the app password you just generated)
 ```
+
 ---
 
 ## **📌 Step 7: Set Up Gemini API Key**
 
 Steps to Get an API Key from AI Studio
-1. Sign In to Your AI Studio Account
-Visit the AI Studio platform you're using (for example, if you're using Gemini AI or a similar service).
-Log in using your credentials (either Google or other account depending on the service).
-2. Navigate to the API Section
-Once logged in, look for the API or Developer section in the dashboard. This might be labeled something like:
-API Access
-API Keys
-Credentials
-Developer Tools
-3. Create a New API Project (if necessary)
-Some platforms require you to create a new API project before generating an API key.
-Look for an option like Create New Project or Add API Key and follow the prompts.
-4. Generate the API Key
-After setting up your project, there should be a button to Generate API Key.
-Click on Generate API Key or Create New Key.
-The system will provide you with a long alphanumeric string, which is your API key.
-5. Copy the API Key
-Copy this generated API Key. It will look something like this:
-```12345abcde67890fghijklmnopqrstuv```
-6. Use the API Key in Your Project
-Once you have the API key, update your .env file in the API-Backend directory:
 
-```GEMINI_API_KEY=your-gemini-api-key-here```
+1. Sign In to Your AI Studio Account
+   Visit the AI Studio platform you're using (for example, if you're using Gemini AI or a similar service).
+   Log in using your credentials (either Google or other account depending on the service).
+2. Navigate to the API Section
+   Once logged in, look for the API or Developer section in the dashboard. This might be labeled something like:
+   API Access
+   API Keys
+   Credentials
+   Developer Tools
+3. Create a New API Project (if necessary)
+   Some platforms require you to create a new API project before generating an API key.
+   Look for an option like Create New Project or Add API Key and follow the prompts.
+4. Generate the API Key
+   After setting up your project, there should be a button to Generate API Key.
+   Click on Generate API Key or Create New Key.
+   The system will provide you with a long alphanumeric string, which is your API key.
+5. Copy the API Key
+   Copy this generated API Key. It will look something like this:
+   `12345abcde67890fghijklmnopqrstuv`
+6. Use the API Key in Your Project
+   Once you have the API key, update your .env file in the API-Backend directory:
+
+`GEMINI_API_KEY=your-gemini-api-key-here`
 
 ## **📌 API Endpoints**
 
