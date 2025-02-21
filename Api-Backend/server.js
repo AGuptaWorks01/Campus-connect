@@ -8,6 +8,7 @@ require("dotenv").config(); // database ko import krha hai
 const studentsRoutes = require("./routers/studentRoutes");
 const authRouter = require("./routers/AuthRouters");
 const feedbackRoutes = require("./routers/FeedbackRoutes");
+const ai = require('./routers/AiRouters')
 
 const app = express();
 const PORT = 3100;
@@ -25,7 +26,7 @@ app.use('/uploads', express.static('uploads'))
 app.use("/api/auth", authRouter);
 app.use("/api/students", studentsRoutes);
 app.use("/api/feedbacks", feedbackRoutes);
-app.use("/api/gemini", require("./routers/Ai-interview-pre"));
+app.use("/api/gemini", ai);
 
 
 

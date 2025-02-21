@@ -1,9 +1,66 @@
-<div class="flex items-center justify-center h-screen bg-gray-200">
-  <div class="text-center p-6 bg-yellow-50 shadow-lg rounded-2xl">
-    <h1 class="text-3xl font-bold text-gray-800">AI-Powered Resume</h1>
-    <p class="text-lg text-gray-600 mt-2">Coming Soon...</p>
-    <div class="mt-4">
-      <span class="loading loading-dots loading-lg"></span>
+<div class="container">
+  <h3 class="title">Upload Your Resume for Review</h3>
+
+  <!-- Resume File Upload Section -->
+  <div class="file-upload-container">
+    <input
+      type="file"
+      (change)="onFileChange($event)"
+      accept=".pdf"
+      id="resume-file"
+      class="file-input"
+    />
+    <label for="resume-file" class="file-input-label">Choose File</label>
+
+    <!-- Displaying selected file name -->
+    <div *ngIf="fileName" class="file-name">
+      <strong>Selected file: </strong>{{ fileName }}
+    </div>
+  </div>
+
+  <!-- Custom Message Input Section -->
+  <div class="message-container">
+    <textarea
+      [(ngModel)]="customMessage"
+      placeholder="Add a message for the reviewer..."
+      class="custom-message-input"
+    ></textarea>
+  </div>
+
+  <!-- Submit Button for Uploading and Reviewing -->
+  <button
+    (click)="uploadResumeForReview()"
+    [disabled]="isLoading"
+    class="upload-button"
+  >
+    Upload and Review
+  </button>
+
+  <!-- Loading Message -->
+  <div *ngIf="isLoading" class="loading-message">
+    Reviewing your resume...
+  </div>
+
+  <!-- AI Review Section -->
+  <div *ngIf="resumeReview" class="review-container">
+    <h4 class="review-title">AI Review</h4>
+    
+    <!-- AI Review Content with sections -->
+    <div *ngIf="resumeReview.feedback">
+      <h5>Feedback:</h5>
+      <p class="review-content">{{ resumeReview.feedback }}</p>
+    </div>
+    
+    <div *ngIf="resumeReview.suggestions">
+      <h5>Suggestions for Improvement:</h5>
+      <ul class="review-suggestions">
+        <li *ngFor="let suggestion of resumeReview.suggestions">{{ suggestion }}</li>
+      </ul>
+    </div>
+
+    <div *ngIf="resumeReview.observations">
+      <h5>Additional Observations:</h5>
+      <p class="review-content">{{ resumeReview.observations }}</p>
     </div>
   </div>
 </div>
