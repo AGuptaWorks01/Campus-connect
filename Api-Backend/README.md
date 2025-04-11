@@ -1,24 +1,32 @@
 CAMPUS-CONNECT/
 │
-├── api-backend/ # Backend-related code
-│ ├── config/ # Database and environment configuration
-│ │ └── db.js # Contains database connection logic
-│ ├── controllers/ # Logic for handling requests and responses
-│ │ ├── AuthController.js # Handles user authentication
-│ │ ├── FeedbackController.js # Handles feedback-related operations
-│ │ └── StudentController.js # Handles student-related operations
-│ ├── middleware/ # Middleware for handling requests
-│ │ └── authMiddleware.js # Validates JWT tokens for authentication
-│ ├── routes/ # Defines route handling logic
-│ │ ├── authRoutes.js # Handles authentication routes like login & register
-│ │ ├── feedbackRoutes.js # Handles feedback submission route
-│ │ └── studentRoutes.js # Handles student data retrieval route
-│ ├── uploads/ # Stores uploaded files (e.g., resumes)
-│ ├── server.js # The main file that runs the server and connects routes
-│ └── .env # Stores environment variables like database URI, JWT secret
+├── api-backend/
+│   ├── uploads/                 # Stores uploaded files (e.g., resumes)
+│   ├── server.js                # Entry point to start the backend server
+│   ├── .env                     # Environment variables
+│   │
+│   └── src/                     # All backend source code
+│       ├── config/             # Database and environment configuration
+│       │   └── db.js           # Contains database connection logic
+│       │
+│       ├── controllers/        # Logic for handling requests and responses
+│       │   ├── AuthController.js    # Handles user authentication
+│       │   ├── FeedbackController.js    # Handles feedback-related operations
+│       │   └── StudentController.js     # Handles student-related operations
+│       │
+│       ├── middleware/        # Middleware for handling requests
+│       │   └── authMiddleware.js  # Validates JWT tokens for authentication
+│       │
+│       ├── routes/             # API routes
+│       │   ├── authRoutes.js        # Validates JWT tokens for authentication
+│       │   ├── feedbackRoutes.js    # Handles feedback submission route
+│       │   └── studentRoutes.js     # Handles student data retrieval route
+│       │
+│       └── app.js              # App setup & routes connection
 │
-└── client-frontend/ # Frontend code (to be built separately)
-└── (files related to frontend UI)
+├── client-frontend/            # Frontend code
+└── (other frontend files...)
+
 
 Explanation of Each Part
 api-backend/config/db.js:
