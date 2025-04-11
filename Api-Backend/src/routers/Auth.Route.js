@@ -5,7 +5,7 @@ const {
   login,
   resetPassword,
   requestPasswordReset,
-} = require("../Controllers/AuthController");
+} = require("../Controllers/Auth.Controller");
 const router = express.Router();
 
 // Register route

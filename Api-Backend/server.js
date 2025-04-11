@@ -1,32 +1,6 @@
-const express = require("express");
-const cookieParser = require("cookie-parser");
-const cors = require("cors");
-const bodyParser = require("body-parser");
-require("dotenv").config(); // database ko import krha hai
-// const { GoogleGenerativeAI } = require('@google/generative-ai')
+const app = require('./src/app.js')
 
-const studentsRoutes = require("./routers/studentRoutes");
-const authRouter = require("./routers/AuthRouters");
-const feedbackRoutes = require("./routers/FeedbackRoutes");
-
-const app = express();
-const PORT = 3100;
-
-// Middleware Setup
-app.use(cookieParser());
-app.use(cors({ origin: "*", credentials: true }));
-app.use(express.json());
-app.use(bodyParser.json());
-
-// serve the 'uploads' folder as a static directory
-app.use('/uploads', express.static('uploads'))
-
-// API Routes
-app.use("/api/auth", authRouter);
-app.use("/api/students", studentsRoutes);
-app.use("/api/feedbacks", feedbackRoutes);
-app.use("/api/gemini", require("./routers/Ai-interview-pre"));
-
+PORT = process.env.PORT
 
 
 // Global Error Handler Middleware

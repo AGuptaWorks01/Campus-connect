@@ -1,5 +1,5 @@
 const express = require('express');
-const { createFeedback, getAllFeedback } = require('../Controllers/FeedbackController'); // Import Controller
+const { createFeedback, getAllFeedback } = require('../Controllers/Feedback.Controller'); // Import Controller
 const router = express.Router();
 
 // Define Routes

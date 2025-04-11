@@ -1,10 +1,284 @@
-.loading-dots {
-  display: inline-block;
-  font-size: 24px;
-  animation: blink 1.5s infinite;
+/* Overall Container */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 30px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
-@keyframes blink {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 1; }
+/* Title Styling */
+.title {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 30px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* File Upload Section */
+.file-upload-container {
+  margin-bottom: 20px;
+  position: relative;
+  width: 100%;
+}
+
+.file-input {
+  display: none;
+}
+
+.file-input-label {
+  display: inline-block;
+  padding: 15px 25px;
+  background-color: #0a1551;
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.file-input-label:hover {
+  background-color: #2c3e50;
+}
+
+/* Custom Message Input */
+.message-container {
+  margin-top: 20px;
+}
+
+.custom-message-input {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+  resize: vertical;
+  min-height: 100px;
+  margin-bottom: 20px;
+  transition: border-color 0.3s ease;
+}
+
+.custom-message-input:focus {
+  border-color: #0a1551;
+  outline: none;
+}
+
+/* Button Styling */
+.upload-button {
+  padding: 12px 25px;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: #0a1551;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.upload-button:hover {
+  background-color: #1a2768;
+}
+
+.upload-button:disabled {
+  background-color: #dcdcdc;
+  cursor: not-allowed;
+}
+
+/* Loading Message Styling */
+.loading-message {
+  font-size: 1rem;
+  color: #333;
+  margin-top: 20px;
+  font-style: italic;
+}
+
+/* Review Section Styling */
+.review-container {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #eef2f7;
+  border-radius: 8px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  max-width: 100%;
+  text-align: left;
+}
+
+.review-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.review-content {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #444;
+  word-wrap: break-word;
+  max-width: 100%;
+  overflow-wrap: break-word;
+}
+
+/* Styling for the file name display */
+.file-name {
+  margin-top: 10px;
+  color: #333;
+  display: flex;
+  align-items: center;
+}
+
+/* Styling for the container */
+.container {
+  width: 60%;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for file input and button */
+.file-upload-container, .message-container {
+  margin-top: 15px;
+}
+
+.file-input {
+  display: none;
+}
+
+.file-input-label {
+  cursor: pointer;
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  margin-right: 10px;
+  font-size: 1em;
+}
+
+.custom-message-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 8px;
+}
+
+.upload-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+.upload-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.loading-message {
+  margin-top: 20px;
+  color: #007bff;
+}
+
+.review-container {
+  margin-top: 30px;
+}
+
+.review-title {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.review-content {
+  font-size: 1em;
+  color: #555;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .container {
+    width: 80%;
+    padding: 20px;
+  }
+
+  .title {
+    font-size: 1.6rem;
+  }
+
+  .file-input-label {
+    padding: 12px 20px;
+    font-size: 1rem;
+  }
+
+  .upload-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+  }
+
+  .custom-message-input {
+    min-height: 80px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .title {
+    font-size: 1.4rem;
+  }
+
+  .file-input-label {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+  }
+
+  .upload-button {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+  }
+
+  .custom-message-input {
+    min-height: 70px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .title {
+    font-size: 1.2rem;
+  }
+
+  .file-input-label {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+  }
+
+  .upload-button {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+  }
+
+  .custom-message-input {
+    min-height: 60px;
+  }
 }
