@@ -22,7 +22,7 @@ exports.upload = multer({
   },
 });
 
-// ✅ Insert Student (with resume upload)
+//==================================  Insert Student (with resume upload)==================================
 exports.addStudent = async (req, res) => {
   const {
     name,
@@ -73,7 +73,7 @@ exports.addStudent = async (req, res) => {
   }
 };
 
-// ✅ Get All Students (No Restrictions)
+// ================================== Get All Students (No Restrictions)  ==================================
 exports.getAllStudents = async (req, res) => {
   try {
     const sql = `SELECT s.*, u.username, u.email FROM students s JOIN users u ON s.user_id = u.id ORDER BY s.id DESC`;
@@ -85,7 +85,7 @@ exports.getAllStudents = async (req, res) => {
   }
 };
 
-// ✅ Update Student (Only User's Own Record) and Allow Resume Update
+// ================================== Update Student (Only User's Own Record) and Allow Resume Update ==================================
 exports.updateStudent = async (req, res) => {
   const studentId = req.params.id;
   const userId = req.user.id; // Get logged-in user ID from middleware
@@ -143,7 +143,7 @@ exports.updateStudent = async (req, res) => {
   }
 };
 
-// ✅ Delete Student (Only User's Own Record)
+// ================================== Delete Student (Only User's Own Record) ==================================
 exports.deleteStudent = async (req, res) => {
   const studentId = req.params.id;
   const userId = req.user.id;
@@ -163,7 +163,7 @@ exports.deleteStudent = async (req, res) => {
   }
 };
 
-// ✅ Download Resume (PDF) for a student
+// ================================== Download Resume (PDF) for a student  ==================================
 exports.downloadResume = async (req, res) => {
   const studentId = req.params.id;
 

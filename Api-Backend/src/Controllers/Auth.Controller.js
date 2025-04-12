@@ -5,7 +5,7 @@ const nodemailer = require("nodemailer");
 const { JWT_SECRETKEY, FRONTEND_URL, EMAIL_USER, EMAIL_PASS } = process.env;
 const pool = require("../config/db");
 
-// Register User
+// ================================== Register User =====================================
 exports.register = async (req, res) => {
   try {
     const { email, password, username } = req.body;
@@ -29,7 +29,7 @@ exports.register = async (req, res) => {
   }
 };
 
-// User Login
+//  ================================== User Login ==================================
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -60,7 +60,7 @@ exports.login = async (req, res) => {
   }
 };
 
-// Request Password Reset
+// ================================== Request Password Reset ==================================
 exports.requestPasswordReset = async (req, res) => {
   try {
     const { email } = req.body;
@@ -102,7 +102,7 @@ exports.requestPasswordReset = async (req, res) => {
   }
 };
 
-// Reset Password
+// ================================== Reset Password  ==================================
 exports.resetPassword = async (req, res) => {
   try {
     const { token, newPassword } = req.body;

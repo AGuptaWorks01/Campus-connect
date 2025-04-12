@@ -1,6 +1,4 @@
 const express = require("express");
-const multer = require("multer");
-const path = require("path");
 const fs = require("fs");
 const pdfParse = require("pdf-parse");
 const { GoogleGenerativeAI } = require('@google/generative-ai');
@@ -8,10 +6,10 @@ require('dotenv').config();  // Load environment variables
 const router = express.Router();
 
 
-// Initialize Gemini AI SDK
+// ============================== Initialize Gemini AI SDK
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY); // Use API key from .env file
 
-// Generate content (AI review and suggestions) based on prompt
+// ================================  Generate content (AI review and suggestions) based on prompt
 exports.generateContent = async (req, res) => {
     const { prompt } = req.body;
 
@@ -35,7 +33,9 @@ exports.generateContent = async (req, res) => {
     }
 };
 
-// Upload and process the resume PDF
+
+
+// ======================================= Upload and process the resume PDF
 exports.uploadResume = async (req, res) => {
     if (!req.file) {
         return res.status(400).json({ error: "No file uploaded" });

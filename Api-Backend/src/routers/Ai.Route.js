@@ -1,6 +1,5 @@
 const express = require('express');
 const multer = require('multer');
-const path = require('path');
 const aiController = require('../Controllers/Ai.Controller'); // Importing the controller
 const router = express.Router();
 

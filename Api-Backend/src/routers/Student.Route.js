@@ -9,9 +9,19 @@ const upload = studentsController.upload;
 // Student CRUD Routes
 router.get("/getall", studentsController.getAllStudents); // Fetch all students
 
-router.post("/add", verifyToken, upload.single('resume'), studentsController.addStudent); // Add a new student (with resume)
+router.post(
+  "/add",
+  verifyToken,
+  upload.single("resume"),
+  studentsController.addStudent
+); // Add a new student (with resume)
 
-router.put("/update/:id", verifyToken, upload.single('resume'), studentsController.updateStudent); // Update a student (with resume)
+router.put(
+  "/update/:id",
+  verifyToken,
+  upload.single("resume"),
+  studentsController.updateStudent
+); // Update a student (with resume)
 
 router.delete("/delete/:id", verifyToken, studentsController.deleteStudent); // Delete a student
 

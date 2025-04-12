@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { environment } from '../../Environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private baseUrl = 'http://localhost:3100/api/auth'; // Your backend URL
+  private apiUrl = `${environment.baseUrl}/auth`;
+
   private tokenKey = 'auth_token'; // Key to store the token in localStorage
   private userIdKey = 'user_id'; // Key to store the user ID in localStorage
   private usernameKey = 'username'; // Key to store the username in localStorage
@@ -18,7 +20,7 @@ export class AuthService {
 
   isLoggedIn$ = this.isLoggedInSubject.asObservable(); // Observable to listen for login status
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   // Get the authentication token from localStorage
   getAuthToken(): string | null {
@@ -26,7 +28,6 @@ export class AuthService {
     // console.log("Fetched Token:", token); // Debugging
     return token;
   }
-
 
   // Check if user is logged in by checking if the token exists
   private checkLoginStatus(): boolean {
@@ -41,7 +42,7 @@ export class AuthService {
     email: string;
     password: string;
   }): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/login`, loginData);
+    return this.http.post<any>(`${this.apiUrl}/login`, loginData);
   }
 
   // Register method to create a new user
@@ -50,32 +51,30 @@ export class AuthService {
     userName: string;
     password: string;
   }): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/register`, registerData);
+    return this.http.post<any>(`${this.apiUrl}/register`, registerData);
   }
 
   // Set the login status, store the token, user ID, and username
-  setLoginStatus(response: { data: { _id: string; username: string }; token: string; }): void {
-    console.log("Received Token from API:", response.token); // Debugging
+  setLoginStatus(response: {
+    data: { _id: string; username: string };
+    token: string;
+  }): void {
+    console.log('Received Token from API:', response.token); // Debugging
 
     if (typeof window !== 'undefined' && window.localStorage) {
-      localStorage.setItem(this.tokenKey, response.token); // ✅ Store Token
-      localStorage.setItem(this.userIdKey, response.data._id); // ✅ Store User ID
-      localStorage.setItem(this.usernameKey, response.data.username); // ✅ Store Username
+      localStorage.setItem(this.tokenKey, response.token); // Store Token
+      localStorage.setItem(this.userIdKey, response.data._id); // Store User ID
+      localStorage.setItem(this.usernameKey, response.data.username); // Store Username
 
-      // console.log("Stored Token in LocalStorage:", localStorage.getItem(this.tokenKey)); // ✅ Verify Storage
+      // console.log("Stored Token in LocalStorage:", localStorage.getItem(this.tokenKey)); // Verify Storage
       this.isLoggedInSubject.next(true); // Notify login status change
     }
   }
-
-
 
   // Get the user ID from localStorage
   getUserId(): string | null {
     return localStorage.getItem(this.userIdKey);
   }
-
-
-
 
   // Get the username from localStorage
   getUsername(): string | null {
@@ -90,14 +89,14 @@ export class AuthService {
     });
   }
 
-  // 🔹 Request password reset (send reset link to email)
+  // Request password reset (send reset link to email)
   requestPasswordReset(email: string): Observable<any> {
-    return this.http.post(`${this.baseUrl}/request-password-reset`, { email });
+    return this.http.post(`${this.apiUrl}/request-password-reset`, { email });
   }
 
   // Reset Password - Update Password
   resetPassword(token: string, newPassword: string): Observable<any> {
-    return this.http.post(`${this.baseUrl}/reset-password`, {
+    return this.http.post(`${this.apiUrl}/reset-password`, {
       token,
       newPassword,
     });

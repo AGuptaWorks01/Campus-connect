@@ -7,7 +7,7 @@ import { LoginComponent } from './Components/login/login.component';
 import { RegisterComponent } from './Components/register/register.component';
 import { ForgetPasswordComponent } from './Components/forget-password/forget-password.component';
 import { ResetPasswordComponent } from './Components/reset-password/reset-password.component';
-import { AuthGuard } from './AuthGuard/auth.guard';
+import { authGuard } from './AuthGuard/auth.guard';
 
 export const routes: Routes = [
   {
@@ -19,49 +19,66 @@ export const routes: Routes = [
     path: 'home',
     loadComponent: () =>
       import('./Components/home/home.component').then((m) => m.HomeComponent),
-    canActivate: [AuthGuard]
+    canActivate: [authGuard],
   },
   {
     path: 'login',
     loadComponent: () =>
-      import('./Components/login/login.component').then((m) => m.LoginComponent),
+      import('./Components/login/login.component').then(
+        (m) => m.LoginComponent
+      ),
   },
   {
     path: 'register',
     loadComponent: () =>
-      import('./Components/register/register.component').then((m) => m.RegisterComponent),
+      import('./Components/register/register.component').then(
+        (m) => m.RegisterComponent
+      ),
   },
   {
     path: 'aiPoweredMockInterview',
     loadComponent: () =>
-      import('./Components/ai-powered-mock-interview/ai-powered-mock-interview.component').then((m) => m.AiPoweredMockInterviewComponent),
-    canActivate: [AuthGuard]
+      import(
+        './Components/ai-powered-mock-interview/ai-powered-mock-interview.component'
+      ).then((m) => m.AiPoweredMockInterviewComponent),
+    canActivate: [authGuard],
   },
   {
     path: 'AiPoweredResumeReview',
     loadComponent: () =>
-      import('./Components/ai-powered-resume-review/ai-powered-resume-review.component').then((m) => m.AiPoweredResumeReviewComponent),
-    canActivate: [AuthGuard]
+      import(
+        './Components/ai-powered-resume-review/ai-powered-resume-review.component'
+      ).then((m) => m.AiPoweredResumeReviewComponent),
+    canActivate: [authGuard],
   },
   {
     path: 'Feedback',
     loadComponent: () =>
-      import('./Components/feedback/feedback.component').then((m) => m.FeedbackComponent),
-    canActivate: [AuthGuard]
-  }
-  ,
+      import('./Components/feedback/feedback.component').then(
+        (m) => m.FeedbackComponent
+      ),
+    canActivate: [authGuard],
+  },
   {
     path: 'forget-password',
     loadComponent: () =>
-      import('./Components/forget-password/forget-password.component').then((m) => m.ForgetPasswordComponent),
+      import('./Components/forget-password/forget-password.component').then(
+        (m) => m.ForgetPasswordComponent
+      ),
   },
   {
     path: 'reset-password/:token',
-    loadComponent: () => import('./Components/reset-password/reset-password.component').then((m) => m.ResetPasswordComponent)
+    loadComponent: () =>
+      import('./Components/reset-password/reset-password.component').then(
+        (m) => m.ResetPasswordComponent
+      ),
   },
   {
     path: 'student-details',
-    loadComponent: () => import('./Components/students-details/students-details.component').then((m) => m.StudentsDetailsComponent),
-    canActivate: [AuthGuard]
+    loadComponent: () =>
+      import('./Components/students-details/students-details.component').then(
+        (m) => m.StudentsDetailsComponent
+      ),
+    canActivate: [authGuard],
   },
 ];

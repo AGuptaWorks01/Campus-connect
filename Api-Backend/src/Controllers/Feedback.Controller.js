@@ -1,6 +1,6 @@
 const pool = require('../config/db'); // MySQL connection
 
-// Create Feedback
+// ================================== Create Feedback ==================================
 exports.createFeedback = async (req, res) => {
     const { name, rating, review } = req.body;
 
@@ -23,7 +23,7 @@ exports.createFeedback = async (req, res) => {
     }
 };
 
-// Get All Feedback
+// ================================== Get All Feedback ==================================
 exports.getAllFeedback = async (req, res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM feedbacks ORDER BY created_at DESC');

@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../Environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GeminiAiService {
-  private apiUrl = 'http://localhost:3100/api/gemini'; // Backend API URL
+  private apiUrl = `${environment.baseUrl}/gemin`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   sendPromptToGemini(prompt: string): Observable<any> {
     const body = { prompt: prompt };
