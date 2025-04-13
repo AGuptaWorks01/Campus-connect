@@ -1,0 +1,120 @@
+openapi: 3.0.3
+info:
+  title: Campus-Connect API Documentation
+  version: "1.0.0"
+  description: Comprehensive API documentation for the Campus-Connect platform.
+
+servers:
+  - url: http://localhost:3100/api
+    description: Development Server
+
+paths:
+  /auth/register:
+    post:
+      summary: Register a new user
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: campusconnect@info.com
+                password:
+                  type: string
+                  example: secret123
+                username:
+                  type: string
+                  example: Campus Connect
+              required:
+                - email
+                - password
+                - username
+      responses:
+        201:
+          description: User registered successfully
+        400:
+          description: Email already exists
+
+  /auth/login:
+    post:
+      summary: Login with user credentials
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: campusconnect@info.com
+                password:
+                  type: string
+                  example: secret123
+              required:
+                - email
+                - password
+      responses:
+        200:
+          description: Login successful
+        400:
+          description: Invalid password
+        404:
+          description: User not found
+
+  /auth/request-password-reset:
+    post:
+      summary: Request password reset link
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: campusconnect@info.com
+              required:
+                - email
+      responses:
+        200:
+          description: Password reset link sent
+        404:
+          description: User not found
+
+  /auth/reset-password:
+    post:
+      summary: Reset user password with token
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                  example: your.jwt.token.here
+                newPassword:
+                  type: string
+                  example: newsecret123
+              required:
+                - token
+                - newPassword
+      responses:
+        200:
+          description: Password reset successfully
+        400:
+          description: Invalid or expired token

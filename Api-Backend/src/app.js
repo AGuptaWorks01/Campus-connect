@@ -11,13 +11,16 @@ const xss = require("xss-clean"); // Middleware to sanitize user input and preve
 const mongoSanitize = require("express-mongo-sanitize"); // Middleware to sanitize inputs and prevent NoSQL injection
 const rateLimit = require("express-rate-limit"); // Middleware to limit the number of requests from an IP address to prevent abuse
 const swaggerUi = require("swagger-ui-express"); // Middleware to serve Swagger API documentation
+const YAML = require("yamljs");
 
 // Importing router files
 const studentsRoutes = require("./routers/Student.Route"); // Routes for student-related API endpoints
 const authRouter = require("./routers/Auth.Route"); // Routes for authentication-related API endpoints
 const feedbackRoutes = require("./routers/Feedback.Route"); // Routes for feedback-related API endpoints
 const aiRoutes = require("./routers/Ai.Route"); // Routes for AI-related API endpoints
-const swaggerSpec = require("./config/swagger.config"); // Swagger configuration for API documentation
+// const swaggerSpec = require("./config/swagger.config"); // Swagger configuration for API documentation
+const swaggerDocument = YAML.load("./src/docs/swagger.doc.yaml");
+
 
 // Creating an instance of Express application
 const app = express();
@@ -55,7 +58,8 @@ app.use("/api/feedbacks", feedbackRoutes); // Feedback-related routes
 app.use("/api/gemini", aiRoutes); // AI-related routes
 
 // Swagger API documentation route
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec)); // Serving the API docs at /api-docs
+// app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec)); // Serving the API docs at /api-docs
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // ======== Global Error Handler ========
 // Handling all unhandled errors globally
