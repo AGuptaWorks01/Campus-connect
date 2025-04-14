@@ -6,14 +6,14 @@ require("dotenv").config();
 
 // Creating a MySQL connection pool using environment variables
 const pool = mysql.createPool({
-  host: process.env.DB_HOST || "db", // Database host (e.g., localhost or remote server)
-  user: process.env.DB_USER || 'root', // Database username
-  password: process.env.DB_PASSWORD || 'root', // Database password
-  database: process.env.DB_NAME  || 'campusDB', // Name of the database to connect to
+  host: process.env.DB_HOST, // Database host (e.g., localhost or remote server)
+  user: process.env.DB_USER, // Database username
+  password: process.env.DB_PASSWORD, // Database password
+  database: process.env.DB_NAME, // Name of the database to connect to
   waitForConnections: true, // Wait for connections instead of throwing an error when the pool is full
   connectionLimit: 10, // Maximum number of connections in the pool
   ssl: false, // SSL disabled (enable in production for secure connection)
-  connectTimeout: 10000, // Connection timeout in milliseconds (10 seconds)
+  connectTimeout: 10000, // Connection timeout in milliseconds (10 seconds)yes
 });
 
 // Function to test if the database connection is working

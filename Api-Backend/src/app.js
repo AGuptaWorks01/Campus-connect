@@ -19,7 +19,7 @@ const authRouter = require("./routers/Auth.Route"); // Routes for authentication
 const feedbackRoutes = require("./routers/Feedback.Route"); // Routes for feedback-related API endpoints
 const aiRoutes = require("./routers/Ai.Route"); // Routes for AI-related API endpoints
 // const swaggerSpec = require("./config/swagger.config"); // Swagger configuration for API documentation
-const swaggerDocument = YAML.load("./src/docs/swagger.doc.yaml");
+const swaggerDocument = YAML.load("./src/docs/swagger.doc.yaml"); // Swagger configuration for API documentation
 
 
 // Creating an instance of Express application
