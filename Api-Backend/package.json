@@ -7,7 +7,6 @@
   "type": "commonjs",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js"
   },
   "dependencies": {
@@ -30,6 +29,7 @@
     "nodemailer": "^6.10.0",
     "nodemon": "^3.1.9",
     "pdf-parse": "^1.1.1",
+    "pm2": "^6.0.5",
     "response-time": "^2.3.3",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
