@@ -3,6 +3,10 @@
 This guide will help you set up the **Campus-Connect** project on your local machine. Follow the steps carefully to ensure a smooth installation and configuration.
 
 ---
+![CC](https://github.com/user-attachments/assets/ddce8cde-eb32-4fcf-90c3-4ea2ebaac75a)
+![CC1](https://github.com/user-attachments/assets/d9f2889f-5882-42bb-9b78-5a8198e5a439)
+![CC2](https://github.com/user-attachments/assets/0175dc2a-8799-4c62-b96d-d7dc0f86736c)
+![CC3](https://github.com/user-attachments/assets/c9a37b48-ac31-4606-88f5-5488ec83e8ad)
 
 ## **📌 Step 1: Clone the GitHub Repository**
 
