@@ -7,6 +7,9 @@ This guide will help you set up the **Campus-Connect** project on your local mac
 ![CC1](https://github.com/user-attachments/assets/d9f2889f-5882-42bb-9b78-5a8198e5a439)
 ![CC2](https://github.com/user-attachments/assets/0175dc2a-8799-4c62-b96d-d7dc0f86736c)
 ![CC3](https://github.com/user-attachments/assets/c9a37b48-ac31-4606-88f5-5488ec83e8ad)
+![Screenshot (59)](https://github.com/user-attachments/assets/1256199c-bbc3-47a5-bf89-bc20ae1c7aa1)
+![Screenshot (60)](https://github.com/user-attachments/assets/33b8964f-ac44-41aa-8b4f-6f05fcb80170)
+![Screenshot (61)](https://github.com/user-attachments/assets/2accb83f-fd32-4d47-aa4e-590cc18bc217)
 
 ## **📌 Step 1: Clone the GitHub Repository**
 
