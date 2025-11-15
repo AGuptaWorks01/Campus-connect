@@ -1,0 +1,49 @@
+version: '3.8'
+
+
+services:
+  mysql:
+    image: mysql:8
+    container_name: my-campusConnectDB
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Admin
+      MYSQL_DATABASE: Campus_Connect
+    ports:
+      - "3100:3306"
+    volumes:
+      - ./Api-Backend/db-init.sql:/docker-entrypoint-initdb.d/db-init.sql
+    networks:
+      - CampusConnect-network
+
+  backend:
+    build:
+      context: ./Api-Backend
+      dockerfile: Dockerfile
+    container_name: my-campusConnectAPI
+    restart: always
+    env_file:
+      - ./Api-Backend/.env
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mysql
+    command: ["sh", "-c", "until nc -z mysql 3306; do echo waiting for mysql; sleep 2; done; node server.js"]
+    networks:
+      - CampusConnect-network
+
+
+  frontend:
+    build:
+      context: ./Client-Frontend
+      dockerfile: Dockerfile
+    container_name: my-campusConnectUI
+    restart: always
+    ports:
+      - "4200:80"
+    networks:
+      - CampusConnect-network
+
+networks:
+  CampusConnect-network:
+    driver: bridge
