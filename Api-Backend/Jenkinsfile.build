@@ -1,0 +1,74 @@
+pipeline {
+    agent any
+
+    environment {
+        APP_NAME      = "Api-Backend"
+        BACKEND_PATH  = "D:\\AnuragG\\Campus-connect\\Api-Backend"
+        ARTIFACT_PATH = "D:\\AnuragG\\Campus-connect\\artifacts\\Api-Backend"
+    }
+
+    stages {
+
+        stage('Cleanup') {
+            steps {
+                echo "🧹 Cleaning old backend artifacts..."
+                bat "rmdir /s /q \"${ARTIFACT_PATH}\" || exit 0"
+                bat "mkdir \"${ARTIFACT_PATH}\""
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                echo "📦 Installing Node.js dependencies..."
+                dir("${BACKEND_PATH}") {
+                    bat "npm ci || npm install"
+                }
+            }
+        }
+
+        stage('Build Backend') {
+            steps {
+                echo "⚙️ Building Node backend (if build step exists)..."
+                dir("${BACKEND_PATH}") {
+                    bat """
+                        npm run build
+                        if %ERRORLEVEL% NEQ 0 (
+                            echo No build step defined, continuing...
+                            exit /B 0
+                        )
+                    """
+                }
+            }
+        }
+
+        stage('Copy Artifact') {
+            steps {
+                echo "📦 Copying backend source (excluding node_modules)..."
+                bat """
+                    robocopy "${BACKEND_PATH}" "${ARTIFACT_PATH}" /E ^
+                    /XD node_modules ^
+                    /XF npm-debug.log ^
+                    /R:2 /W:2
+                    exit /B 0
+                """
+            }
+        }
+
+
+        stage('Verify Artifact') {
+            steps {
+                echo "🔍 Listing artifact contents..."
+                bat "dir \"${ARTIFACT_PATH}\""
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "✅ Backend build successful. Artifacts stored in: ${ARTIFACT_PATH}"
+        }
+        failure {
+            echo "❌ Backend build failed. Check logs."
+        }
+    }
+}

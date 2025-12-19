@@ -1,0 +1,58 @@
+pipeline {
+    agent any 
+
+    environment {
+         FRONTEND_DIR = "D:/AnuragG/Campus-connect/Client-Frontend"
+         DIST_OUTPUT_DIR = "D:/AnuragG/Campus-connect/Client-Frontend/dist"
+    }
+
+    stages {
+        stage('clean Workspace'){
+            steps {
+                 echo "Cleaning previous build..."
+                bat "rmdir /s /q dist || exit 0"
+            }
+        }
+
+         stage('Install Dependencies') {
+            steps {
+                dir("${FRONTEND_DIR}") {
+                    echo "Installing npm packages..."
+                    bat "npm install"
+                }
+            }
+        }
+
+        stage('Build Angular App') {
+            steps {
+                dir("${FRONTEND_DIR}") {
+                    echo "Building Angular for production..."
+                    bat "npm run build"
+                }
+            }
+        }
+
+        stage('Copy Build Output') {
+            steps {
+                script {
+                    def source = 'D:/AnuragG/Campus-connect/Client-Frontend/dist'
+                    def target = 'D:/AnuragG/Campus-connect/artifacts/frontend'
+
+                    bat """
+                    if not exist "${target}" mkdir "${target}"
+                    xcopy "${source}" "${target}" /E /I /Y
+                    """
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "✅ Frontend build completed successfully."
+        }
+        failure {
+            echo "❌ Frontend build failed. Check logs."
+        }
+    }
+}

@@ -1,0 +1,12 @@
+{
+  "routes": [
+    "/aiPoweredMockInterview",
+    "/AiPoweredResumeReview",
+    "/Feedback",
+    "/forget-password",
+    "/home",
+    "/login",
+    "/register",
+    "/student-details"
+  ]
+}

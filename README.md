@@ -351,3 +351,17 @@ client-frontend/
 ## 🎉 **Congratulations!**
 
 You have successfully set up the **Campus-Connect** project. Happy coding! 🚀
+
+
+
+
+
+
+
+
+| Pipeline Name | Purpose |
+|----------------|----------|
+| `frontend-app-build` | Builds the Angular app and copies output to artifacts |
+| `frontend-docker-image` | Builds a Docker image from the frontend artifacts |
+| `backend-app-build` | Builds the node and copies it to artifacts |
+| `backend-docker-image` | Builds a Docker image for the backend using the built backend |

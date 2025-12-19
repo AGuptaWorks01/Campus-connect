@@ -1,0 +1,187 @@
+openapi: 3.0.4
+info:
+  title: Campus-Connect API Documentation
+  version: "1.0.0"
+  description: Comprehensive API documentation for the Campus-Connect platform.
+
+servers:
+  - url: http://localhost:3100/api
+    description: Development Server
+
+paths:
+  # Defining Register API for Document
+  /auth/register:
+    post:
+      summary: Register a new user
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: campusconnect@info.com
+                password:
+                  type: string
+                  example: secret123
+                username:
+                  type: string
+                  example: Campus Connect
+              required:
+                - email
+                - password
+                - username
+      responses:
+        201:
+          description: User registered successfully
+        400:
+          description: Email already exists
+
+  # Defining login api for Document
+  /auth/login:
+    post:
+      summary: Login with user credentials
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: campusconnect@info.com
+                password:
+                  type: string
+                  example: secret123
+              required:
+                - email
+                - password
+      responses:
+        200:
+          description: Login successful
+        400:
+          description: Invalid password
+        404:
+          description: User not found
+
+  # Defining request-password-reset api for Document
+  /auth/request-password-reset:
+    post:
+      summary: Request password reset link
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: campusconnect@info.com
+              required:
+                - email
+      responses:
+        200:
+          description: Password reset link sent
+        404:
+          description: User not found
+
+  # Defining Reset-Password api for Document
+  /auth/reset-password:
+    post:
+      summary: Reset user password with token
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                  example: your.jwt.token.here(we get after login success)
+                newPassword:
+                  type: string
+                  example: newsecret123
+              required:
+                - token
+                - newPassword
+      responses:
+        200:
+          description: Password reset successfully
+        400:
+          description: Invalid or expired token
+
+  # ======================================== Feedbacks ===========================
+
+  /feedbacks:
+    post:
+      summary: Give FeedBack
+      tags:
+        - FeedBack
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Tester
+                rating:
+                  type: string
+                  example: "4.3"
+                review:
+                  type: string
+                  example: Well Structure this Application
+              requird:
+                - name
+                - rating
+                - review
+          responses:
+            201:
+              description: Feedback added successfully
+            400:
+              description: All fields are required
+            500:
+              description: Internal server error
+
+  # /feedbacks:
+    get:
+      summary: Get all feedbacks
+      tags:
+        - FeedBack
+      responses:
+        200:
+          description: A list of feedback entries
+          content:
+            application/json:
+              example:
+                - id: 1
+                  name: Tester
+                  rating: "4.5"
+                  review: Excellent experience!
+                  created_at: 2025-04-14T10:00:00.000Z
+                - id: 2
+                  name: John
+                  rating: "3.8"
+                  review: Could be improved
+                  created_at: 2025-04-13T15:22:00.000Z
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              example:
+                message: Internal server error

@@ -1,0 +1,2 @@
+import './polyfills.server.mjs';
+import{a}from"./chunk-LMQQXND5.mjs";import{K as i,P as o,ec as n}from"./chunk-OUTSVT7Z.mjs";var p=class r{constructor(t){this.http=t}apiUrl=`${a.baseUrl}/gemin`;sendPromptToGemini(t){let e={prompt:t};return this.http.post(`${this.apiUrl}/generate-content`,e)}sendResumeForReview(t){return this.http.post(`${this.apiUrl}/upload-resume`,t)}static \u0275fac=function(e){return new(e||r)(o(n))};static \u0275prov=i({token:r,factory:r.\u0275fac,providedIn:"root"})};export{p as a};
