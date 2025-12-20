@@ -346,29 +346,55 @@ client-frontend/
 ---
 
 
+## ** 🏗️ CI/CD Architecture  **   
+This project uses Jenkins CI pipelines to automate application builds and Docker image creation using separate Jenkinsfiles.
+Developer   
+   |   
+   v   
+GitHub Repository   
+   |   
+   |  (Manual Trigger)   
+   v   
+Jenkins (Pipeline Script)   
+   |   
+   |-- Build Pipelines   
+   |-- Image Pipelines   
+   |   
+   v   
+Docker Images   
+   |   
+   v   
+Docker Compose   
+   |   
+   v   
+Nginx Reverse Proxy   
 
-🏗️ CI/CD Architecture (Updated)
-Developer
-   |
-   v
-GitHub Repository
-   |
-   |  (Manual Trigger)
-   v
-Jenkins (Pipeline Script)
-   |
-   |-- Build Pipelines
-   |-- Image Pipelines
-   |
-   v
-Docker Images
-   |
-   v
-Docker Compose
-   |
-   v
-Nginx Reverse Proxy
 
+## Pipeline Workflow
+Jenkinsfile.build
+
+Installs dependencies
+
+Builds Angular frontend and Node.js backend
+
+Stores build outputs as artifacts
+
+Jenkinsfile.image
+
+Uses generated build artifacts
+
+Builds Docker images for frontend and backend services
+
+Ensures consistent and reproducible container builds
+
+🔹 Jenkins Pipelines
+Pipeline Name	Purpose
+frontend-app-build	Builds Angular app and stores output as artifacts
+frontend-docker-image	Builds Docker image using frontend build artifacts
+backend-app-build	Builds Node.js backend and stores build artifacts
+backend-docker-image	Builds Docker image for backend service
+
+   
 ## **📌 Notes**
 
 - Ensure MySQL is running on your system before starting the backend.
@@ -380,6 +406,7 @@ Nginx Reverse Proxy
 ## 🎉 **Congratulations!**
 
 You have successfully set up the **Campus-Connect** project. Happy coding! 🚀
+
 
 
 
