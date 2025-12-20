@@ -345,6 +345,30 @@ client-frontend/
 
 ---
 
+
+
+🏗️ CI/CD Architecture (Updated)
+Developer
+   |
+   v
+GitHub Repository
+   |
+   |  (Manual Trigger)
+   v
+Jenkins (Pipeline Script)
+   |
+   |-- Build Pipelines
+   |-- Image Pipelines
+   |
+   v
+Docker Images
+   |
+   v
+Docker Compose
+   |
+   v
+Nginx Reverse Proxy
+
 ## **📌 Notes**
 
 - Ensure MySQL is running on your system before starting the backend.
@@ -356,5 +380,6 @@ client-frontend/
 ## 🎉 **Congratulations!**
 
 You have successfully set up the **Campus-Connect** project. Happy coding! 🚀
+
 
 
