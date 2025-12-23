@@ -1,0 +1,48 @@
+pipeline {
+    agent any
+
+    environment {
+        APP_NAME        = "api-backend"
+        IMAGE_TAG       = "${BUILD_ID}"
+        DOCKERFILE_PATH = "D:\\AnuragG\\Campus-connect\\Api-Backend\\Dockerfile.backend"
+        CONTEXT_PATH    = "D:\\AnuragG\\Campus-connect\\artifacts\\Api-Backend"
+        IMAGE_NAME      = "${APP_NAME}:${IMAGE_TAG}"
+    }
+
+    stages {
+        stage('Preparation') {
+            steps {
+                echo "🔍 Checking backend source artifacts..."
+                bat "dir \"${CONTEXT_PATH}\" || exit 1"
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                echo "🐳 Building backend Docker image..."
+                bat """
+                    docker build ^
+                        -t ${IMAGE_NAME} ^
+                        -f "${DOCKERFILE_PATH}" ^
+                        "${CONTEXT_PATH}"
+                """
+            }
+        }
+
+        stage('Verify Image') {
+            steps {
+                echo "🔎 Listing Docker images..."
+                bat "docker images | findstr ${APP_NAME}"
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "🎯 Backend Docker image built successfully: ${IMAGE_NAME}"
+        }
+        failure {
+            echo "❌ Backend Docker image build failed."
+        }
+    }
+}

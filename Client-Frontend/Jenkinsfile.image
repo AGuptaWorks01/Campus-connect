@@ -1,0 +1,50 @@
+pipeline {
+    agent any
+
+    environment {
+        APP_NAME = "client-frontend"
+        IMAGE_TAG = "${BUILD_ID}"
+        DOCKERFILE_PATH = "D:\\AnuragG\\Campus-connect\\Client-Frontend\\Dockerfile.frontend"
+        CONTEXT_PATH = "D:\\AnuragG\\Campus-connect"
+        IMAGE_NAME = "${APP_NAME}:${IMAGE_TAG}"
+    }
+
+    stages {
+        stage('Preparation') {
+            steps {
+                echo "🔍 Checking artifacts directory..."
+                bat "dir \"${CONTEXT_PATH}\" || exit 1"
+                echo "✅ Artifacts found successfully."
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                echo "🐳 Building Docker image: ${IMAGE_NAME}"
+                bat """
+                    docker build ^
+                        -t ${IMAGE_NAME} ^
+                        -f "${DOCKERFILE_PATH}" ^
+                        "${CONTEXT_PATH}"
+                """
+                echo "✅ Docker image built successfully: ${IMAGE_NAME}"
+            }
+        }
+
+        stage('Verify Image') {
+            steps {
+                echo "🔎 Listing Docker images..."
+                bat "docker images | findstr ${APP_NAME}"
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "🎯 Frontend image build completed successfully."
+        }
+        failure {
+            echo "❌ Frontend image build failed. Check logs."
+        }
+    }
+}
