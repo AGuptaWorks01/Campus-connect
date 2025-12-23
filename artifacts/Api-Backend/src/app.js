@@ -33,6 +33,8 @@ app.use(xss()); // Sanitizing input to prevent XSS attacks
 app.use(mongoSanitize()); // Sanitizing input to prevent NoSQL injection
 app.use(hpp()); // Protecting against HTTP parameter pollution
 
+app.set('trust proxy', 1);
+
 // Rate Limiting Setup
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // Setting a 15-minute window for rate limiting
