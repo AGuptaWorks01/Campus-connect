@@ -13,20 +13,36 @@ services:
     networks:
       - campusconnect-net
     ports:
-      - "3306:3306"
+      - "3307:3306"
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: campusconnect-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - campusconnect-net
+    command: [ "redis-server", "--save", "60", "1", "--loglevel", "warning" ]
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
       interval: 10s
       timeout: 5s
       retries: 5
 
   backend:
-    image: api-backend:10
+    image: api-backend:6
     container_name: campusconnect-backend
     env_file:
       - ./Api-Backend/.env
     depends_on:
       mysql:
+        condition: service_healthy
+      redis:
         condition: service_healthy
     expose:
       - "3100"
@@ -34,7 +50,7 @@ services:
       - campusconnect-net
 
   frontend:
-    image: client-frontend:8
+    image: client-frontend:3
     container_name: campusconnect-frontend
     ports:
       - "80:80"
@@ -45,6 +61,7 @@ services:
 
 volumes:
   mysql_data:
+
 
 networks:
   campusconnect-net:

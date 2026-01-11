@@ -4,8 +4,8 @@ pipeline {
     environment {
         APP_NAME        = "api-backend"
         IMAGE_TAG       = "${BUILD_ID}"
-        DOCKERFILE_PATH = "D:\\AnuragG\\Campus-connect\\Api-Backend\\Dockerfile.backend"
-        CONTEXT_PATH    = "D:\\AnuragG\\Campus-connect\\artifacts\\Api-Backend"
+        DOCKERFILE_PATH = "D:\\Projects\\Campus-connect\\Api-Backend\\Dockerfile.backend"
+        CONTEXT_PATH    = "D:\\Projects\\Campus-connect\\artifacts\\Api-Backend"
         IMAGE_NAME      = "${APP_NAME}:${IMAGE_TAG}"
     }
 
