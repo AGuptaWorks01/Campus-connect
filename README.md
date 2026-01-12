@@ -11,6 +11,15 @@ This guide will help you set up the **Campus-Connect** project on your local mac
 ![Screenshot (60)](https://github.com/user-attachments/assets/33b8964f-ac44-41aa-8b4f-6f05fcb80170)
 ![Screenshot (61)](https://github.com/user-attachments/assets/2accb83f-fd32-4d47-aa4e-590cc18bc217)
 
+
+---
+## **📌 Jenkins( CI-CD)**
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/3705a895-b84f-461b-9ce9-4dc58ea27834" />
+
+---
+## **📌 Redis**
+![Screenshot (1)](https://github.com/user-attachments/assets/322d56fd-1f8e-41ab-ae59-7762636ede42)
+
 ---
 ![image](https://github.com/user-attachments/assets/6271c652-9532-42d7-aa4e-cac17df061cd)
 ---
@@ -340,6 +349,56 @@ client-frontend/
 
 ---
 
+
+## ** 🏗️ CI/CD Architecture  **   
+This project uses Jenkins CI pipelines to automate application builds and Docker image creation using separate Jenkinsfiles.
+Developer   
+   |   
+   v   
+GitHub Repository   
+   |   
+   |  (Manual Trigger)   
+   v   
+Jenkins (Pipeline Script)   
+   |   
+   |-- Build Pipelines   
+   |-- Image Pipelines   
+   |   
+   v   
+Docker Images   
+   |   
+   v   
+Docker Compose   
+   |   
+   v   
+Nginx Reverse Proxy   
+
+
+## Pipeline Workflow
+Jenkinsfile.build
+
+Installs dependencies
+
+Builds Angular frontend and Node.js backend
+
+Stores build outputs as artifacts
+
+Jenkinsfile.image
+
+Uses generated build artifacts
+
+Builds Docker images for frontend and backend services
+
+Ensures consistent and reproducible container builds
+
+🔹 Jenkins Pipelines
+Pipeline Name	Purpose
+frontend-app-build	Builds Angular app and stores output as artifacts
+frontend-docker-image	Builds Docker image using frontend build artifacts
+backend-app-build	Builds Node.js backend and stores build artifacts
+backend-docker-image	Builds Docker image for backend service
+
+   
 ## **📌 Notes**
 
 - Ensure MySQL is running on your system before starting the backend.
