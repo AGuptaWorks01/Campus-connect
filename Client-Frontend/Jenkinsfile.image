@@ -4,8 +4,8 @@ pipeline {
     environment {
         APP_NAME = "client-frontend"
         IMAGE_TAG = "${BUILD_ID}"
-        DOCKERFILE_PATH = "D:\\AnuragG\\Campus-connect\\Client-Frontend\\Dockerfile.frontend"
-        CONTEXT_PATH = "D:\\AnuragG\\Campus-connect"
+        DOCKERFILE_PATH = "D:\\Projects\\Campus-connect\\Client-Frontend\\Dockerfile.frontend"
+        CONTEXT_PATH = "D:\\Projects\\Campus-connect"
         IMAGE_NAME = "${APP_NAME}:${IMAGE_TAG}"
     }
 

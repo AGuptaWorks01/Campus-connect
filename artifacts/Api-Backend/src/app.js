@@ -21,7 +21,6 @@ const aiRoutes = require("./routers/Ai.Route"); // Routes for AI-related API end
 // const swaggerSpec = require("./config/swagger.config"); // Swagger configuration for API documentation
 const swaggerDocument = YAML.load("./src/docs/swagger.doc.yaml"); // Swagger configuration for API documentation
 
-
 // Creating an instance of Express application
 const app = express();
 

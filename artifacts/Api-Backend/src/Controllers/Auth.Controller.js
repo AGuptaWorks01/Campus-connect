@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const { JWT_SECRETKEY, FRONTEND_URL, EMAIL_USER, EMAIL_PASS } = process.env;
 const pool = require("../config/db");
+const redisClient = require("../config/redis");
 
 // ================================== Register User =====================================
 exports.register = async (req, res) => {
@@ -33,13 +34,22 @@ exports.register = async (req, res) => {
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const [userRows] = await pool.query("SELECT * FROM users WHERE email = ?", [email]);
 
-    if (userRows.length === 0) {
-      return res.status(404).json({ message: "User not found" });
+    const cacheKey = `user:${email}`;
+    let cachedUser = await redisClient.get(cacheKey);
+
+    let user;
+    if (cachedUser) {
+      console.log("⚡ User cache hit");
+      user = JSON.parse(cachedUser);
+    } else {
+      const [userRows] = await pool.query("SELECT * FROM users WHERE email = ?", [email]);
+      if (userRows.length === 0) return res.status(404).json({ message: "User not found" });
+      user = userRows[0];
+
+      // Cache user for 1 hour
+      await redisClient.setEx(cacheKey, 3600, JSON.stringify(user));
     }
-
-    const user = userRows[0];
     const isPasswordCorrect = await bcrypt.compare(password, user.password);
 
     if (!isPasswordCorrect) {

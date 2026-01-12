@@ -3,8 +3,8 @@ pipeline {
 
     environment {
         APP_NAME      = "Api-Backend"
-        BACKEND_PATH  = "D:\\AnuragG\\Campus-connect\\Api-Backend"
-        ARTIFACT_PATH = "D:\\AnuragG\\Campus-connect\\artifacts\\Api-Backend"
+        BACKEND_PATH  = "D:\\Projects\\Campus-connect\\Api-Backend"
+        ARTIFACT_PATH = "D:\\Projects\\Campus-connect\\artifacts\\Api-Backend"
     }
 
     stages {

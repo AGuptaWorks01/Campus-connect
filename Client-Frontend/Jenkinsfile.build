@@ -1,9 +1,8 @@
 pipeline {
     agent any 
-
     environment {
-         FRONTEND_DIR = "D:/AnuragG/Campus-connect/Client-Frontend"
-         DIST_OUTPUT_DIR = "D:/AnuragG/Campus-connect/Client-Frontend/dist"
+         FRONTEND_DIR = "D:/Projects/Campus-connect/Client-Frontend"
+         DIST_OUTPUT_DIR = "D:/Projects/Campus-connect/Client-Frontend/dist"
     }
 
     stages {
@@ -35,8 +34,8 @@ pipeline {
         stage('Copy Build Output') {
             steps {
                 script {
-                    def source = 'D:/AnuragG/Campus-connect/Client-Frontend/dist'
-                    def target = 'D:/AnuragG/Campus-connect/artifacts/frontend'
+                    def source = 'D:/Projects/Campus-connect/Client-Frontend/dist'
+                    def target = 'D:/Projects/Campus-connect/artifacts/frontend'
 
                     bat """
                     if not exist "${target}" mkdir "${target}"

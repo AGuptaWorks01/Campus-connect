@@ -1,4 +1,5 @@
 const pool = require("../config/db");
+const redisClient = require("../config/redis");
 const multer = require("multer");
 const path = require("path");
 
@@ -63,6 +64,8 @@ exports.addStudent = async (req, res) => {
     ];
 
     const [result] = await pool.execute(sql, values);
+    await redisClient.del("students:all");
+
     res.status(201).json({
       message: "Student added successfully",
       studentId: result.insertId
@@ -76,8 +79,22 @@ exports.addStudent = async (req, res) => {
 // ================================== Get All Students (No Restrictions)  ==================================
 exports.getAllStudents = async (req, res) => {
   try {
-    const sql = `SELECT s.*, u.username, u.email FROM students s JOIN users u ON s.user_id = u.id ORDER BY s.id DESC`;
+    const cacheKey = "students:all";
+
+    const cachedStudents = await redisClient.get(cacheKey);
+    if (cachedStudents) {
+      console.log("⚡ Cache hit");
+      return res.status(200).json({ students: JSON.parse(cachedStudents) });
+    }
+
+    const sql = `
+    SELECT s.*, u.username, u.email 
+    FROM students s 
+    JOIN users u ON s.user_id = u.id 
+    ORDER BY s.id DESC
+    `;
     const [students] = await pool.execute(sql);
+    await redisClient.setEx(cacheKey, 3600, JSON.stringify(students));
     res.status(200).json({ students });
   } catch (error) {
     console.error("Fetch Error:", error);
@@ -132,6 +149,8 @@ exports.updateStudent = async (req, res) => {
     ];
     const [result] = await pool.execute(sql, values);
 
+    await redisClient.del("students:all");
+
     if (result.affectedRows === 0) {
       return res.status(404).json({ message: "Student not found or not authorized to update." });
     }
@@ -152,6 +171,8 @@ exports.deleteStudent = async (req, res) => {
     const sql = "DELETE FROM students WHERE id = ? AND user_id = ?";
     const [result] = await pool.execute(sql, [studentId, userId]);
 
+    await redisClient.del("students:all");
+    
     if (result.affectedRows === 0) {
       return res.status(404).json({ message: "Student not found or not authorized to delete." });
     }
