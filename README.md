@@ -424,3 +424,11 @@ You have successfully set up the **Campus-Connect** project. Happy coding! 🚀
 | `frontend-docker-image` | Builds Docker image using frontend build artifacts |
 | `backend-app-build` | Builds Node.js backend and stores build artifacts |
 | `backend-docker-image` | Builds Docker image for backend service |
+
+
+
+
+docker ps 
+docker compose down
+docker compose up -d --build
+docker logs campusconnect-backend
